@@ -8,19 +8,19 @@ var util = require('util'),
 
 var DEFAULT_PORT = 8000;
 
-// function main(argv) {
-//   new HttpServer({
-//     'GET': createServlet(StaticServlet),
-//     'HEAD': createServlet(StaticServlet)
-//   }).start(Number(argv[2]) || DEFAULT_PORT);
-// }
-
 function main(argv) {
   new HttpServer({
     'GET': createServlet(StaticServlet),
     'HEAD': createServlet(StaticServlet)
-  }).start(process.env.PORT || DEFAULT_PORT);
+  }).start(Number(argv[2]) || DEFAULT_PORT);
 }
+
+// function main(argv) {
+//   new HttpServer({
+//     'GET': createServlet(StaticServlet),
+//     'HEAD': createServlet(StaticServlet)
+//   }).start(process.env.PORT || DEFAULT_PORT);
+// }
 
 function escapeHtml(value) {
   return value.toString().
