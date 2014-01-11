@@ -2,7 +2,7 @@
   "name": "thinkster-firebase-tutorial",
   "version": "0.0.0",
   "description": "Version 1",
-  "main": "index.js",
+  "main": "scripts/web-server.js",
   "directories": {
     "test": "test"
   },
@@ -25,5 +25,8 @@
   },
   "dependencies": {
     "bower": "~1.2.8"
+  }
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }
