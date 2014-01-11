@@ -1,0 +1,20 @@
+<div data-ng-controller="PlayersController" data-ng-init="findPlayers()">
+    <ul class="navlist">
+        <li><input type="text" data-ng-model="search.name" placeholder="Player name"></li>
+        <li data-ng-include="'views/partials/nflteamselect.html'"></li>
+        <li data-ng-include="'views/partials/positionselect.html'"></li>
+        <li data-ng-include="'views/partials/limitselect.html'"></li>
+    </ul>
+    <table>
+        <tr>
+            <th>Player</th>
+            <th>Position</th>
+            <th>Team</th>
+        </tr>
+        <tr data-ng-repeat="player in players | filter:search | filter:strictsearch:true | limitTo:searchsize.limit">
+            <td>{{ player.name }}<span data-ng-show="player.num"> - #{{ player.num }}</span></td>
+            <td>{{ positions[player.pos].abbr }}</td>
+            <td>{{ nflteams[player.team].abbr }}</td>
+        </tr>
+    </table>
+</div>
