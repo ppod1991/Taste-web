@@ -1,0 +1,31 @@
+<div data-ng-controller="SnapsController">
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="store">Store</label>
+            <div class="controls">
+                <input type="text" data-ng-model="snap.store" id="store" placeholder="Store Name">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="clothing">Clothing Type</label>
+            <div class="controls">
+                <input type="text" data-ng-model="snap.clothing" id="clothing" placeholder="Clothing Type">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="snap_picture">Picture Link</label>
+            <div class="controls">
+                <input type="text" data-ng-model="snap.picture" id="picture" placeholder="URL of Picture">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button data-ng-click="createSnap()">Create Snap</button>
+            </div>
+        </div>
+
+    </form>
+</div>

@@ -16,5 +16,11 @@
                     , fantasyTeams: function() {
                         return new Firebase(FBURL+'/fantasyTeams');
                     }
+                    , feed: function() {
+                        return new Firebase(FBURL+'/feed');
+                    }
+                    , snaps: function() {
+                        return new Firebase(FBURL+'/snaps');
+                    }
                 }
          }])

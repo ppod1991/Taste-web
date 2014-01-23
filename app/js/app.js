@@ -10,5 +10,8 @@ var app = angular.module('fantasyApp',
   , 'fantasyApp.controllers.leagues'
   , 'fantasyApp.controllers.players'
   , 'fantasyApp.controllers.fantasyTeams'
+  , 'fantasyApp.controllers.feed'
+  , 'fantasyApp.controllers.snaps'
+  , 'fantasyApp.controllers.fans'
   , 'firebase', 'ui.bootstrap', 'ngRoute']
   )

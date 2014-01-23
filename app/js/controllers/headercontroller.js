@@ -18,6 +18,10 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
           "link": "/nflteams"
         }
        ,{
+          "title": "Fan Feed",
+          "link": "/feed"
+       }
+       ,{
           "title": "Leagues",
           "link": "/leagues"
        }
@@ -29,6 +33,14 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
           "title": "Fantasy Teams",
           "link": "/fantasyteams"
         }
+       , {
+          "title": "New Snap",
+          "link": "/snaps/create"
+        }
+        , {
+           "title": "Find Friends",
+           "link": "/fans/find"
+         }
       ];
 
       $scope.$on('$routeChangeSuccess',function() {
