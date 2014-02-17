@@ -4,35 +4,24 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
   .controller('HeaderController', ['$scope', '$location', 'loginService', 'angularFire', 'FBURL', 
     function($scope, $location, loginService, angularFire, FBURL) {
 
-      $scope.$on("angularFireAuth:login", function() {
-        angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
+       $scope.$on("angularFireAuth:login", function() {
+      //   angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
+           $location.path('/feed');
+       });
+
+      $scope.$on("angularFireAuth:logout", function() {
+        $location.path('/signin')
       });
 
       $scope.logout = function() {
-        loginService.logout('/signin');
+        loginService.logout();
       };
 
       $scope.navbarEntries = [
         {
-          "title": "NFL Teams",
-          "link": "/nflteams"
-        }
-       ,{
           "title": "Fan Feed",
           "link": "/feed"
        }
-       ,{
-          "title": "Leagues",
-          "link": "/leagues"
-       }
-       ,{
-          "title": "Players",
-          "link": "/players"
-       } 
-       , {
-          "title": "Fantasy Teams",
-          "link": "/fantasyteams"
-        }
        , {
           "title": "New Snap",
           "link": "/snaps/create"

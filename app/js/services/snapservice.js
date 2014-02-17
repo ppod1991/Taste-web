@@ -8,7 +8,7 @@ angular.module('fantasyApp.services.snaps', ['fantasyApp.services.firebaseRefs']
                 return FireRef.snaps().push({
                     store: store,
                     clothing: clothing,
-                    date: new Date().toDateString(),
+                    date: new Date().getTime(),
                     userID: id
                 }, cb).name();
                 }

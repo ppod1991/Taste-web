@@ -1,0 +1,5 @@
+div.container-fluid(data-ng-controller="SigninCtrl")
+	div.row
+		div.col-md-4(class="col-md-offset-4")
+			button.btn(class="btn-primary btn-block" type="submit" ng-click="login()") Enter Paparazi.co
+			p.error(ng-show="error") {{err}}

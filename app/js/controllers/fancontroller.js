@@ -10,8 +10,8 @@ angular.module('fantasyApp.controllers.fans', ['fantasyApp.services.fans'])
                 $scope.users = Fans.collection();
             }
 
-            $scope.addAsFriend = function(user) {
-                $scope.users = Fans.create($scope.auth.id,user);
+            $scope.sendFriendRequest = function(user) {
+                $scope.users = Fans.friendRequest($scope.auth.id,user);
             }
 
     }]);

@@ -7,10 +7,14 @@ angular.module('fantasyApp.services.fans', ['fantasyApp.services.firebaseRefs'])
                 collection: function() {
                     return angularFireCollection(FireRef.users());
                 }
-                , create: function(user,friend) {
+                , friendRequest: function(user,friend) {
                     //console.log(friend);
                     //console.log(user);    
-                    FireRef.users().child(user).child('friends').child(friend.$id).set(friend.$id);
+                    FireRef.users().child(user).child('friendRequests').push({
+                        ID: friend.$id,
+                        date: new Date().getTime()
+                    });
+
                 }
             }   
         }])

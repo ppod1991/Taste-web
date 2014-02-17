@@ -6,7 +6,7 @@ angular.module('fantasyApp.config', [])
 app.config(['$routeProvider', 
     function($routeProvider) {
       $routeProvider
-      .when('/',        { templateUrl: 'views/default.html' })
+      .when('/',        { redirectTo: '/signin'})
       .when('/signin',  { templateUrl: 'views/users/signin.html' })
       .when('/signup',  { templateUrl: 'views/users/signup.html' })
       .when('/nflteams', { templateUrl: 'views/nfl/list.html', authRequired: true })
@@ -25,7 +25,7 @@ app.config(['$routeProvider',
       .when('/feed', { templateUrl: 'views/feed/feed.html', authRequired: true })
       .when('/fans/find', { templateUrl: 'views/fans/fanSearch.html', authRequired: true })
 
-      .otherwise(       { redirectTo: '/' });
+      .otherwise(       { redirectTo: '/signin' });
     }])
   
   // establish authentication

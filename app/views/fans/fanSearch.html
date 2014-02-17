@@ -9,7 +9,7 @@
             <th></th>
         </tr>
         <tr data-ng-repeat="user in users | filter:search">
-            <td>{{ user.name }} <button type="submit" class="btn btn-primary" ng-click="addAsFriend(user)">Be a Fan</button> </td>
+            <td>{{ user.name }} <button type="submit" class="btn btn-primary" ng-click="sendFriendRequest(user)">Be a Fan</button> </td>
             <td>{{ user.email }}</td>
         </tr>
     </table>

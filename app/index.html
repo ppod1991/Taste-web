@@ -2,24 +2,30 @@
 <html lang="en" ng-app="fantasyApp">
   <head>
     <meta charset="utf-8">
-    <title>My AngularJS App</title>
+    <title>Paparazi.co</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<!--<link rel="stylesheet" href="lib/bootstrap/docs/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/bootstrap/docs/assets/css/bootstrap-responsive.css" /> -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="lib/bootstrap/docs/assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="lib/bootstrap/docs/assets/css/bootstrap-responsive.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
+
   <body>
 
-    <header data-ng-include="'views/header.html'" class="navbar navbar-fixed-top navbar-inverse ng-scope"></header>
+    <header data-ng-include="'views/header.html'"></header>
 
-    <section class="content">
-      <section class="container">
-        <div ng-view></div>
-      </section>
+    <section class="container-fluid">
+        <div ng-view class="fades"></div>
     </section>
 
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://static.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
-    <script src="lib/angular/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js"</script>
+    <!-- <script src="//code.jquery.com/jquery-latest.min.js"></script> -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
     <script src="lib/angular-fire/angularFire.js"></script>

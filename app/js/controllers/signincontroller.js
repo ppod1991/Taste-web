@@ -5,11 +5,11 @@ angular.module('fantasyApp.controllers.signin', ['fantasyApp.services.login'])
     function($scope, loginService, $location) {
 
       if (!!$scope.auth) {
-        $location.path('/');
+        $location.path('/feed');
       }
       
       $scope.$on('angularFireAuth:login', function () {
-        $location.path('/');
+        $location.path('/feed');
       })
 
       $scope.email = null;
@@ -18,7 +18,7 @@ angular.module('fantasyApp.controllers.signin', ['fantasyApp.services.login'])
 
       $scope.login = function(callback) {
         $scope.err = null;
-        loginService.login($scope.email, $scope.pass, '/', function(err, user) {
+        loginService.login('/feed', function(err, user) {
           $scope.err = err||null;
           typeof(callback) === 'function' && callback(err, user);
         });
