@@ -1,14 +1,14 @@
 nav.navbar(class="navbar-default ng-scope" role="navigation" ng-controller="HeaderController")
   div.container-fluid
     div.navbar-header
-      button.navbar-toggle(type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+      button.navbar-toggle(id = "headerButton" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
         span.sr-only Toggle Navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
       a.navbar-brand(href="#/feed") Paparazi.co
 
-    div.collapse(class="navbar-collapse" id="bs-example-navbar-collapse-1")
+    div.collapse(class="navbar-collapse" id="bs-example-navbar-collapse-1" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
       ul.nav(class="navbar-nav" ng-if="auth")
         li(data-ng-repeat="entry in navbarEntries" data-ng-class="{active: entry.isActive}")
           a(href="#{{entry.link}}") {{entry.title}}
@@ -20,7 +20,7 @@ nav.navbar(class="navbar-default ng-scope" role="navigation" ng-controller="Head
           a(href="" ng-click="logout()") Sign Out
       ul.nav(class="navbar-nav navbar-right" ng-if="!auth")
         li
-          a(href="#/signin") Sign In
+          a(href="" ng-click="login()") Sign In
 
 
 

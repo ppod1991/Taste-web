@@ -17,6 +17,14 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
         loginService.logout();
       };
 
+      $scope.login = function(callback) {
+        $scope.err = null;
+        loginService.login('/feed', function(err, user) {
+          $scope.err = err||null;
+          typeof(callback) === 'function' && callback(err, user);
+        });
+      };
+      
       $scope.navbarEntries = [
         {
           "title": "Fan Feed",
