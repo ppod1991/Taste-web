@@ -13,5 +13,6 @@ var app = angular.module('fantasyApp',
   , 'fantasyApp.controllers.feed'
   , 'fantasyApp.controllers.snaps'
   , 'fantasyApp.controllers.fans'
+  , 'fantasyApp.controllers.userTest'
   , 'firebase', 'ui.bootstrap', 'ngRoute','ngAnimate']
   )

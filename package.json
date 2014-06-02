@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,10 @@
     "url": "https://github.com/msfrisbie/thinkster-firebase-tutorial/issues"
   },
   "dependencies": {
-    "bower": "~1.2.8"
-  },
-  "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "bower": "~1.2.8",
+    "connect": "~2.18.0",
+    "express": "~4.4.0",
+    "logfmt": "~1.1.2",
+    "pg": "~3.2.0"
   }
 }

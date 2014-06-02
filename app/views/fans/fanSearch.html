@@ -1,4 +1,4 @@
-<div data-ng-controller="FansController" data-ng-init="findUsers()">
+<!-- <div data-ng-controller="FansController" data-ng-init="findUsers()">
     <ul class="navlist">
         <li><input type="text" data-ng-model="search.name" placeholder="Name"></li>
     </ul>
@@ -8,9 +8,32 @@
             <th>Email</th>
             <th></th>
         </tr>
-        <tr data-ng-repeat="user in users | filter:search">
-            <td>{{ user.name }} <button type="submit" class="btn btn-primary" ng-click="sendFriendRequest(user)">Be a Fan</button> </td>
-            <td>{{ user.email }}</td>
+        <tr data-ng-repeat="thisUser in users | filter:search">
+            <td>{{thisUser.name}}</td>
+            <td>{{thisUser.email}}</td>
+            <td class="btn btn-primary" ng-click="sendFriendRequest(thisUser,$index)">Become a fan</td>
         </tr>
     </table>
+</div> -->
+
+<div data-ng-controller="userTestController">
+    <ul class="navlist">
+        <li><input type="text" data-ng-model="search.name" placeholder="Name"></li>
+    </ul>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        <tr data-ng-repeat="thisUser in users | filter:search">
+            <td>{{thisUser.name}}</td>
+            <td>{{thisUser.user_id}}</td>
+            <td class="btn btn-primary">Become a fan</td>
+        </tr>
+    </table>
+    <table>
+        <li><input type="text" data-ng-model="newUser.name" placeholder="Name"></li>
+        <li><input type="text" data-ng-model="newUser.user_id" placeholder="User_id"></li>
+        <td class="btn btn-primary" ng-click="addUser(newUser)">Add User</td>
 </div>

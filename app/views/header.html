@@ -24,13 +24,12 @@
   </div> /.container-fluid 
 </div>  -->
 
-
 <nav role="navigation" ng-controller="HeaderController" class="navbar navbar-default ng-scope">
   <div class="container-fluid">
     <div class="navbar-header">
       <button id="headerButton" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle Navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#/feed" class="navbar-brand">Paparazi.co</a>
     </div>
-    <div id="bs-example-navbar-collapse-1" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+    <div id="bs-example-navbar-collapse-1" data-toggle="collapse" class="collapse navbar-collapse">
       <ul ng-if="auth" class="nav navbar-nav">
         <li data-ng-repeat="entry in navbarEntries" data-ng-class="{active: entry.isActive}"><a href="#{{entry.link}}">{{entry.title}}</a></li>
       </ul>
