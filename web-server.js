@@ -6,17 +6,19 @@ var app = express();
 var pg = require('pg');
 var users = require('./app/Resources/Users');
 var connect = require('connect');
+var cors = require('cors');
 
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*");
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  next();
- });
-
+app.use(cors());
 app.use(logfmt.requestLogger());
 app.use(connect.bodyParser());
 app.use(express.static(__dirname + '/app'));
+
+// app.all('*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:5000/");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   res.header("Ace")
+//   next();
+//  });
 
 app.get('/', function(req, res) {
   res.sendfile('index.html');
