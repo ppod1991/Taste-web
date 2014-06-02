@@ -17,6 +17,7 @@ var executeFunction = function(functionToExecute) {
 				  if(!err) return false;
 				  console.log('HandleError2');
 				  done(client);
+				  res.set({'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'});
 				  //res.writeHead(500, {'content-type': 'text/plain'});
 				  res.end('An error occurred');
 				  return true;
@@ -37,7 +38,8 @@ exports.findAll = function(req, res) {
 			client.query('SELECT * FROM users', function(err, result) {
 			  if(err) return console.error(err);
 			  console.log(result.rows);
-  		      
+  		      res.set({'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'});
+
 			  res.send(result.rows);
 			});
 
@@ -55,7 +57,8 @@ exports.findById = function(req, res) {
 			client.query('SELECT * FROM users WHERE user_id =' + user_id.toString() + ';', function(err, result) {
 			  if(err) return console.error(err);
 			  console.log(result.rows);
-  		     res.send(result.rows);
+  		      res.set({'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'});
+  		  	  res.send(result.rows);
 			});
 
 		}
