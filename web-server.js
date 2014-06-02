@@ -4,14 +4,22 @@ var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
 var pg = require('pg');
-var users = require('./Resources/Users');
+var users = require('./app/Resources/Users');
 var connect = require('connect');
+
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  next();
+ });
 
 app.use(logfmt.requestLogger());
 app.use(connect.bodyParser());
+app.use(express.static(__dirname + '/app'));
 
 app.get('/', function(req, res) {
-  res.sendfile('app/index.html');
+  res.sendfile('index.html');
 });
 
 app.get('/users', users.findAll);
@@ -28,7 +36,7 @@ app.listen(port, function() {
 
 
 
-// //#!/usr/bin/env node
+// #!/usr/bin/env node
 
 // var util = require('util'),
 //     http = require('http'),
@@ -36,7 +44,7 @@ app.listen(port, function() {
 //     url = require('url'),
 //     events = require('events');
 
-// var DEFAULT_PORT = 5000;
+// var DEFAULT_PORT = 8000;
 
 // // function main(argv) {
 // //   new HttpServer({
