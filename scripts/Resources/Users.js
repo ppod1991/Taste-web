@@ -2,7 +2,7 @@ var pg = require('pg');
 
 //If local db doesn't work, run 'heroku pg:credentials' and replace the address
 var connection = process.env.DATABASE_URL 
-	|| 'postgres://khctwifcwaratd:D4-FK0pynGsG7S_wuOn4m1Cyrw@ec2-54-243-48-227.compute-1.amazonaws.com:5432/d81o6v1corf28q';
+	|| 'postgres://khctwifcwaratd:D4-FK0pynGsG7S_wuOn4m1Cyrw@ec2-54-243-48-227.compute-1.amazonaws.com:5432/d81o6v1corf28q?ssl=true';
 
 
 
