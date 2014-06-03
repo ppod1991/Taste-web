@@ -115,22 +115,22 @@ exports.addUser = function(req, res) {
 // }
 
 
-//Add A New User
-exports.addUser = function(req, res) {
-		console.log("User trying to be added!");
-		var name = req.body.name;
-		var user_id = req.params.user_id;
+// //Add A New User
+// exports.addUser = function(req, res) {
+// 		console.log("User trying to be added!");
+// 		var name = req.body.name;
+// 		var user_id = req.params.user_id;
 
-		var toExecute = function(client) {
-			console.log('Add user');
+// 		var toExecute = function(client) {
+// 			console.log('Add user');
 
-			client.query('INSERT INTO users VALUES (' + user_id.toString() + ",'" + name.toString() + "');" , function(err, result) {
-			  if(err) return console.error(err);
-			  console.log(result.rows);
-  		      res.set({'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'});
-  		  	  res.send(201, null);
-			});
+// 			client.query('INSERT INTO users VALUES (' + user_id.toString() + ",'" + name.toString() + "');" , function(err, result) {
+// 			  if(err) return console.error(err);
+// 			  console.log(result.rows);
+//   		      res.set({'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'});
+//   		  	  res.send(201, null);
+// 			});
 
-		}
-		executeFunction(toExecute);
-}
+// 		}
+// 		executeFunction(toExecute);
+// }
