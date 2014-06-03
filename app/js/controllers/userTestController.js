@@ -12,12 +12,15 @@ angular.module('fantasyApp.controllers.userTest', ['fantasyApp.services.userTest
 
 
             $scope.addUser = function(user) {
-                console.log(user);
                 var newUser = new userTest();
-                newUser.name = user.name;
-                newUser.user_id = user.user_id;
+                newUser.first_name = user.first_name;
+                newUser.last_name = user.last_name;
+                newUser.last_gender = user.last_gender;
                 console.log(newUser);
-                userTest.save({user_id:user.user_id}, newUser, function(value, responseHeader) {
+                // userTest.save({user_id:user.user_id}, newUser, function(value, responseHeader) {
+                //     console.log(value);
+                // });
+                userTest.save([], newUser, function(value, responseHeader) {
                     console.log(value);
                 });
             };

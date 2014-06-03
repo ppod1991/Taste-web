@@ -27,13 +27,14 @@
             <th></th>
         </tr>
         <tr data-ng-repeat="thisUser in users | filter:search">
-            <td>{{thisUser.name}}</td>
+            <td>{{thisUser.first_name}}</td>
             <td>{{thisUser.user_id}}</td>
             <td class="btn btn-primary">Become a fan</td>
         </tr>
     </table>
     <table>
-        <li><input type="text" data-ng-model="newUser.name" placeholder="Name"></li>
-        <li><input type="text" data-ng-model="newUser.user_id" placeholder="User_id"></li>
+        <li><input type="text" data-ng-model="newUser.first_name" placeholder="First Name"></li>
+        <li><input type="text" data-ng-model="newUser.last_name" placeholder="Last Name"></li>
+        <li><input type="text" data-ng-model="newUser.gender" placeholder="Gender"></li>
         <td class="btn btn-primary" ng-click="addUser(newUser)">Add User</td>
 </div>
