@@ -2,16 +2,57 @@
 
 var express = require("express");
 var logfmt = require("logfmt");
-var app = express();
+
 var pg = require('pg');
 var users = require('./app/Resources/Users');
 var connect = require('connect');
 var cors = require('cors');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+passport.serializeUser(function(user, done) {
+  console.log("SERIALIZE USER");
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  console.log("DESERIALIZE USER");
+  done(null, obj);
+});
+
+
+var callbackURL;
+
+if (!!process.env.PORT) {
+	callbackURL = "http://desolate-plateau-4658.herokuapp.com/auth/facebook/callback";
+}
+else {
+	callbackURL = "http://localhost:5000/auth/facebook/callback";
+}
+
+passport.use(new FacebookStrategy({
+      clientID: 193198737555570,
+      clientSecret: "19422735ab599ea41028f4f242e1a6ae",
+      callbackURL: callbackURL
+    },
+  function(accessToken, refreshToken, profile, done) {
+  		console.log(profile);
+  		var newUser = users.createUser(profile._json);
+  		return done(null,newUser);
+  }));
+
+var app = express();
 
 app.use(cors());
 app.use(logfmt.requestLogger());
+app.use(connect.cookieParser());
 app.use(connect.bodyParser());
+app.use(passport.initialize());
+app.use(connect.session({ secret: 'keyboard cat2' }));
+app.use(passport.session());
 app.use(express.static(__dirname + '/app'));
+
+
 
 // app.all('*', function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "http://localhost:5000/");
@@ -20,13 +61,33 @@ app.use(express.static(__dirname + '/app'));
 //   next();
 //  });
 
+var auth = function(req, res, next) {
+	if (!req.isAuthenticated())
+		res.send(401);
+	else
+		next();
+};
+
+
 app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
 
 app.get('/users', users.findAll);
-app.get('/users/:user_id', users.findById);
-app.post('/users',users.addUser);
+app.get('/users/:user_id', auth, users.findById);
+app.post('/users', auth, users.addUser);
+app.get('/loggedin',function (req,res) {
+	res.send(req.isAuthenticated() ? req.user : '0');
+});
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',passport.authenticate('facebook',{successRedirect:'/',failureRedirect:'/'}));
+
+app.get('/logout', function(req,res) {
+	req.logOut();
+	res.redirect('/');
+	res.send(200);
+})
 
 var port = Number(process.env.PORT || 5000);
 

@@ -32,10 +32,11 @@ Bookshelf.PG.knex.schema.createTable('stores', function (table) {
 Bookshelf.PG.knex.schema.createTable('users', function (table) {
 	table.string('first_name');
 	table.increments('user_id');
+	table.string('facebook_id');
 	table.string('last_name');
 	table.date('date_of_birth');
 	table.string('gender');
-	table.string('zipcode');
+	table.string('location_id');
 	table.string('email');
 	table.string('phone_number');
 	table.string('dietary_restrictions');

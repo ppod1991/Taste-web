@@ -4,26 +4,26 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
   .controller('HeaderController', ['$scope', '$location', 'loginService', 'angularFire', 'FBURL', 
     function($scope, $location, loginService, angularFire, FBURL) {
 
-       $scope.$on("angularFireAuth:login", function() {
-      //   angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
-           $location.path('/feed');
-       });
+      //  $scope.$on("angularFireAuth:login", function() {
+      // //   angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
+      //      $location.path('/feed');
+      //  });
 
-      $scope.$on("angularFireAuth:logout", function() {
-        $location.path('/signin')
-      });
+      // $scope.$on("angularFireAuth:logout", function() {
+      //   $location.path('/signin')
+      // });
 
-      $scope.logout = function() {
-        loginService.logout();
-      };
+      // $scope.logout = function() {
+      //   loginService.logout();
+      // };
 
-      $scope.login = function(callback) {
-        $scope.err = null;
-        loginService.login('/feed', function(err, user) {
-          $scope.err = err||null;
-          typeof(callback) === 'function' && callback(err, user);
-        });
-      };
+      // $scope.login = function(callback) {
+      //   $scope.err = null;
+      //   loginService.login('/feed', function(err, user) {
+      //     $scope.err = err||null;
+      //     typeof(callback) === 'function' && callback(err, user);
+      //   });
+      // };
       
       $scope.navbarEntries = [
         {

@@ -49,6 +49,41 @@ exports.addUser = function(req, res) {
 	});
 }
 
+//Add a New User 
+exports.createUser = function(profile) {
+	console.log("New User trying to be created!");
+	Bookshelf.PG.knex('users').where('facebook_id',profile.id.toString()).then(function(existingUser) {
+		
+		console.log("Existing User:" + existingUser);
+
+		if (existingUser.count('facebook_id')==0)
+		{
+
+			var newUser = {};
+			newUser.first_name = profile.first_name;
+			newUser.last_name = profile.last_name;
+			newUser.gender = profile.gender;
+			newUser.email = profile.email;
+			newUser.facebook_id = profile.id;
+			newUser.location_id = profile.location.id;
+
+			Bookshelf.PG.knex('users').insert(
+						{first_name: newUser.first_name,
+						last_name: newUser.last_name,
+						gender: newUser.gender,
+						email: newUser.email,
+						facebook_id: newUser.facebook_id, 
+						location_id: newUser.location_id})
+					.then(function(result) {
+					  console.log('New User Successfully Added');
+					  return newUser;	 
+					});
+		}
+		else
+			return existingUser;
+	});
+	
+}
 // // //If local db doesn't work, run 'heroku pg:credentials' and replace the address
 // var connection = process.env.DATABASE_URL 
 // 	|| 'postgres://khctwifcwaratd:D4-FK0pynGsG7S_wuOn4m1Cyrw@ec2-54-243-48-227.compute-1.amazonaws.com:5432/d81o6v1corf28q?ssl=true';
