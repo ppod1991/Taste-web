@@ -1,9 +1,26 @@
 'use strict';
 
 angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
-  .controller('HeaderController', ['$scope', '$location', 'loginService', 'angularFire', 'FBURL', 
-    function($scope, $location, loginService, angularFire, FBURL) {
+  .controller('HeaderController', ['$scope', '$location', 'loginService', 'angularFire', 
+    function($scope, $location, loginService, angularFire) {
+      
+      $scope.auth = 0;
 
+      $scope.$watch(loginService.getUser, function (value, oldValue) {
+
+        if(!value && oldValue) {
+          console.log("Disconnect");
+          $scope.auth = 0;
+          $location.path('/signin');
+        }
+
+        if(value > 0) {
+          console.log("Connect with value: " + value);
+          $scope.auth = value;
+        }
+
+      }, true);
+      
       //  $scope.$on("angularFireAuth:login", function() {
       // //   angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
       //      $location.path('/feed');

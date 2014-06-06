@@ -3,12 +3,7 @@
 angular.module('fantasyApp.controllers.signin', ['fantasyApp.services.login'])
   .controller('SigninCtrl', ['$scope', 'loginService',
     function($scope, loginService) {
-      $scope.login = function(callback) {     
-        loginService.get(function(response) {
-            console.log(response);
-            $scope.auth = response;
-          });
-        };
+    	$scope.auth = loginService.getUser();
     }])
 
 

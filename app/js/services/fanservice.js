@@ -1,8 +1,8 @@
 'use strict';
  
 angular.module('fantasyApp.services.fans', ['fantasyApp.services.firebaseRefs'])
-    .factory('Fans', ['FBURL', 'Firebase', 'angularFireCollection', 'FireRef',
-        function(FBURL, Firebase, angularFireCollection, FireRef) {
+    .factory('Fans', ['Firebase', 'angularFireCollection', 'FireRef',
+        function(Firebase, angularFireCollection, FireRef) {
             return {
                 collection: function() {
                     return angularFireCollection(FireRef.users());

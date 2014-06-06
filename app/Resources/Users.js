@@ -20,7 +20,7 @@ exports.findAll = function(req, res) {
 	  console.log(result);	     
 	  res.send(result);
 	});
-}
+};
 
 //Retrieve a User by their ID
 exports.findById = function(req, res) {
@@ -30,7 +30,7 @@ exports.findById = function(req, res) {
 	  console.log(result[0].first_name);	     
 	  res.send(result);
 	});
-}
+};
 
 //Add a New User 
 exports.addUser = function(req, res) {
@@ -47,16 +47,16 @@ exports.addUser = function(req, res) {
 		  console.log(result);
 	      res.send(201, null);
 	});
-}
+};
 
 //Add a New User 
-exports.createUser = function(profile) {
+exports.createUser = function(profile, done) {
 	console.log("New User trying to be created!");
 	Bookshelf.PG.knex('users').where('facebook_id',profile.id.toString()).then(function(existingUser) {
-		
-		console.log("Existing User:" + existingUser);
+		console.log("ExistingUser:");
+		console.log(existingUser);
 
-		if (existingUser.count('facebook_id')==0)
+		if (existingUser === 0)
 		{
 
 			var newUser = {};
@@ -76,14 +76,19 @@ exports.createUser = function(profile) {
 						location_id: newUser.location_id})
 					.then(function(result) {
 					  console.log('New User Successfully Added');
-					  return newUser;	 
+					  console.log("Done Called");
+					  return done(null,newUser[0]);
+					  
 					});
 		}
 		else
-			return existingUser;
+			console.log("done called 2!");
+			return done(null,existingUser[0]);
 	});
 	
-}
+};
+
+exports.Bookshelf = Bookshelf;
 // // //If local db doesn't work, run 'heroku pg:credentials' and replace the address
 // var connection = process.env.DATABASE_URL 
 // 	|| 'postgres://khctwifcwaratd:D4-FK0pynGsG7S_wuOn4m1Cyrw@ec2-54-243-48-227.compute-1.amazonaws.com:5432/d81o6v1corf28q?ssl=true';

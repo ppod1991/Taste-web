@@ -5,23 +5,30 @@ var logfmt = require("logfmt");
 
 var pg = require('pg');
 var users = require('./app/Resources/Users');
-var connect = require('connect');
 var cors = require('cors');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.serializeUser(function(user, done) {
   console.log("SERIALIZE USER");
-  done(null, user);
+  console.log(user.user_id);
+  done(null,user.user_id);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function(user_id, done) {
   console.log("DESERIALIZE USER");
-  done(null, obj);
+  users.Bookshelf.PG.knex('users').where('user_id',user_id).then(function(user) {
+    console.log(user);
+    done(null, user[0]); 
+  });
 });
 
 
 var callbackURL;
+
 
 if (!!process.env.PORT) {
 	callbackURL = "http://desolate-plateau-4658.herokuapp.com/auth/facebook/callback";
@@ -36,21 +43,26 @@ passport.use(new FacebookStrategy({
       callbackURL: callbackURL
     },
   function(accessToken, refreshToken, profile, done) {
-  		console.log(profile);
-  		var newUser = users.createUser(profile._json);
-  		return done(null,newUser);
+    		process.nextTick(function () {
+          console.log(profile);
+          users.createUser(profile._json,done);
+      });
+      
+
   }));
 
 var app = express();
 
-app.use(cors());
+
+
 app.use(logfmt.requestLogger());
-app.use(connect.cookieParser());
-app.use(connect.bodyParser());
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({secret: 'keyboard cat'}));
 app.use(passport.initialize());
-app.use(connect.session({ secret: 'keyboard cat2' }));
 app.use(passport.session());
 app.use(express.static(__dirname + '/app'));
+app.use(cors());
 
 
 
@@ -68,35 +80,41 @@ var auth = function(req, res, next) {
 		next();
 };
 
-
 app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
 
-app.get('/users', users.findAll);
+app.get('/users', auth, users.findAll);
 app.get('/users/:user_id', auth, users.findById);
 app.post('/users', auth, users.addUser);
-app.get('/loggedin',function (req,res) {
-	res.send(req.isAuthenticated() ? req.user : '0');
-});
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback',passport.authenticate('facebook',{successRedirect:'/',failureRedirect:'/'}));
+app.get('/loggedin',function (req,res) {
+  console.log("Going to /loggedin");
+  console.log(req.user);
+  res.send(req.isAuthenticated() ? req.user : {user_id: 0});
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
+    // The request will be redirected to Facebook for authentication, so this
+    // function will not be called.
+  });
+
+app.get('/auth/facebook/callback',passport.authenticate('facebook',{successRedirect:'/#/fans/find',failureRedirect:'/'}),  function(req, res) {
+    res.redirect('/');
+  });
 
 app.get('/logout', function(req,res) {
 	req.logOut();
+  res.send(200);
 	res.redirect('/');
-	res.send(200);
-})
+	
+});
 
 var port = Number(process.env.PORT || 5000);
 
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
-
-
-
 
 
 // #!/usr/bin/env node
