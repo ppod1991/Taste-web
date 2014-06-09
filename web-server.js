@@ -85,7 +85,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/users', auth, users.findAll);
-app.get('/users/:user_id', auth, users.findById);
+app.get('/users/:user_id', users.findById);
 app.post('/users', auth, users.addUser);
 
 app.get('/loggedin',function (req,res) {

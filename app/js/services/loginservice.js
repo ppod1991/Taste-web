@@ -4,21 +4,20 @@ angular.module('fantasyApp.services.login', ['ngResource'])
     .factory('loginService', ['$resource',
         function($resource) {
         	var user_id = 0;
-
         	return {
         		
         		getUser: function() {
-        			console.log("Get User Called with value: " + user_id);
+        			console.log("Get User Called with value: " + user_id );
         			return user_id;
         		},
 
         		isLoggedIn: function() {
 		            //return $resource("http://desolate-plateau-4658.herokuapp.com/users/:user_id",{user_id:'@user_id'});            
 			        var checkLogIn = $resource("http://localhost:5000/loggedin").get(function () {
-			            user_id = checkLogIn.user_id;
-			            var isLoggedIn = !(checkLogIn.user_id === 0);            
-			        	console.log('Logged In Being Checked');
-						console.log(checkLogIn);
+
+						user_id = checkLogIn.user_id;
+					
+						var isLoggedIn = !(checkLogIn.user_id === 0);  
 			        	console.log((checkLogIn.user_id));
 			        	console.log('Response is ' + isLoggedIn);
 			        	return isLoggedIn;

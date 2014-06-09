@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
-  .controller('HeaderController', ['$scope', '$location', 'loginService', 'angularFire', 
-    function($scope, $location, loginService, angularFire) {
+  .controller('HeaderController', ['$scope', '$location', 'loginService', '$window','angularFire', 
+    function($scope, $location, loginService, $window,angularFire) {
       
       $scope.auth = 0;
 
       $scope.$watch(loginService.getUser, function (value, oldValue) {
-
+        console.log("$scope.$watch called with val: " + value + " and old Value of: " + oldValue);
+        console.log($scope);
         if(!value && oldValue) {
           console.log("Disconnect");
           $scope.auth = 0;
@@ -20,7 +21,10 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
         }
 
       }, true);
-      
+
+      $scope.logout = function () {
+        $window.location.href = 'http://localhost:5000/logout';
+      }
       //  $scope.$on("angularFireAuth:login", function() {
       // //   angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
       //      $location.path('/feed');

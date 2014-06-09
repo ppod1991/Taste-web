@@ -14,6 +14,7 @@ app.config(['$routeProvider',
       .otherwise(       { redirectTo: '/' });
     }])
 .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
+
         $rootScope.$on('$routeChangeStart', function (event) {
             loginService.isLoggedIn();
             if (loginService.getUser()===0) {
