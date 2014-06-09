@@ -18,7 +18,7 @@ exports.findAll = function(req, res) {
 	console.log('Find all Users Called!');
 	Bookshelf.PG.knex('users').select().then(function(result) {
 	  console.log(result);	     
-	  res.send(result);
+	  res.send("{Users: " + JSON.stringify(result) + "}");
 	});
 };
 
