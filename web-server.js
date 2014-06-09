@@ -84,8 +84,8 @@ app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
 
-app.get('/users', auth, users.findAll);
-app.get('/users/:user_id', users.findById);
+app.get('/users', users.findAll);
+app.get('/users/:user_id', auth, users.findById);
 app.post('/users', auth, users.addUser);
 
 app.get('/loggedin',function (req,res) {
