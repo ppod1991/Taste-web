@@ -13,7 +13,7 @@ Bookshelf.PG = Bookshelf.initialize({
 });
 
 
-//Retrieve all Users
+//Retrieve all Users sir
 exports.findAll = function(req, res) {
 	console.log('Find all Users Called!');
 	Bookshelf.PG.knex('users').select().then(function(result) {
