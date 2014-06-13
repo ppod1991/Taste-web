@@ -29,6 +29,24 @@ Bookshelf.PG.knex.schema.createTable('stores', function (table) {
 		console.log('Stores Table is Created!');
 	});
 
+// CREATE TABLE stores
+// (
+//   store_name character varying(255),
+//   store_id integer NOT NULL,
+//   owner_first_name character varying(255),
+//   owner_last_name character varying(255), -- 
+//   hashtag_text character varying(255),
+//   url character varying(255), -- 
+//   phone_number character varying(255),
+//   owner_email character varying(255),
+//   cuisine character varying(255),
+//   street_address character varying(255),
+//   city character varying(255),
+//   state character varying(255),
+//   zipcode character varying(255),
+//   CONSTRAINT stores_pkey PRIMARY KEY (store_id)
+// )
+
 Bookshelf.PG.knex.schema.createTable('users', function (table) {
 	table.string('first_name');
 	table.increments('user_id');

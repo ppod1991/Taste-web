@@ -16,7 +16,9 @@ app.get('/', function(req, res) {
 
 app.get('/users', users.findAll);
 app.get('/users/:user_id', users.findById);
-app.post('/users',users.addUser);
+app.get('/stores', stores.findAll);
+app.get('/stores/:store_id', stores.findById);
+
 
 var port = Number(process.env.PORT || 5000);
 
