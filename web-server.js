@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-
+var request = require('request');
 passport.serializeUser(function(user, done) {
   console.log("SERIALIZE USER");
   console.log(user.user_id);
@@ -74,16 +74,41 @@ app.use(cors());
 //   next();
 //  });
 
+var androidAuth = function(req, res, next) {
+	var clientAccessToken = req.query.accessToken;
+  request.get(('https://graph.facebook.com/v2.0/debug_token?input_token='+clientAccessToken +'&access_token=193198737555570|19422735ab599ea41028f4f242e1a6ae'), function (error, response, body) {
+    console.log("Response from Facebook:");
+
+    if (error) {
+      console.log("Error");
+      console.log(error);
+      res.send(401);
+    }
+    else {
+      var returnedObject = JSON.parse(body);
+      console.log(JSON.stringify(returnedObject));
+      if ("error" in returnedObject || "error" in returnedObject.data || !returnedObject.data.is_valid)
+        res.send(401);
+      else
+        next();
+    }
+    
+  });
+
+};
+
 var auth = function(req, res, next) {
-	if (!req.isAuthenticated())
-		res.send(401);
-	else
-		next();
+  if (!req.isAuthenticated())
+    res.send(401);
+  else
+    next();
 };
 
 app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
+
+app.get('/android/users', androidAuth, users.findAll);
 
 app.get('/users', users.findAll);
 app.get('/users/:user_id', auth, users.findById);

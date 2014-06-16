@@ -1,0 +1,97 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'http,',
+1 verbose cli   'https',
+1 verbose cli   '--save' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.21
+4 verbose node symlink C:\Program Files (x86)\nodejs\\node.exe
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'http,', null ]
+7 verbose cache add name=undefined spec="http," args=["http,",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'http,',
+8 verbose parsed url   path: 'http,',
+8 verbose parsed url   href: 'http,' }
+9 verbose cache add [ 'https', null ]
+10 verbose cache add name=undefined spec="https" args=["https",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'https',
+11 verbose parsed url   path: 'https',
+11 verbose parsed url   href: 'https' }
+12 silly lockFile 7acef253-http http,
+13 verbose lock http, C:\Users\Piyush\AppData\Roaming\npm-cache\7acef253-http.lock
+14 silly lockFile c3437dbc-https https
+15 verbose lock https C:\Users\Piyush\AppData\Roaming\npm-cache\c3437dbc-https.lock
+16 silly lockFile 7acef253-http http,
+17 silly lockFile 7acef253-http http,
+18 silly lockFile c3437dbc-https https
+19 silly lockFile c3437dbc-https https
+20 verbose addNamed [ 'http,', '' ]
+21 verbose addNamed [ null, '*' ]
+22 silly lockFile ee307d9a-http http,@
+23 verbose lock http,@ C:\Users\Piyush\AppData\Roaming\npm-cache\ee307d9a-http.lock
+24 verbose addNamed [ 'https', '' ]
+25 verbose addNamed [ null, '*' ]
+26 silly lockFile 421d451a-https https@
+27 verbose lock https@ C:\Users\Piyush\AppData\Roaming\npm-cache\421d451a-https.lock
+28 silly addNameRange { name: 'http,', range: '*', hasData: false }
+29 silly addNameRange { name: 'https', range: '*', hasData: false }
+30 verbose url raw http,
+31 verbose url resolving [ 'https://registry.npmjs.org/', './http%2C' ]
+32 verbose url resolved https://registry.npmjs.org/http%2C
+33 info trying registry request attempt 1 at 15:27:46
+34 http GET https://registry.npmjs.org/http%2C
+35 verbose url raw https
+36 verbose url resolving [ 'https://registry.npmjs.org/', './https' ]
+37 verbose url resolved https://registry.npmjs.org/https
+38 info trying registry request attempt 1 at 15:27:46
+39 http GET https://registry.npmjs.org/https
+40 http 404 https://registry.npmjs.org/https
+41 silly registry.get cb [ 404,
+41 silly registry.get   { date: 'Mon, 16 Jun 2014 19:27:47 GMT',
+41 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+41 silly registry.get     'content-type': 'application/json',
+41 silly registry.get     'cache-control': 'max-age=0',
+41 silly registry.get     'content-length': '52',
+41 silly registry.get     'accept-ranges': 'bytes',
+41 silly registry.get     via: '1.1 varnish',
+41 silly registry.get     age: '0',
+41 silly registry.get     'x-served-by': 'cache-v41-ASH',
+41 silly registry.get     'x-cache': 'MISS',
+41 silly registry.get     'x-cache-hits': '0',
+41 silly registry.get     'x-timer': 'S1402946867.772250,VS0,VE11',
+41 silly registry.get     'keep-alive': 'timeout=10, max=50',
+41 silly registry.get     connection: 'Keep-Alive' } ]
+42 silly lockFile 421d451a-https https@
+43 silly lockFile 421d451a-https https@
+44 error 404 'https' is not in the npm registry.
+44 error 404 You should bug the author to publish it
+44 error 404
+44 error 404 Note that you can also install from a
+44 error 404 tarball, folder, or http url, or git url.
+45 error System Windows_NT 6.2.9200
+46 error command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "http," "https" "--save"
+47 error cwd C:\Users\Piyush\thinkster-firebase-tutorial
+48 error node -v v0.10.21
+49 error npm -v 1.3.11
+50 error code E404
+51 verbose exit [ 1, true ]
