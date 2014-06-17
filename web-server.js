@@ -6,6 +6,7 @@ var logfmt = require("logfmt");
 var pg = require('pg');
 var users = require('./app/Resources/Users');
 var stores = require('./app/Resources/Stores');
+var promotions = require('./app/Resources/Promotions');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -116,6 +117,9 @@ app.post('/users', auth, users.addUser);
 
 app.get('/stores', stores.findAll);
 app.get('/stores/:store_id', auth, stores.findById);
+
+app.get('/promotions/:promotion_id',promotions.findById);
+app.get('/promotions', promotions.findAll);
 
 app.get('/loggedin',function (req,res) {
   console.log("Going to /loggedin");

@@ -1,22 +1,22 @@
 var pg = require('pg');
-var Bookshelf = require('bookshelf');
+var bookshelf = require('./Bookshelf');
 
-Bookshelf.PG = Bookshelf.initialize({
-	client: 'pg',
-	connection: {
-		host : 'ec2-54-243-48-227.compute-1.amazonaws.com',
-		user: 'khctwifcwaratd',
-		password: 'D4-FK0pynGsG7S_wuOn4m1Cyrw',
-		database: 'd81o6v1corf28q',
-		ssl: 'true'
-	}
-});
+// Bookshelf.PG = Bookshelf.initialize({
+// 	client: 'pg',
+// 	connection: {
+// 		host : 'ec2-54-243-48-227.compute-1.amazonaws.com',
+// 		user: 'khctwifcwaratd',
+// 		password: 'D4-FK0pynGsG7S_wuOn4m1Cyrw',
+// 		database: 'd81o6v1corf28q',
+// 		ssl: 'true'
+// 	}
+// });
 
 
 //Retrieve all Users sir
 exports.findAll = function(req, res) {
 	console.log('Find all Users Called!');
-	Bookshelf.PG.knex('users').select().then(function(result) {
+	bookshelf.PG.knex('users').select().then(function(result) {
 	  console.log(result);	     
 	  res.send("{Users: " + JSON.stringify(result) + "}");
 	});
@@ -26,7 +26,7 @@ exports.findAll = function(req, res) {
 exports.findById = function(req, res) {
 	var user_id = req.params.user_id;
 	console.log('Find User By ID Called!');
-	Bookshelf.PG.knex('users').select().where('user_id',user_id).then(function(result) {
+	bookshelf.PG.knex('users').select().where('user_id',user_id).then(function(result) {
 	  console.log(result[0].first_name);	     
 	  res.send(result);
 	});
@@ -39,7 +39,7 @@ exports.addUser = function(req, res) {
 	var last_name = req.body.last_name;
 	var gender = req.body.gender;
 
-	Bookshelf.PG.knex('users').insert(
+	bookshelf.PG.knex('users').insert(
 		{first_name: first_name,
 		 last_name: last_name,
 		 gender: gender})
@@ -52,7 +52,7 @@ exports.addUser = function(req, res) {
 //Add a New User 
 exports.createUser = function(profile, done) {
 	console.log("New User trying to be created!");
-	Bookshelf.PG.knex('users').where('facebook_id',profile.id.toString()).then(function(existingUser) {
+	bookshelf.PG.knex('users').where('facebook_id',profile.id.toString()).then(function(existingUser) {
 		console.log("ExistingUser:");
 		console.log(existingUser);
 
@@ -67,7 +67,7 @@ exports.createUser = function(profile, done) {
 			newUser.facebook_id = profile.id;
 			newUser.location_id = profile.location.id;
 
-			Bookshelf.PG.knex('users').insert(
+			bookshelf.PG.knex('users').insert(
 						{first_name: newUser.first_name,
 						last_name: newUser.last_name,
 						gender: newUser.gender,
@@ -88,7 +88,6 @@ exports.createUser = function(profile, done) {
 	
 };
 
-exports.Bookshelf = Bookshelf;
 // // //If local db doesn't work, run 'heroku pg:credentials' and replace the address
 // var connection = process.env.DATABASE_URL 
 // 	|| 'postgres://khctwifcwaratd:D4-FK0pynGsG7S_wuOn4m1Cyrw@ec2-54-243-48-227.compute-1.amazonaws.com:5432/d81o6v1corf28q?ssl=true';
