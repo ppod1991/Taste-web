@@ -16,7 +16,12 @@ var bookshelf = require('./Bookshelf');
 //Retrieve all Users sir
 exports.findAll = function(req, res) {
 	console.log('Find all Users Called!');
-	bookshelf.PG.knex('users').select().then(function(result) {
+	var model = bookshelf.PG.knex('users').select();
+	if("facebook_id" in req.query) {
+		model = model.where('facebook_id',req.query.facebook_id);
+	}
+
+	model.then(function(result) {
 	  console.log(result);	     
 	  res.send("{Users: " + JSON.stringify(result) + "}");
 	});
