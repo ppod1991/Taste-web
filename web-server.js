@@ -14,6 +14,8 @@ var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var request = require('request');
+var bookshelf = require('./app/Resources/Bookshelf');
+
 passport.serializeUser(function(user, done) {
   console.log("SERIALIZE USER");
   console.log(user.user_id);
@@ -22,7 +24,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(user_id, done) {
   console.log("DESERIALIZE USER");
-  users.Bookshelf.PG.knex('users').where('user_id',user_id).then(function(user) {
+  bookshelf.PG.knex('users').where('user_id',user_id).then(function(user) {
     console.log(user);
     done(null, user[0]); 
   });
@@ -120,12 +122,15 @@ app.get('/stores/:store_id', auth, stores.findById);
 
 app.get('/promotions/:promotion_id',promotions.findById);
 app.get('/promotions', promotions.findAll);
+app.post('/promotions',promotions.addPromotion);
 
 app.get('/loggedin',function (req,res) {
   console.log("Going to /loggedin");
   console.log(req.user);
   res.send(req.isAuthenticated() ? req.user : {user_id: 0});
 });
+
+
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
     // The request will be redirected to Facebook for authentication, so this
