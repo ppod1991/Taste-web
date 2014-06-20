@@ -10,7 +10,8 @@ exports.findAll = function(req, res) {
 	var store_id = req.query.store_id;
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
-	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id');
+	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id')
+				.select(PG.knex.raw('"display_text","store_name","start_date"::DATE,"end_date"::DATE'));
 	//console.log(knex('promotions').join('stores'));
 	//var model = PG.knex('promotions').innerJoin('stores');
 	console.log(model.toString());
@@ -27,6 +28,7 @@ exports.findAll = function(req, res) {
 		model = model.where('use_status',use_status);
 	}
 	model = model.where(PG.knex.raw("end_date > timezone('utc'::text, now())"));
+
 	console.log(model.toString());
 	//model = model.where(PG.knex.raw("start_date < timezone('utc'::text, now())"));
 	console.log("REACHED");
