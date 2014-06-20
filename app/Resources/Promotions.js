@@ -10,7 +10,7 @@ exports.findAll = function(req, res) {
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
 
-	var model = bookshelf.PG.knex('promotions').select();
+	var model = bookshelf.PG.knex('promotions').innerJoin('stores').select();
 	if("store_id" in req.query) {
 		model = model.where('store_id',store_id);
 	}
