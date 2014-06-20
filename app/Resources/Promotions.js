@@ -24,7 +24,7 @@ exports.findAll = function(req, res) {
 	}
 
 	model = model.where(bookshelf.PG.knex.raw("end_date > timezone('utc'::text, now())"));
-	model = model.where(bookshelf.PG.knex.raw("start_date < timezone('utc'::text, now())"));
+	//model = model.where(bookshelf.PG.knex.raw("start_date < timezone('utc'::text, now())"));
 
 	model.then(function(result) {
 	  console.log(result);	     
