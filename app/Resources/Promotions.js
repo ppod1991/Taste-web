@@ -11,13 +11,13 @@ exports.findAll = function(req, res) {
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
 	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id')
-				.select(PG.knex.raw('"display_text","store_name","start_date"::DATE,"end_date"::DATE'));
+				.select(PG.knex.raw('"use_status","user_id","store_id","display_text","store_name","start_date"::DATE,"end_date"::DATE'));
 	//console.log(knex('promotions').join('stores'));
 	//var model = PG.knex('promotions').innerJoin('stores');
 	console.log(model.toString());
 	//('stores','promotions.store_id','stores.store_id').select();
 	if("store_id" in req.query) {
-		model = model.where('store_id',store_id);
+		model = model.where('promotions.store_id',store_id);
 	}
 
 	if("user_id" in req.query) {
