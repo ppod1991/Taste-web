@@ -1,12 +1,12 @@
-var pg = require('pg');
-var bookshelf = require('./Bookshelf');
+//var pg = require('pg');
+var PG = require('./knex');
 
 
 
 //Retrieve all Stores
 exports.findAll = function(req, res) {
 	console.log('Find all Stores Called!');
-	bookshelf.PG.knex('stores').select().then(function(result) {
+	PG.knex('stores').select().then(function(result) {
 	  console.log(result);	     
 	  res.send("{Stores: " + JSON.stringify(result) + "}");
 	});
@@ -16,7 +16,7 @@ exports.findAll = function(req, res) {
 exports.findById = function(req, res) {
 	var store_id = req.params.store_id;
 	console.log('Find Store By ID Called!');
-	bookshelf.PG.knex('stores').select().where('store_id',store_id).then(function(result) {
+	PG.knex('stores').select().where('store_id',store_id).then(function(result) {
 	  console.log(result[0].first_name);	     
 	  res.send(result);
 	});

@@ -1,5 +1,5 @@
-var pg = require('pg');
-var bookshelf = require('./Bookshelf');
+//r pg = require('pg');
+var PG = require('./knex');
 
 // Bookshelf.PG = Bookshelf.initialize({
 // 	client: 'pg',
@@ -16,7 +16,7 @@ var bookshelf = require('./Bookshelf');
 //Retrieve all Users sir
 exports.findAll = function(req, res) {
 	console.log('Find all Users Called!');
-	var model = bookshelf.PG.knex('users').select();
+	var model = PG.knex('users').select();
 	if("facebook_id" in req.query) {
 		model = model.where('facebook_id',req.query.facebook_id);
 	}
@@ -31,7 +31,7 @@ exports.findAll = function(req, res) {
 exports.findById = function(req, res) {
 	var user_id = req.params.user_id;
 	console.log('Find User By ID Called!');
-	bookshelf.PG.knex('users').select().where('user_id',user_id).then(function(result) {
+	PG.knex('users').select().where('user_id',user_id).then(function(result) {
 	  console.log(result[0].first_name);	     
 	  res.send(result);
 	});
@@ -44,7 +44,7 @@ exports.addUser = function(req, res) {
 	var last_name = req.body.last_name;
 	var gender = req.body.gender;
 
-	bookshelf.PG.knex('users').insert(
+	PG.knex('users').insert(
 		{first_name: first_name,
 		 last_name: last_name,
 		 gender: gender})
@@ -57,7 +57,7 @@ exports.addUser = function(req, res) {
 //Add a New User 
 exports.createUser = function(profile, done) {
 	console.log("New User trying to be created!");
-	bookshelf.PG.knex('users').where('facebook_id',profile.id.toString()).then(function(existingUser) {
+	PG.knex('users').where('facebook_id',profile.id.toString()).then(function(existingUser) {
 		console.log("ExistingUser:");
 		console.log(existingUser);
 
@@ -72,7 +72,7 @@ exports.createUser = function(profile, done) {
 			newUser.facebook_id = profile.id;
 			newUser.location_id = profile.location.id;
 
-			bookshelf.PG.knex('users').insert(
+			PG.knex('users').insert(
 						{first_name: newUser.first_name,
 						last_name: newUser.last_name,
 						gender: newUser.gender,

@@ -1,16 +1,20 @@
-var pg = require('pg');
-var bookshelf = require('./Bookshelf');
+var PG = require('./knex');
 
 
 
 //Retrieve all Promotions where Query Parameters are met
 exports.findAll = function(req, res) {
+	console.log("pg");
+	console.log(PG);
 	console.log('Find all Promotions In Existence!');
 	var store_id = req.query.store_id;
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
-
-	var model = bookshelf.PG.knex('promotions').innerJoin('stores').select();
+	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id');
+	//console.log(knex('promotions').join('stores'));
+	//var model = PG.knex('promotions').innerJoin('stores');
+	console.log(model.toString());
+	//('stores','promotions.store_id','stores.store_id').select();
 	if("store_id" in req.query) {
 		model = model.where('store_id',store_id);
 	}
@@ -22,10 +26,10 @@ exports.findAll = function(req, res) {
 	if("use_status" in req.query) {
 		model = model.where('use_status',use_status);
 	}
-
-	model = model.where(bookshelf.PG.knex.raw("end_date > timezone('utc'::text, now())"));
-	//model = model.where(bookshelf.PG.knex.raw("start_date < timezone('utc'::text, now())"));
-
+	model = model.where(PG.knex.raw("end_date > timezone('utc'::text, now())"));
+	console.log(model.toString());
+	//model = model.where(PG.knex.raw("start_date < timezone('utc'::text, now())"));
+	console.log("REACHED");
 	model.then(function(result) {
 	  console.log(result);	     
 	  res.send("{Promotions: " + JSON.stringify(result) + "}");
@@ -46,7 +50,7 @@ exports.addPromotion = function(req,res) {
 	}
 	
 
-	bookshelf.PG.knex('promotions').insert(
+	PG.knex('promotions').insert(
 		{user_id: user_id,
 		 store_id: store_id,
 		 display_text: display_text})
@@ -60,7 +64,7 @@ exports.findById = function(req, res) {
 
 
 	console.log('Find Promotions By ID Called!');
-	bookshelf.PG.knex('promotions').select().where('promotion_id',promotion_id).then(function(result) {
+	PG.knex('promotions').select().where('promotion_id',promotion_id).then(function(result) {
 	  console.log(result[0].display_text);	     
 	  res.send(result);
 	});

@@ -14,7 +14,7 @@ var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var request = require('request');
-var bookshelf = require('./app/Resources/Bookshelf');
+var PG = require('./app/Resources/knex');
 
 passport.serializeUser(function(user, done) {
   console.log("SERIALIZE USER");
@@ -24,7 +24,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(user_id, done) {
   console.log("DESERIALIZE USER");
-  bookshelf.PG.knex('users').where('user_id',user_id).then(function(user) {
+  PG.knex('users').where('user_id',user_id).then(function(user) {
     console.log(user);
     done(null, user[0]); 
   });
