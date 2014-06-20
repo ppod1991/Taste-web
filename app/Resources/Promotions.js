@@ -4,17 +4,17 @@ var PG = require('./knex');
 
 //Retrieve all Promotions where Query Parameters are met
 exports.findAll = function(req, res) {
-	console.log("pg");
-	console.log(PG);
+	//console.log("pg");
+	//console.log(PG);
 	console.log('Find all Promotions In Existence!');
 	var store_id = req.query.store_id;
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
 	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id')
-				.select(PG.knex.raw('"use_status","user_id","store_id","display_text","store_name","start_date"::DATE,"end_date"::DATE'));
+				.select('display_text','store_name','start_date','end_date');
 	//console.log(knex('promotions').join('stores'));
 	//var model = PG.knex('promotions').innerJoin('stores');
-	console.log(model.toString());
+	//console.log(model.toString());
 	//('stores','promotions.store_id','stores.store_id').select();
 	if("store_id" in req.query) {
 		model = model.where('promotions.store_id',store_id);
@@ -31,7 +31,7 @@ exports.findAll = function(req, res) {
 
 	console.log(model.toString());
 	//model = model.where(PG.knex.raw("start_date < timezone('utc'::text, now())"));
-	console.log("REACHED");
+	//console.log("REACHED");
 	model.then(function(result) {
 	  console.log(result);	     
 	  res.send("{Promotions: " + JSON.stringify(result) + "}");
