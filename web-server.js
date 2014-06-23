@@ -15,6 +15,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var request = require('request');
 var PG = require('./app/Resources/knex');
+var facebook = require('./app/Resources/Facebook');
 
 passport.serializeUser(function(user, done) {
   console.log("SERIALIZE USER");
@@ -124,6 +125,9 @@ app.get('/stores/:store_id', auth, stores.findById);
 app.get('/promotions', promotions.findAll);
 app.post('/promotions',promotions.addPromotion);
 app.post('/promotions/redeem',promotions.redeemPromotion);
+
+app.get('/facebookVisit',facebook.newVisitGET);
+app.post('/facebookVisit',facebook.newVisitPOST);
 
 app.get('/loggedin',function (req,res) {
   console.log("Going to /loggedin");
