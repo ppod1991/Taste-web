@@ -11,7 +11,7 @@ exports.findAll = function(req, res) {
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
 	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id')
-				.select('display_text','store_name','start_date','end_date');
+				.select('display_text','store_name','start_date','end_date','promotion_id');
 	//console.log(knex('promotions').join('stores'));
 	//var model = PG.knex('promotions').innerJoin('stores');
 	//console.log(model.toString());
@@ -67,7 +67,7 @@ exports.redeemPromotion = function(req,res) {
 	var promotion_id = req.body.promotion_id;
 
 	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used'}).then(function(result) {
-		console.log("Promotion with Promotion_id: " + promotion_id.toString() + " redeemed!");
+		console.log("Promotion with Promotion_id: " + promotion_id + " redeemed!");
 	});
 
 
