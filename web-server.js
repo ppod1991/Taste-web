@@ -120,9 +120,10 @@ app.post('/users', auth, users.addUser);
 app.get('/stores', stores.findAll);
 app.get('/stores/:store_id', auth, stores.findById);
 
-app.get('/promotions/:promotion_id',promotions.findById);
+//app.get('/promotions/:promotion_id',promotions.findById);
 app.get('/promotions', promotions.findAll);
 app.post('/promotions',promotions.addPromotion);
+app.post('/promotions/redeem',promotions.redeemPromotion);
 
 app.get('/loggedin',function (req,res) {
   console.log("Going to /loggedin");

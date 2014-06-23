@@ -61,6 +61,18 @@ exports.addPromotion = function(req,res) {
 	      res.send(201, null);
 	});
 };
+
+exports.redeemPromotion = function(req,res) {
+	console.log("Promotion trying to be redeemed!");
+	var promotion_id = req.body.promotion_id;
+
+	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used'}).then(function(result) {
+		console.log("Promotion with Promotion_id: " + promotion_id.toString() + " redeemed!");
+	});
+
+
+};
+
 //Retrieve a User by their ID
 exports.findById = function(req, res) {
 
