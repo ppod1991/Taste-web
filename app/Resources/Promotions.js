@@ -68,6 +68,7 @@ exports.redeemPromotion = function(req,res) {
 
 	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used'}).then(function(result) {
 		console.log("Promotion with Promotion_id: " + promotion_id + " redeemed!");
+		res.send(201, null);
 	});
 
 
