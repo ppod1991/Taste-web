@@ -56,6 +56,7 @@ exports.addPromotion = function(req,res) {
 		{user_id: user_id,
 		 store_id: store_id,
 		 display_text: display_text})
+	.returning('promotion_id')
 	.then(function(result) {
 		  console.log(result);
 	      res.send(result);
