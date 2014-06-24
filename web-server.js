@@ -116,6 +116,8 @@ app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
 
+app.post('/experience',facebook.experienceEatery);
+
 app.get('/android/users', androidAuth, users.findAll);
 
 app.get('/users', users.findAll);
