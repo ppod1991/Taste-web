@@ -7,6 +7,7 @@ var pg = require('pg');
 var users = require('./app/Resources/Users');
 var stores = require('./app/Resources/Stores');
 var promotions = require('./app/Resources/Promotions');
+var snaps = require('./app/Resources/Snaps');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -141,7 +142,7 @@ app.get('/loggedin',function (req,res) {
   res.send(req.isAuthenticated() ? req.user : {user_id: 0});
 });
 
-
+app.post('/Snaps',snaps.addSnap);
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
     // The request will be redirected to Facebook for authentication, so this

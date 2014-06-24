@@ -58,7 +58,7 @@ exports.addPromotion = function(req,res) {
 		 display_text: display_text})
 	.then(function(result) {
 		  console.log(result);
-	      res.send(201, null);
+	      res.send(result);
 	});
 };
 

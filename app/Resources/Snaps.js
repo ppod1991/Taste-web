@@ -2,7 +2,7 @@ var PG = require('./knex');
 
 exports.addSnap = function (req, res) {
 	console.log("Snap trying to be added!");
-	console.log(req.body);
+	console.log(JSON.stringify(req.body));
 	res.send(201,null);
 	// var user_id = req.body.user_id;
 	// var store_id = req.body.store_id;
