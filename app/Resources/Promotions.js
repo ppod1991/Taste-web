@@ -58,8 +58,8 @@ exports.addPromotion = function(req,res) {
 		 display_text: display_text})
 	.returning('promotion_id')
 	.then(function(result) {
-		  console.log(result);
-	      res.send(result);
+		  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+	      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 	});
 };
 
