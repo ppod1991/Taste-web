@@ -108,6 +108,10 @@ var auth = function(req, res, next) {
     next();
 };
 
+app.get('/moltoBene', function(req, res) {
+  res.sendfile('./app/views/places/moltoBene.html');
+});
+
 app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
