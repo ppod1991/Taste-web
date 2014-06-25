@@ -35,6 +35,7 @@ exports.addSnap = function (req, res) {
 	var pictureURLforFB =  '&image[0][url]=' + encodeURIComponent(picture_url) + '&image[0][user_generated]=true';
 	//var pictureURL =  '&image:url=' + encodeURIComponent('https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/10499434_10152165511185233_8074458132375143692_o.jpg') + '&image:user_generated=true';
 	var explicitSharing = '&fb:explicitly_shared=true';
+	var messageForFB = '&message=' + encodeURIComponent(req.body.snap_message);
 	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing;
 	console.log("resulting url: " + resultingURL);
 	request.post({url: resultingURL},function (error, response,body) {
