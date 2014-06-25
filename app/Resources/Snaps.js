@@ -36,13 +36,13 @@ exports.addSnap = function (req, res) {
 	//var pictureURL =  '&image:url=' + encodeURIComponent('https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/10499434_10152165511185233_8074458132375143692_o.jpg') + '&image:user_generated=true';
 	var explicitSharing = '&fb:explicitly_shared=true';
 	var messageForFB = '&message=' + encodeURIComponent(req.body.snap_message);
-	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing;
+	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing + messageForFB;
 	console.log("resulting url: " + resultingURL);
 	request.post({url: resultingURL},function (error, response,body) {
 		console.log("Error: " + error);
 		console.log("Response: " + response);
 		console.log("Body: " + body);
-		var facebook_action_post_id = body.id;
+		var facebook_action_post_id = JSON.parse(body).id;
 		console.log('Facebook Action Post Id: ' + facebook_action_post_id);
 		PG.knex('snaps').insert(
 			{user_id: req.body.user.user_id,
