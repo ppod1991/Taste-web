@@ -7,6 +7,12 @@ exports.addSnap = function (req, res) {
 	console.log(JSON.stringify(req.body.user));
 	console.log(JSON.stringify(req.body.store));
 	res.send(201,null);
+	var access_token = req.body.access_token;
+	var eatery = 'https://desolate-plateau-4658.herokuapp.com/' + req.body.store.hashtag_text;
+	eatery = '&eatery=' + encodeURIComponent(eatery);
+	console.log("Encoded Eatery:" + eatery);
+	var picture_url = req.body.picture_url;
+
 	// var user_id = req.body.user_id;
 	// var store_id = req.body.store_id;
 	// var display_text;
@@ -19,14 +25,40 @@ exports.addSnap = function (req, res) {
 	// }
 	
 
-	// PG.knex('promotions').insert(
-	// 	{user_id: user_id,
-	// 	 store_id: store_id,
-	// 	 display_text: display_text})
-	// .then(function(result) {
-	// 	  console.log(result);
-	//       res.send(201, null);
-	// });
+	//var access_token = '?access_token=' + 'CAACvtpYfgHIBAPVwWbFFjcE3Gwj2GJR7VuylzZBDpWmXMwZB93ewr5o4aJbEyZCj6vI2ENa14hOKjZAprOUy4Osg7aGbWZBXCu5zn5WVrBooFWgDuZB0JTy7s5TpiUsOiQeDOo8SI604yt6dWbX7bOzaM60P2s9nbCfDWppFDtcW9PocmiGym49PW2Rw9YTfCnVEPF0ZCaKTZC7MSx9ZAAYfqEIVWXjBAAIGVTZAZB3CZCZCKfQZDZD';
+	//var eatery = 'https://desolate-plateau-4658.herokuapp.com/moltobene';
+
+	//console.log("Uncoded Eatery:" + eatery);
+	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';
+	var method = '&method=POST';
+	var pictureURLforFB =  '&image[0][url]=' + encodeURIComponent(picture_url) + '&image[0][user_generated]=true';
+	//var pictureURL =  '&image:url=' + encodeURIComponent('https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/10499434_10152165511185233_8074458132375143692_o.jpg') + '&image:user_generated=true';
+	var explicitSharing = '&fb:explicitly_shared=true';
+	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing;
+	console.log("resulting url: " + resultingURL);
+	request.post({url: resultingURL},function (error, response,body) {
+		console.log("Error: " + error);
+		console.log("Response: " + response);
+		console.log("Body: " + body);
+		var facebook_action_post_id = body.id;
+
+		PG.knex('snaps').insert(
+			{user_id: req.body.user.user_id,
+			 store_id: req.body.store.store_id,
+			 received_promotion_id: req.body.promotion.promotion_id,
+			 snap_message: req.body.snap_message,
+			 snap_URL: picture_url,
+			 facebook_action_post_id: facebook_action_post_id,
+			 facebook_image_post_id: req.body.facebook_post_id
+			 })
+		.then(function(result) {
+			  console.log(result);
+		      res.send(201, null);
+		});
+
+	});
+
+
 };
 
 // //Retrieve all Promotions where Query Parameters are met
