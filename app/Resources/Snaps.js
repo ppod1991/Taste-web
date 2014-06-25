@@ -42,7 +42,7 @@ exports.addSnap = function (req, res) {
 		console.log("Response: " + response);
 		console.log("Body: " + body);
 		var facebook_action_post_id = body.id;
-
+		console.log('Facebook Action Post Id: ' + facebook_action_post_id);
 		PG.knex('snaps').insert(
 			{user_id: req.body.user.user_id,
 			 store_id: req.body.store.store_id,
