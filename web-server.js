@@ -114,11 +114,11 @@ app.get('/moltoBene', function(req, res) {
 });
 
 app.get('/eastAsianFusion', function(req, res) {
-  res.sendfile('./app/views/places/eastasianfusion.html');
+  res.sendfile('./app/views/places/eastAsianFusion.html');
 });
 
 app.get('/crownOfIndia', function(req, res) {
-  res.sendfile('./app/views/places/crownofindia.html');
+  res.sendfile('./app/views/places/crownOfIndia.html');
 });
 
 app.get('/', function(req, res) {
