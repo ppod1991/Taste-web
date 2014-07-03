@@ -3,16 +3,22 @@
 angular.module('fantasyApp.services.place', ['ngResource'])
     .factory('placeService', ['$resource',
         function($resource) {
-        	return {
-        		getStoreParameters: function(place_id) {
+
+            var meta = {};
+       	    return {
+        		setNewStoreParameters: function(place_id) {
                     var storeParams= $resource("http://desolate-plateau-4658.herokuapp.com/stores/" + place_id).get(function () {
-                        console.log('Store Params:');
-                        console.log(storeParams);
-                        storeParams = storeParams[0];
-                        console.log(storeParams);
-                        return storeParams;
+                        console.log("Set New Store Parameters called with place_id: " + place_id);
+                        meta = {
+                            title: storeParams.store_name,
+                            hashtag_text: storeParams.hashtag_text,
+                            picture_URL: storeParams.store_picture_URL
+                        };
+
+                        return meta;
                     });
 			        
-        		}
+        		},
+                getMeta: function() { return meta; }
         	}
         }]);
