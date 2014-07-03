@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.place')
+angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place'])
   .controller('PlaceCtrl', ['$scope', '$routeParams', placeService,
     function($scope, $routeParams, placeService) {
     	$scope.place_id = $routeParams.store_name;
