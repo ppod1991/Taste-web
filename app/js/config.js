@@ -34,7 +34,7 @@ app.config(['$routeProvider','$locationProvider',
                 //$location.path('/feed');
             }
         });
-}]).use(require('prerender-node').set('prerenderToken', 'Diu6USu9BaTRhnmuaDYJ'));
+}]);
   
   // // establish authentication
   // .run(['angularFireAuth', 'FBURL', '$rootScope', 
