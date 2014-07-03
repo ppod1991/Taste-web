@@ -5,6 +5,9 @@ angular.module('fantasyApp.config', ['ngRoute'])
 
 app.config(['$routeProvider','$locationProvider', 
     function($routeProvider,$locationProvider) {
+
+      $locationProvider.hashPrefix('!');
+
       $routeProvider
       .when('/', { redirectTo: '/signin' })
       .when('/signin',  { templateUrl: 'views/users/signin.html' })
@@ -14,9 +17,8 @@ app.config(['$routeProvider','$locationProvider',
       .when('/places/:store_name',{ templateUrl: 'views/places/place.html', controller: 'PlaceCtrl'})
       .otherwise(       { redirectTo: '/' });
 
-      $locationProvider.html5Mode(true);
-      $locationProvider.hashPrefix('!');
-
+      //$locationProvider.html5Mode(true);
+      
     }])
 .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
 
