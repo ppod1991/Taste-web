@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place'])
-  .controller('PlaceCtrl', ['$scope', '$routeParams', 'placeService',
+angular.module('fantasyApp.controllers.main', ['fantasyApp.services.place'])
+  .controller('MainCtrl', ['$scope', 'placeService',
     function($scope, placeService) {
         $scope.meta = placeService.getMeta();
     }]);
