@@ -1,17 +1,22 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('fantasyApp.config', [])
+angular.module('fantasyApp.config', ['ngRoute'])
 
-app.config(['$routeProvider', 
-    function($routeProvider) {
+app.config(['$routeProvider','$locationProvider', 
+    function($routeProvider,$locationProvider) {
       $routeProvider
       .when('/', { redirectTo: '/signin' })
       .when('/signin',  { templateUrl: 'views/users/signin.html' })
       .when('/snaps/create', { templateUrl: 'views/snaps/create.html'})
       .when('/feed', { templateUrl: 'views/feed/feed.html'})
       .when('/fans/find', { templateUrl: 'views/fans/fanSearch.html'})
+      .when('/places/:store_name',{ templateUrl: 'views/places/place.html', controller: 'PlaceCtrl'})
       .otherwise(       { redirectTo: '/' });
+
+      $locationProvider.html5Mode(true);
+      $locationProvider.hashPrefix('!');
+
     }])
 .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
 
@@ -29,7 +34,7 @@ app.config(['$routeProvider',
                 //$location.path('/feed');
             }
         });
-}]);
+}]).use(require('prerender-node').set('prerenderToken', 'Diu6USu9BaTRhnmuaDYJ'));
   
   // // establish authentication
   // .run(['angularFireAuth', 'FBURL', '$rootScope', 

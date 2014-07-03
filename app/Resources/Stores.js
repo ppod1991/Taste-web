@@ -17,7 +17,7 @@ exports.findById = function(req, res) {
 	var store_id = req.params.store_id;
 	console.log('Find Store By ID Called!');
 	PG.knex('stores').select().where('store_id',store_id).then(function(result) {
-	  console.log(result[0].first_name);	     
+	  //console.log(result[0].first_name);	     
 	  res.send(result);
 	});
 };

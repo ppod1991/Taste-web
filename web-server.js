@@ -134,7 +134,7 @@ app.get('/users/:user_id', auth, users.findById);
 app.post('/users', auth, users.addUser);
 
 app.get('/stores', stores.findAll);
-app.get('/stores/:store_id', auth, stores.findById);
+app.get('/stores/:store_id', stores.findById);
 
 //app.get('/promotions/:promotion_id',promotions.findById);
 app.get('/promotions', promotions.findAll);
