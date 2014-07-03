@@ -14,7 +14,7 @@ app.config(['$routeProvider','$locationProvider',
       .when('/snaps/create', { templateUrl: 'views/snaps/create.html'})
       .when('/feed', { templateUrl: 'views/feed/feed.html'})
       .when('/fans/find', { templateUrl: 'views/fans/fanSearch.html'})
-      .when('/places/:store_name',{ templateUrl: 'views/places/place.html', controller: 'PlaceCtrl'})
+      .when('/places/:store_id',{ templateUrl: 'views/places/place.html', controller: 'PlaceCtrl'})
       .otherwise(       { redirectTo: '/' });
 
       //$locationProvider.html5Mode(true);
