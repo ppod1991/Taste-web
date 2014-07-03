@@ -2,7 +2,7 @@
 
 angular.module('fantasyApp.controllers.place', ['ngRoute','fantasyApp.services.place'])
   .controller('PlaceCtrl', ['$scope', '$route', 'placeService',
-    function($scope, $routeParams, placeService) {
+    function($scope, $route, placeService) {
     	var params = $route.current.params;
     	console.log(params);
     	console.log(params.store_id);
