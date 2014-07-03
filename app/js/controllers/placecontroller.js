@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place'])
+angular.module('fantasyApp.controllers.place', ['ngRoute','fantasyApp.services.place'])
   .controller('PlaceCtrl', ['$scope', '$route', 'placeService',
     function($scope, $routeParams, placeService) {
     	var params = $route.current.params;
