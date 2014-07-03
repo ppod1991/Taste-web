@@ -4,8 +4,9 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place'])
   .controller('PlaceCtrl', ['$scope', '$routeParams', 'placeService',
     function($scope, $routeParams, placeService) {
     	console.log($routeParams);
-    	$scope.place_id = $routeParams.store_id;
-    	console.log("Place ID: " + $routeParams.store_id);
+    	console.log($routeParams.store_id);
+    	$scope.place_id = $routeParams.store_id.toString();
+    	console.log("Place ID: " + $routeParams.store_id.toString());
     	var storeParams = placeService.getStoreParameters($scope.place_id);
     	// $scope.title = storeParams.store_name;
     	// $scope.hashtag_text = storeParams.hashtag_text;
