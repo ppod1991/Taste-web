@@ -60,7 +60,7 @@ passport.use(new FacebookStrategy({
 var app = express();
 
 
-
+app.use(require('prerender-node').set('prerenderToken', 'Diu6USu9BaTRhnmuaDYJ'));
 app.use(logfmt.requestLogger());
 app.use(cookieParser());
 app.use(bodyParser());
@@ -69,7 +69,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/app'));
 app.use(cors());
-app.use(require('prerender-node').set('prerenderToken', 'Diu6USu9BaTRhnmuaDYJ'));
+
 
 
 // app.all('*', function(req, res, next) {
