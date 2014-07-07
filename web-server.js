@@ -109,6 +109,31 @@ var auth = function(req, res, next) {
     next();
 };
 
+var checkUserAgent = function(req, res, next) {
+  console.log(req);
+  var userAgent = req.headers['user-agent'];
+  var escapedFrag = req.param('_escaped_fragment_');
+  console.log("User Agent: " + userAgent);
+  if (userAgent === "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)") {
+    console.log("DETECTED FACEBOOK!");
+    next();
+  }
+  else if (typeof escapedFrag == 'undefined') {
+    console.log("DETECTED NO ESCAPED FRAGMENT! " + escapedFrag);
+    next();
+  }
+  else {
+    console.log("DETECTED ESCAPED FRAGMENT AND NOT FACEBOOK!" + escapedFrag);
+    escapedFrag = decodeURI(escapedFrag);
+    console.log("AFTER DECODING! " + escapedFrag);
+    res.redirect("/#!/escapedFrag");
+  }
+};
+
+
+app.all('*',checkUserAgent);
+
+
 app.get('/moltoBene', function(req, res) {
   res.sendfile('./app/views/places/moltoBene.html');
 });
