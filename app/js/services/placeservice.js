@@ -16,7 +16,8 @@ angular.module('fantasyApp.services.place',[])
                             var newMeta = {
                                 title: storeParams.store_name,
                                 hashtag_text: storeParams.hashtag_text,
-                                picture_URL: storeParams.store_picture_url
+                                picture_URL: storeParams.store_picture_url,
+                                store_id: storeParams.store_id
                             };
                             meta = newMeta;
                             console.log("New Meta:");
