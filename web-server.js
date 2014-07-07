@@ -17,6 +17,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var request = require('request');
 var PG = require('./app/Resources/knex');
 var facebook = require('./app/Resources/Facebook');
+var url = require('url');
 
 passport.serializeUser(function(user, done) {
   console.log("SERIALIZE USER");
@@ -110,15 +111,18 @@ var auth = function(req, res, next) {
 };
 
 var checkUserAgent = function(req, res, next) {
-  console.log(req);
+  //console.log(req);
   var userAgent = req.headers['user-agent'];
-  var escapedFrag = req.param('_escaped_fragment_');
+  console.log("REQUEST QUERY PARAMS");
+  console.log(url.parse(req.url, true));
+  var escapedFrag = req.query._escaped_fragment_;
   console.log("User Agent: " + userAgent);
+
   if (userAgent === "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)") {
     console.log("DETECTED FACEBOOK!");
     next();
   }
-  else if (typeof escapedFrag == 'undefined') {
+  else if (!(url.parse(req.url, true).query.hasOwnProperty('_escaped_fragment_'))) {
     console.log("DETECTED NO ESCAPED FRAGMENT! " + escapedFrag);
     next();
   }
@@ -126,7 +130,7 @@ var checkUserAgent = function(req, res, next) {
     console.log("DETECTED ESCAPED FRAGMENT AND NOT FACEBOOK!" + escapedFrag);
     escapedFrag = decodeURI(escapedFrag);
     console.log("AFTER DECODING! " + escapedFrag);
-    res.redirect("/#!/escapedFrag");
+    res.redirect("/#!" + escapedFrag);
   }
 };
 
