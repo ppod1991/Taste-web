@@ -1,26 +1,34 @@
 'use strict';
  
-angular.module('fantasyApp.services.place', ['ngResource'])
-    .factory('placeService', ['$resource',
-        function($resource) {
-
-            var meta = {};
+angular.module('fantasyApp.services.place',[])
+    .factory('placeService', ['$http',
+        function($http) {
+         
+           var meta = {};
        	    return {
         		setNewStoreParameters: function(place_id) {
-                    var storeParams= $resource("http://desolate-plateau-4658.herokuapp.com/stores/" + place_id).get(function () {
-                        console.log("Set New Store Parameters called with place_id: " + place_id);
-                        console.log("Store Params:");
-                        console.log(storeParams);
-                        meta = {
-                            title: storeParams.store_name,
-                            hashtag_text: storeParams.hashtag_text,
-                            picture_URL: storeParams.store_picture_URL
-                        };
-
-                        return meta;
-                    });
-			        
-        		},
-                getMeta: function() { return meta; }
+                    var promise = $http.get("http://desolate-plateau-4658.herokuapp.com/stores/" + place_id)
+                        .then(function(response) {
+                            var storeParams = response.data;
+                            console.log("Set New Store Parameters called with place_id: " + place_id);
+                            //console.log("Store Params:");
+                            //console.log(storeParams);
+                            var newMeta = {
+                                title: storeParams.store_name,
+                                hashtag_text: storeParams.hashtag_text,
+                                picture_URL: storeParams.store_picture_url
+                            };
+                            meta = newMeta;
+                            console.log("New Meta:");
+                            console.log(meta);
+                            return meta;   
+            		      });
+                        return promise;
+                    },
+                getMeta: function() { 
+                    // console.log("getMeta called with: ");
+                    // console.log(meta);
+                    return meta; 
+                }
         	}
         }]);

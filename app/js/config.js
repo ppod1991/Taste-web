@@ -26,7 +26,9 @@ app.config(['$routeProvider','$locationProvider',
             loginService.isLoggedIn();
             if (loginService.getUser()===0) {
                 console.log('DENY');
-                event.preventDefault();
+                //event.preventDefault();
+
+
                 // $locationProvider.html5mode(true);
                 //$location.path('/signin');
                 // $locationProvider.html5mode(false);

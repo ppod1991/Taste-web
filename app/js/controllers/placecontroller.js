@@ -4,11 +4,18 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place'])
   .controller('PlaceCtrl', ['$scope', '$routeParams', 'placeService',
     function($scope, $routeParams, placeService) {
     	var params = $routeParams;
-    	console.log(params);
-    	console.log(params.store_id);
+    	console.log("Params:" + params);
+    	//console.log(params.store_id);
     	$scope.place_id = params.store_id;
     	console.log("Place ID: " + $scope.place_id);
-    	$scope.childMeta = placeService.setNewStoreParameters($scope.place_id);
+    	var childMeta = placeService.setNewStoreParameters($scope.place_id).then(function(meta) {
+    		console.log("Child Meta:");
+    		console.log(meta);
+    		$scope.childMeta = meta;
+    	});
+
+
+    	//$scope.childMeta = placeService.setNewStoreParameters($scope.place_id);
     	// $scope.title = storeParams.store_name;
     	// $scope.hashtag_text = storeParams.hashtag_text;
     	// $scope.picture_URL = storeParams.store_picture_URL;

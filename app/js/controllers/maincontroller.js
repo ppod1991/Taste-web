@@ -3,5 +3,9 @@
 angular.module('fantasyApp.controllers.main', ['fantasyApp.services.place'])
   .controller('MainCtrl', ['$scope', 'placeService',
     function($scope, placeService) {
-        $scope.meta = placeService.getMeta();
+        console.log("Main getMeta called");
+
+        $scope.placeService = placeService;
+        // console.log("Main Meta:");
+        // console.log($scope.meta);
     }]);
