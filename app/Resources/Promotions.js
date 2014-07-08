@@ -45,7 +45,7 @@ exports.isFirstPromotion = function (req,res) {
 			console.log(result);
 			count = parseInt(result[0].count);
 		});
-	return (count === 0);
+	res.send(count === 0);
 };
 
 exports.addPromotion = function(req,res) {

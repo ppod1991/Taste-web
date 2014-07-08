@@ -8,7 +8,7 @@ div
 			div.col-xs-4(class = "col-xs-offset-4")
 				hr.intro-divider
 			div.col-xs-12(class="text-center")
-				a.btn(class="btn-primary" type="button" ng-if="auth && !isFirstPromotion" ) You've Already Claimed a Gift from {{childMeta.title}}!
+				button.btn(class="btn-primary" type="button" ng-if="auth && !isFirstPromotion" ) You've Already Claimed a Gift from {{childMeta.title}}!
 				a.btn(ng-click="addPromotion()" class="btn-primary" type="button" ng-if="auth && isFirstPromotion" ) Claim your Gift Certificates!
 				a.btn(class="btn-primary" type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + childMeta.store_id}}") Sign in to Claim your Gift Certificates!
 				
