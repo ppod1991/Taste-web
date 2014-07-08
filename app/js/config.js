@@ -9,7 +9,7 @@ app.config(['$routeProvider','$locationProvider',
       $locationProvider.hashPrefix('!');
 
       $routeProvider
-      .when('/', { redirectTo: '/signin' })
+      .when('/',{templateUrl:'views/default.html',controller:"urlCtrl"})
       .when('/signin',  { templateUrl: 'views/users/signin.html' })
       .when('/snaps/create', { templateUrl: 'views/snaps/create.html'})
       .when('/feed', { templateUrl: 'views/feed/feed.html'})

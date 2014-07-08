@@ -113,16 +113,20 @@ var auth = function(req, res, next) {
 var checkUserAgent = function(req, res, next) {
   //console.log(req);
   var userAgent = req.headers['user-agent'];
-  console.log("REQUEST QUERY PARAMS");
+  //console.log("REQUEST QUERY PARAMS");
+  console.log("URL: " + req.path);
   console.log(url.parse(req.url, true));
   var escapedFrag = req.query._escaped_fragment_;
   console.log("User Agent: " + userAgent);
+
+  var queryString = (req.url).indexOf('?_escaped_fragment_');
+  console.log("INDex of query string:  " + queryString);
 
   if (userAgent === "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)") {
     console.log("DETECTED FACEBOOK!");
     next();
   }
-  else if (!(url.parse(req.url, true).query.hasOwnProperty('_escaped_fragment_'))) {
+  else if (!(url.parse(req.url, true, true).query.hasOwnProperty('_escaped_fragment_'))) {
     console.log("DETECTED NO ESCAPED FRAGMENT! " + escapedFrag);
     next();
   }
@@ -135,7 +139,7 @@ var checkUserAgent = function(req, res, next) {
 };
 
 
-app.all('*',checkUserAgent);
+app.use(checkUserAgent);
 
 
 app.get('/moltoBene', function(req, res) {
@@ -174,8 +178,8 @@ app.get('/facebookVisit',facebook.newVisitGET);
 app.post('/facebookVisit',facebook.newVisitPOST);
 
 app.get('/loggedin',function (req,res) {
-  console.log("Going to /loggedin");
-  console.log(req.user);
+  // console.log("Going to /loggedin");
+  // console.log(req.user);
   res.send(req.isAuthenticated() ? req.user : {user_id: 0});
 });
 
