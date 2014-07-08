@@ -171,6 +171,7 @@ app.get('/stores/:store_id', stores.findById);
 
 //app.get('/promotions/:promotion_id',promotions.findById);
 app.get('/promotions', promotions.findAll);
+app.post('/promotions/isFirstPromotion',promotions.isFirstPromotion);
 app.post('/promotions',promotions.addPromotion);
 app.post('/promotions/redeem',promotions.redeemPromotion);
 

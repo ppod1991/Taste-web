@@ -13,7 +13,7 @@ angular.module('fantasyApp.services.login', ['ngResource'])
 
         		isLoggedIn: function() {
 		            //return $resource("http://desolate-plateau-4658.herokuapp.com/users/:user_id",{user_id:'@user_id'});            
-			        var checkLogIn = $resource("http://localhost:5000/loggedin").get(function () {
+			        var checkLogIn = $resource("/loggedin").get(function () {
 
 						user_id = checkLogIn.user_id;
 					

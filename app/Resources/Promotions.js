@@ -38,6 +38,15 @@ exports.findAll = function(req, res) {
 	});
 };
 
+exports.isFirstPromotion = function (req,res) {
+	var user_id = req.query.user_id;
+	var store_id = req.query.store_id;
+	PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
+			console.log(result);
+			count = parseInt(result[0].count);
+		});
+	return (count === 0);
+};
 
 exports.addPromotion = function(req,res) {
 	console.log("Promotion trying to be added!");
@@ -45,20 +54,47 @@ exports.addPromotion = function(req,res) {
 	var store_id = req.body.store_id;
 	var display_text;
 	var first_time = req.body.first_time;
-	var proceed = 1;
 	var count = -1;
 
-	if ("first_time" in req.body && first_time === "true") {
+	if ("first_time" in req.body && first_time) {
 		console.log("First Time Found!");
 		PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
 			console.log(result);
 			count = parseInt(result[0].count);
-			if (count > 0)
-				proceed = 0;
-		});
-	}
+			console.log("Count: " + count);
+			if (count === 0) {
+				console.log("Count is === 0");
 
-	if (proceed === 1) {
+				if("display_text" in req.body) {
+					display_text = req.body.display_text;
+				}
+				else {
+					display_text = "$2 Gift Certificate!";
+				}
+				
+
+
+				PG.knex('promotions').insert(
+					{user_id: user_id,
+					 store_id: store_id,
+					 display_text: display_text})
+				.returning('promotion_id')
+				.then(function(result) {
+					  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+				      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+				});
+
+
+			 }
+			else {
+				console.log("Sorry, you have already claimed a promotion from here " + count + " times!");
+				res.send("Sorry, you have already claimed a promotion from here " + count + " times!");
+			}	
+
+		});
+			
+	}
+	else {
 
 
 		if("display_text" in req.body) {
@@ -79,10 +115,6 @@ exports.addPromotion = function(req,res) {
 			  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 		      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 		});
-	}
-	else {
-		console.log("THIS HAS ALREADY BEEN Claimed");
-		res.send("You have already received a promotion from here " + count + " times");
 	}
 };
 

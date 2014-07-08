@@ -23,6 +23,7 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
       }, true);
 
       $scope.logout = function () {
+        $window.location.href = 'desolate-plateau-4658.herokuapp.com/logout';
         $window.location.href = 'http://localhost:5000/logout';
       }
       //  $scope.$on("angularFireAuth:login", function() {
