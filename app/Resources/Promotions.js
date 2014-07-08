@@ -38,29 +38,50 @@ exports.findAll = function(req, res) {
 	});
 };
 
+
 exports.addPromotion = function(req,res) {
 	console.log("Promotion trying to be added!");
 	var user_id = req.body.user_id;
 	var store_id = req.body.store_id;
 	var display_text;
+	var first_time = req.body.first_time;
+	var proceed = 1;
 
-	if("display_text" in req.body) {
-		display_text = req.body.display_text;
+	if ("first_time" in req.body && first_time === "true") {
+		console.log("First Time Found!");
+		PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
+			var a = console.log(result);
+			if (parseInt(result[0].count) > 0)
+				proceed = 0;
+		});
+	}
+
+	if (proceed === 1) {
+
+
+		if("display_text" in req.body) {
+			display_text = req.body.display_text;
+		}
+		else {
+			display_text = "$2 Gift Certificate!";
+		}
+		
+
+
+		PG.knex('promotions').insert(
+			{user_id: user_id,
+			 store_id: store_id,
+			 display_text: display_text})
+		.returning('promotion_id')
+		.then(function(result) {
+			  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+		      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+		});
 	}
 	else {
-		display_text = "$2 Gift Certificate!";
+		console.log("THIS HAS ALREADY BEEN REDEEMED");
+		res.send("You have already redeemed your first visit Gift Certificate!");
 	}
-	
-
-	PG.knex('promotions').insert(
-		{user_id: user_id,
-		 store_id: store_id,
-		 display_text: display_text})
-	.returning('promotion_id')
-	.then(function(result) {
-		  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-	      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-	});
 };
 
 exports.redeemPromotion = function(req,res) {

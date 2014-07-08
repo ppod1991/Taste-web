@@ -20,15 +20,15 @@ var facebook = require('./app/Resources/Facebook');
 var url = require('url');
 
 passport.serializeUser(function(user, done) {
-  console.log("SERIALIZE USER");
-  console.log(user.user_id);
+  //console.log("SERIALIZE USER");
+  //console.log(user.user_id);
   done(null,user.user_id);
 });
 
 passport.deserializeUser(function(user_id, done) {
-  console.log("DESERIALIZE USER");
+  //console.log("DESERIALIZE USER");
   PG.knex('users').where('user_id',user_id).then(function(user) {
-    console.log(user);
+    //console.log(user);
     done(null, user[0]); 
   });
 });
@@ -47,7 +47,7 @@ else {
 passport.use(new FacebookStrategy({
       clientID: 193198737555570,
       clientSecret: "19422735ab599ea41028f4f242e1a6ae",
-      callbackURL: callbackURL
+      //callbackURL: callbackURL
     },
   function(accessToken, refreshToken, profile, done) {
     		process.nextTick(function () {
@@ -110,36 +110,36 @@ var auth = function(req, res, next) {
     next();
 };
 
-var checkUserAgent = function(req, res, next) {
-  //console.log(req);
-  var userAgent = req.headers['user-agent'];
-  //console.log("REQUEST QUERY PARAMS");
-  console.log("URL: " + req.path);
-  console.log(url.parse(req.url, true));
-  var escapedFrag = req.query._escaped_fragment_;
-  console.log("User Agent: " + userAgent);
+// var checkUserAgent = function(req, res, next) {
+//   //console.log(req);
+//   var userAgent = req.headers['user-agent'];
+//   //console.log("REQUEST QUERY PARAMS");
+//   console.log("URL: " + req.path);
+//   console.log(url.parse(req.url, true));
+//   var escapedFrag = req.query._escaped_fragment_;
+//   console.log("User Agent: " + userAgent);
 
-  var queryString = (req.url).indexOf('?_escaped_fragment_');
-  console.log("INDex of query string:  " + queryString);
+//   var queryString = (req.url).indexOf('?_escaped_fragment_');
+//   console.log("INDex of query string:  " + queryString);
 
-  if (userAgent === "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)") {
-    console.log("DETECTED FACEBOOK!");
-    next();
-  }
-  else if (!(url.parse(req.url, true, true).query.hasOwnProperty('_escaped_fragment_'))) {
-    console.log("DETECTED NO ESCAPED FRAGMENT! " + escapedFrag);
-    next();
-  }
-  else {
-    console.log("DETECTED ESCAPED FRAGMENT AND NOT FACEBOOK!" + escapedFrag);
-    escapedFrag = decodeURI(escapedFrag);
-    console.log("AFTER DECODING! " + escapedFrag);
-    res.redirect("/#!" + escapedFrag);
-  }
-};
+//   if (userAgent === "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)") {
+//     console.log("DETECTED FACEBOOK!");
+//     next();
+//   }
+//   else if (!(url.parse(req.url, true, true).query.hasOwnProperty('_escaped_fragment_'))) {
+//     console.log("DETECTED NO ESCAPED FRAGMENT! " + escapedFrag);
+//     next();
+//   }
+//   else {
+//     console.log("DETECTED ESCAPED FRAGMENT AND NOT FACEBOOK!" + escapedFrag);
+//     escapedFrag = decodeURI(escapedFrag);
+//     console.log("AFTER DECODING! " + escapedFrag);
+//     res.redirect("/#!" + escapedFrag);
+//   }
+// };
 
 
-app.use(checkUserAgent);
+// app.use(checkUserAgent);
 
 
 app.get('/moltoBene', function(req, res) {
@@ -190,8 +190,32 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
     // function will not be called.
   });
 
-app.get('/auth/facebook/callback',passport.authenticate('facebook',{successRedirect:'/#/fans/find',failureRedirect:'/'}),  function(req, res) {
+app.get('/auth/facebook/places/:placeID', function(req, res, next){
+   passport.authenticate('facebook',{callbackURL: '/auth/facebook/callback/places/'+req.params.placeID})(req,res,next);
+    // The request will be redirected to Facebook for authentication, so this
+    // function will not be called.
+  });
+
+// app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
+//     // The request will be redirected to Facebook for authentication, so this
+//     // function will not be called.
+//   });
+
+app.get('/auth/facebook/callback',passport.authenticate('facebook'), function(req, res) {
+    console.log("FACEBOOK REDIRECT REQUEST!!");
+    console.log(req);
+    console.log("FACEBOOK REDIRECT REQUEST 2!!");
     res.redirect('/');
+  });
+
+app.get('/auth/facebook/callback/places/:placeID', function(req, res,next) {
+    passport.authenticate(
+      'facebook',
+      {
+        callbackURL: '/auth/facebook/callback/places/'+req.params.placeID,
+        successRedirect:"/#!/places/" + req.params.placeID,
+        failureRedirect: "/"
+      })(req,res,next);
   });
 
 app.get('/logout', function(req,res) {

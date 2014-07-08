@@ -7,8 +7,8 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
       $scope.auth = 0;
 
       $scope.$watch(loginService.getUser, function (value, oldValue) {
-        console.log("$scope.$watch called with val: " + value + " and old Value of: " + oldValue);
-        console.log($scope);
+        //console.log("$scope.$watch called with val: " + value + " and old Value of: " + oldValue);
+        //console.log($scope);
         if(!value && oldValue) {
           console.log("Disconnect");
           $scope.auth = 0;

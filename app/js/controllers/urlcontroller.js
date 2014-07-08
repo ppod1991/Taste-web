@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.signin', [])
+angular.module('fantasyApp.controllers.url', [])
   .controller('urlCtrl', ['$scope','$location',
     function($scope, $location) {
     	// var escapedFragment = $routeParams._escaped_fragment_;
@@ -16,6 +16,7 @@ angular.module('fantasyApp.controllers.signin', [])
 	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
 	    var results = regex.exec(absUrl);
 	    results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        
 	    var newPath = decodeURIComponent(results[1]);
 	    console.log("REGEX FOUND FRAGMENT VAL:" + newPath);
 	    if (!(results === ""))
