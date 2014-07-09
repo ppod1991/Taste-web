@@ -14,7 +14,7 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
         var isFirstPromotion = $resource("/promotions/isFirstPromotion",{user_id:loginService.getUser(), store_id:$scope.place_id}).get(function () {
             console.log("isFirstPromotion called and returned: ");
             console.log(isFirstPromotion);
-            $scope.isFirstPromotion = isFirstPromotion;
+            $scope.isFirstPromotion = isFirstPromotion.isFirstPromotion;
         });
 
 
@@ -25,6 +25,7 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
                 console.log(val);
                 console.log("Response Header");
                 console.log(responseHeader);
+                $scope.isFirstPromotion = false;
             });  
 
         };
