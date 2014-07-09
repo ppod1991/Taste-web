@@ -42,10 +42,13 @@ exports.isFirstPromotion = function (req,res) {
 	var user_id = req.query.user_id;
 	var store_id = req.query.store_id;
 	PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
+			console.log("isFirstPromotion called with result: ");
 			console.log(result);
-			count = parseInt(result[0].count);
+
+			var count = parseInt(result[0].count);
+			res.send(count === 0);
 		});
-	res.send(count === 0);
+	
 };
 
 exports.addPromotion = function(req,res) {
