@@ -7,7 +7,7 @@ angular.module('fantasyApp.services.login', ['ngResource'])
         	return {
         		
         		getUser: function() {
-        			//console.log("Get User Called with value: " + user_id );
+        			console.log("Get User Called with value: " + user_id );
         			return user_id;
         		},
 
@@ -16,7 +16,7 @@ angular.module('fantasyApp.services.login', ['ngResource'])
 			        var checkLogIn = $resource("/loggedin").get(function () {
 
 						user_id = checkLogIn.user_id;
-					
+					    console.log("isLoggedIn called and user_id set to:  " + user_id);
 						var isLoggedIn = !(checkLogIn.user_id === 0);  
 			        	//console.log((checkLogIn.user_id));
 			        	//console.log('Response is ' + isLoggedIn);

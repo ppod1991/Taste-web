@@ -8,16 +8,28 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
     	//console.log(params.store_id);
     	$scope.place_id = params.store_id;
     	console.log("Place ID: " + $scope.place_id);
+        //$scope.isFirstPromotion = true;
+
         $scope.isFirstPromotion = true;
-
-
-        var isFirstPromotion = $resource("/promotions/isFirstPromotion",{user_id:loginService.getUser(), store_id:$scope.place_id}).get(function () {
+        //loginService.isLoggedIn();
+        var user_id = loginService.getUser();
+        console.log("Currently stored User_ID = " + user_id);
+        
+        var isFirstPromotion = $resource("/promotions/isFirstPromotion",{user_id:user_id, store_id:$scope.place_id}).get(function () {
             console.log("isFirstPromotion called and returned: ");
             console.log(isFirstPromotion);
-            $scope.isFirstPromotion = isFirstPromotion.isFirstPromotion;
+            if (user_id === 0) {
+                $scope.isFirstPromotion = false;
+                console.log("User ID is 0!");
+            }
+            else {
+                $scope.isFirstPromotion = isFirstPromotion.isFirstPromotion;
+            }
+
         });
 
 
+        
         $scope.addPromotion = function() {
             console.log("ADDING PROMOTION! ");
             $resource("/promotions").save([],{user_id:loginService.getUser(), store_id:$scope.place_id,first_time:true},function(val, responseHeader) {

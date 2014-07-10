@@ -7,7 +7,7 @@ angular.module('fantasyApp.services.place',[])
            var meta = {};
        	    return {
         		setNewStoreParameters: function(place_id) {
-                    var promise = $http.get("http://desolate-plateau-4658.herokuapp.com/stores/" + place_id)
+                    var promise = $http.get("/stores/" + place_id)
                         .then(function(response) {
                             var storeParams = response.data;
                             console.log("Set New Store Parameters called with place_id: " + place_id);

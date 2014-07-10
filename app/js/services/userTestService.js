@@ -6,6 +6,6 @@ angular.module('fantasyApp.services.userTestService', ['ngResource'])
             //return $resource("http://desolate-plateau-4658.herokuapp.com/users/:user_id",{user_id:'@user_id'});            
             
             
-            return $resource("http://localhost:5000/users/:user_id",{user_id:'@user_id'});            
+            return $resource("/users/:user_id",{user_id:'@user_id'});            
         
         }])
