@@ -99,10 +99,7 @@ exports.addAndroidUser = function(req, res) {
 		}
 	});
 
-	model.then(function(result) {
-	  console.log(result.length);	     
-	  res.send("{Users: " + JSON.stringify(result) + "}");
-	});
+
 
 };
 
