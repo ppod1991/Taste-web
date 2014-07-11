@@ -65,6 +65,8 @@ exports.addAndroidUser = function(req, res) {
 	var birthday = req.body.birthday;
 	var fb_url = req.body.fb_url;
 
+	var user_id;
+
 	PG.knex('users').select().where('facebook_id',facebook_id).then(function(result) {
 		if (result.length === 0) {
 			PG.knex('users').insert(
@@ -75,11 +77,11 @@ exports.addAndroidUser = function(req, res) {
 						facebook_id: facebook_id, 
 						location_id: hometown,
 						birthday: birthday,
-						fb_url:fb_url})
+						fb_url:fb_url},'user_id')
 					.then(function(result) {
 					  console.log('New Android User Successfully Added:');
 					  console.log(result);
-					  res.send(result);
+					  user_id = result;
 					  
 					});
 		}
@@ -91,14 +93,19 @@ exports.addAndroidUser = function(req, res) {
 						email: email, 
 						location_id: hometown,
 						birthday: birthday,
-						fb_url:fb_url}).then(function(result) {
+						fb_url:fb_url},'user_id').then(function(result) {
 							console.log("Existing Android User Updated with:");
 							console.log(result);
-							res.send(result[0]);
+							user_id = result;
 						});
 		}
 	});
 
+
+	PG.knex('users').select().where('user_id',user_id).then(function(result) {
+	  console.log("User being returned with first name " + result[0].first_name);	     
+	  res.send(result[0]);
+	});
 
 
 };
