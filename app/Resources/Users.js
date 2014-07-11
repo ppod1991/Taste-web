@@ -83,6 +83,10 @@ exports.addAndroidUser = function(req, res) {
 					  console.log(result[0]);
 					  user_id = result[0];
 					  
+					  PG.knex('users').select().where('user_id',user_id).then(function(result) {
+					    console.log("User being returned with first name " + result[0].first_name);	     
+					    res.send(result[0]);
+					  });
 					});
 		}
 		else {
@@ -98,14 +102,16 @@ exports.addAndroidUser = function(req, res) {
 							console.log(result[0]);
 							user_id = result[0];
 						});
+
+						PG.knex('users').select().where('user_id',user_id).then(function(result) {
+						  console.log("User being returned with first name " + result[0].first_name);	     
+						  res.send(result[0]);
+						});
 		}
 	});
 
 
-	PG.knex('users').select().where('user_id',user_id).then(function(result) {
-	  console.log("User being returned with first name " + result[0].first_name);	     
-	  res.send(result[0]);
-	});
+
 
 
 };
