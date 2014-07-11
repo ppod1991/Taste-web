@@ -5,12 +5,12 @@
       <div class="col-xs-12 text-center">
         <h1 class="text-center">{{childMeta.title}}</h1>
       </div>
-      <div class="col-xs-12"><img ng-src="{{childMeta.picture_URL}}" class="center-block img-responsive"/></div>
+      <div class="col-xs-12"><img style="max-height:200px" ng-src="{{childMeta.picture_URL}}" class="center-block img-responsive img-circle img-thumbnail"/></div>
       <div class="col-xs-4 col-xs-offset-4">
         <hr class="intro-divider"/>
       </div>
       <div class="col-xs-12 text-center">
-        <button type="button" ng-if="auth && !isFirstPromotion" class="btn btn-primary">You've Claimed a Gift from {{childMeta.title}}!</button><a ng-click="addPromotion()" type="button" ng-if="auth && isFirstPromotion" class="btn btn-primary">Claim your Gift Certificates!</a><a type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + childMeta.store_id}}" class="btn btn-primary">Sign in to Claim your Gift Certificates!</a>
+        <button type="button" ng-if="!(!auth || isFirstPromotion)" class="btn btn-primary">You've Claimed a Gift from {{childMeta.title}}!</button><a ng-click="addPromotion()" type="button" ng-if="!(!auth || !isFirstPromotion)" class="btn btn-primary">Claim your Gift Certificates!</a><a type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + childMeta.store_id}}" class="btn btn-primary">Sign in to Claim your Gift Certificates!</a>
       </div>
     </div>
   </div>

@@ -4,11 +4,11 @@ div
 			div.col-xs-12(class = "text-center")
 				h1(class = "text-center") {{childMeta.title}}
 			div.col-xs-12
-				img(class = "center-block img-responsive" ng-src = "{{childMeta.picture_URL}}")
+				img(class = "center-block img-responsive img-circle img-thumbnail" style="max-height:200px" ng-src = "{{childMeta.picture_URL}}")
 			div.col-xs-4(class = "col-xs-offset-4")
 				hr.intro-divider
 			div.col-xs-12(class="text-center")
-				button.btn(class="btn-primary" type="button" ng-if="auth && !isFirstPromotion" ) You've Claimed a Gift from {{childMeta.title}}!
-				a.btn(ng-click="addPromotion()" class="btn-primary" type="button" ng-if="auth && isFirstPromotion" ) Claim your Gift Certificates!
+				button.btn(class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) You've Claimed a Gift from {{childMeta.title}}!
+				a.btn(ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) Claim your Gift Certificates!
 				a.btn(class="btn-primary" type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + childMeta.store_id}}") Sign in to Claim your Gift Certificates!
 				

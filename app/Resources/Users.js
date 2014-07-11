@@ -54,6 +54,58 @@ exports.addUser = function(req, res) {
 	});
 };
 
+exports.addAndroidUser = function(req, res) {
+	console.log("New Android User being checked and/or created");
+	var first_name = req.body.first_name;
+	var last_name = req.body.last_name;
+	var facebook_id = req.body.facebook_id;
+	var hometown = req.body.hometown;
+	var email = req.body.email;
+	var gender = req.body.gender;
+	var birthday = req.body.birthday;
+	var fb_url = req.body.fb_url;
+
+	PG.knex('users').select().where('facebook_id',facebook_id).then(function(result) {
+		if (result.length === 0) {
+			PG.knex('users').insert(
+						{first_name: first_name,
+						last_name: last_name,
+						gender: gender,
+						email: email,
+						facebook_id: facebook_id, 
+						location_id: hometown,
+						birthday: birthday,
+						fb_url:fb_url})
+					.then(function(result) {
+					  console.log('New Android User Successfully Added:');
+					  console.log(result);
+					  res.send(result);
+					  
+					});
+		}
+		else {
+			PG.knex('users').where('facebook_id',facebook_id).update(
+						{first_name: first_name,
+						last_name: last_name,
+						gender: gender,
+						email: email, 
+						location_id: hometown,
+						birthday: birthday,
+						fb_url:fb_url}).then(function(result) {
+							console.log("Existing Android User Updated with:");
+							console.log(result);
+							res.send(result[0]);
+						});
+		}
+	});
+
+	model.then(function(result) {
+	  console.log(result.length);	     
+	  res.send("{Users: " + JSON.stringify(result) + "}");
+	});
+
+};
+
 //Add a New User 
 exports.createUser = function(profile, done) {
 	console.log("New User trying to be created!");
