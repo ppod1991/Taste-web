@@ -80,8 +80,8 @@ exports.addAndroidUser = function(req, res) {
 						fb_url:fb_url},'user_id')
 					.then(function(result) {
 					  console.log('New Android User Successfully Added:');
-					  console.log(result);
-					  user_id = result;
+					  console.log(result[0]);
+					  user_id = result[0];
 					  
 					});
 		}
@@ -95,8 +95,8 @@ exports.addAndroidUser = function(req, res) {
 						birthday: birthday,
 						fb_url:fb_url},'user_id').then(function(result) {
 							console.log("Existing Android User Updated with:");
-							console.log(result);
-							user_id = result;
+							console.log(result[0]);
+							user_id = result[0];
 						});
 		}
 	});
