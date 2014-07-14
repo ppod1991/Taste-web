@@ -59,7 +59,7 @@ exports.addAndroidUser = function(req, res) {
 	var first_name = req.body.first_name;
 	var last_name = req.body.last_name;
 	var facebook_id = req.body.facebook_id;
-	var hometown = req.body.hometown;
+	var location_id = req.body.location_id;
 	var email = req.body.email;
 	var gender = req.body.gender;
 	var birthday = req.body.birthday;
@@ -75,7 +75,7 @@ exports.addAndroidUser = function(req, res) {
 						gender: gender,
 						email: email,
 						facebook_id: facebook_id, 
-						location_id: hometown,
+						location_id: location_id,
 						birthday: birthday,
 						fb_url:fb_url},'user_id')
 					.then(function(result) {
@@ -95,7 +95,7 @@ exports.addAndroidUser = function(req, res) {
 						last_name: last_name,
 						gender: gender,
 						email: email, 
-						location_id: hometown,
+						location_id: location_id,
 						birthday: birthday,
 						fb_url:fb_url},'user_id').then(function(result) {
 							console.log("Existing Android User Updated with:");

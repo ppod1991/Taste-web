@@ -124,10 +124,24 @@ exports.addPromotion = function(req,res) {
 exports.redeemPromotion = function(req,res) {
 	console.log("Promotion trying to be redeemed!");
 	var promotion_id = req.body.promotion_id;
+	var start_date = new Date(req.body.start_date);
+	var end_date = new Date(req.body.end_date);
+	var cur_date = new Date();
 
+	if (cur_date > end_date) {
+		//Promotion Expired 
+		console.log("Trying to Redeem Expired Coupon");
+		res.send(412,"eek! This gift has expired! :(");
+	}
+
+	if (cur_date < start_date) {
+		//Promotion Expired 
+		console.log("Trying to Redeem Coupon Too Early");
+		res.send(412,"alas! This gift is not ready yet, but try again soon!");
+	}
 	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used'}).then(function(result) {
 		console.log("Promotion with Promotion_id: " + promotion_id + " redeemed!");
-		res.send(201, null);
+		res.send(201, "You just redeemed your gift! I'm jealous...");
 	});
 
 

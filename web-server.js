@@ -185,7 +185,7 @@ app.get('/loggedin',function (req,res) {
   res.send(req.isAuthenticated() ? req.user : {user_id: 0});
 });
 
-app.post('/Snaps',snaps.addSnap);
+app.post('/snaps',snaps.addSnap);
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
     // The request will be redirected to Facebook for authentication, so this

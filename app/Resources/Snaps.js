@@ -7,7 +7,7 @@ exports.addSnap = function (req, res) {
 	console.log(req.body);
 	console.log(JSON.stringify(req.body.user));
 	console.log(JSON.stringify(req.body.store));
-	res.send(201,null);
+	//res.send(201,null);
 	var access_token = req.body.access_token;
 	var eatery = 'https://desolate-plateau-4658.herokuapp.com/#!/places/' + req.body.store.store_id;
 	eatery = '&eatery=' + encodeURIComponent(eatery);
