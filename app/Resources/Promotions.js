@@ -131,20 +131,20 @@ exports.redeemPromotion = function(req,res) {
 	if (cur_date > end_date) {
 		//Promotion Expired 
 		console.log("Trying to Redeem Expired Coupon");
-		res.send(201,"eek! This gift has expired! :(");
+		res.send(201,{"eek! This gift has expired! :("});
 		return;
 	}
 
 	if (cur_date < start_date) {
 		//Promotion Expired 
 		console.log("Trying to Redeem Coupon Too Early");
-		res.send(201,"alas! This gift is not ready yet, but try again soon!");
+		res.send(201,{"alas! This gift is not ready yet, but try again soon!"});
 		return;
 
 	}
 	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used'}).then(function(result) {
 		console.log("Promotion with Promotion_id: " + promotion_id + " redeemed!");
-		res.send(201, "You just redeemed your gift! I'm jealous...");
+		res.send(201, {"You just redeemed your gift! I'm jealous..."});
 		return;
 	});
 
