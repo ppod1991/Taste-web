@@ -12,7 +12,7 @@ exports.addSnap = function (req, res) {
 		 store_id: req.body.store.store_id,
 		 received_promotion_id: req.body.promotion.promotion_id,
 		 snap_message: req.body.snap_message,
-		 snap_URL: picture_url,
+		 snap_URL: req.body.picture_url,
 		 facebook_image_post_id: req.body.facebook_post_id
 		 }).returning('snap_id')
 	.then(function(result) {
