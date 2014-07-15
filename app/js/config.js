@@ -25,7 +25,7 @@ app.config(['$routeProvider','$locationProvider',
         $rootScope.$on('$routeChangeStart', function (event) {
             var promise = loginService.isLoggedIn();
             promise.then(function(value) {
-                if (loginService.getUser()===0) {
+                if (value===0) {
                   console.log('DENY');
                   //event.preventDefault();
 
@@ -38,7 +38,7 @@ app.config(['$routeProvider','$locationProvider',
                   console.log('ALLOW');
                   //$location.path('/feed');
               }
-            });
+            },null,null);
         });
 }]);
   

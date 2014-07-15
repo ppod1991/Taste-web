@@ -33,7 +33,7 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
                 }
 
             });
-        });
+        },null,null);
         // var user_id = loginService.getUser();
         // console.log("Currently stored User_ID = " + user_id);
         
