@@ -38,7 +38,7 @@ app.config(['$routeProvider','$locationProvider',
                   console.log('ALLOW');
                   //$location.path('/feed');
               }
-          }
+            });
         });
 }]);
   
