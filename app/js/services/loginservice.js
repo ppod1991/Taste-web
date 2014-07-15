@@ -27,8 +27,9 @@ angular.module('fantasyApp.services.login', ['ngResource'])
                         console.log("Promise resolved with user_id: " + user_id);
                         deferred.resolve(user_id);
 
-			        	return deferred.promise;
+			        	
 			        });
+                    return deferred.promise;
 			        
         		}
         	}
