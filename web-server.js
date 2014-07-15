@@ -186,6 +186,7 @@ app.get('/loggedin',function (req,res) {
 });
 
 app.post('/snaps',snaps.addSnap);
+app.get('/snaps/:snap_id', snaps.findById);
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
     // The request will be redirected to Facebook for authentication, so this
