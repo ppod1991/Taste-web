@@ -61,7 +61,7 @@ passport.use(new FacebookStrategy({
 var app = express();
 
 
-app.use(require('prerender-node').set('prerenderToken', 'Diu6USu9BaTRhnmuaDYJ'));
+app.use(require('prerender-node').set('prerenderServiceUrl', 'http://intense-eyrie-3358.herokuapp.com/'));
 app.use(logfmt.requestLogger());
 app.use(cookieParser());
 app.use(bodyParser());
