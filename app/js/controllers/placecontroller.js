@@ -43,7 +43,7 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
         
         $scope.addPromotion = function() {
             console.log("ADDING PROMOTION! ");
-            $resource("/promotions").save([],{user_id:loginService.getUser(), store_id:$scope.childMeta.place_id,first_time:true},function(val, responseHeader) {
+            $resource("/promotions").save([],{user_id:loginService.getUser(), store_id:$scope.childMeta.store_id,first_time:true},function(val, responseHeader) {
                 console.log("New Promotion Added!");
                 console.log(val);
                 console.log("Response Header");
