@@ -6,7 +6,7 @@ var PG = require('./knex');
 //Retrieve all Stores
 exports.findAll = function(req, res) {
 	console.log('Find all Stores Called!');
-	PG.knex('stores').select().then(function(result) {
+	PG.knex('stores').select().orderBy('store_name').then(function(result) {
 	  console.log(result);	     
 	  res.send("{Stores: " + JSON.stringify(result) + "}");
 	});
