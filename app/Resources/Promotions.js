@@ -40,14 +40,19 @@ exports.findAll = function(req, res) {
 
 exports.isFirstPromotion = function (req,res) {
 	var user_id = req.query.user_id;
-	var store_id = req.query.store_id;
-	PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
-			console.log("isFirstPromotion called with result: ");
-			console.log(result);
+	var snap_id = req.query.snap_id;
 
-			var count = parseInt(result[0].count);
-			res.send({isFirstPromotion: (count === 0)});
-		});
+	PG.knex('snaps').where('snap_id',snap_id).select('store_id').then(function(result) {
+		var store_id = result[0];
+		PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
+				console.log("isFirstPromotion called with result: ");
+				console.log(result);
+
+				var count = parseInt(result[0].count);
+				res.send({isFirstPromotion: (count === 0)});
+			});
+	});
+	
 	
 };
 
