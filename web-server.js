@@ -193,8 +193,8 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
     // function will not be called.
   });
 
-app.get('/auth/facebook/places/:placeID', function(req, res, next){
-   passport.authenticate('facebook',{callbackURL: '/auth/facebook/callback/places/'+req.params.placeID})(req,res,next);
+app.get('/auth/facebook/places/:snapID', function(req, res, next){
+   passport.authenticate('facebook',{callbackURL: '/auth/facebook/callback/places/'+req.params.snapID})(req,res,next);
     // The request will be redirected to Facebook for authentication, so this
     // function will not be called.
   });
@@ -211,12 +211,12 @@ app.get('/auth/facebook/callback',passport.authenticate('facebook'), function(re
     res.redirect('/');
   });
 
-app.get('/auth/facebook/callback/places/:placeID', function(req, res,next) {
+app.get('/auth/facebook/callback/places/:snapID', function(req, res,next) {
     passport.authenticate(
       'facebook',
       {
-        callbackURL: '/auth/facebook/callback/places/'+req.params.placeID,
-        successRedirect:"/#!/places/" + req.params.placeID,
+        callbackURL: '/auth/facebook/callback/places/'+req.params.snapID,
+        successRedirect:"/#!/places/" + req.params.snapID,
         failureRedirect: "/"
       })(req,res,next);
   });

@@ -11,11 +11,18 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
         //$scope.isFirstPromotion = true;
 
         $scope.isFirstPromotion = true;
+
+        var childMeta = placeService.setNewStoreParameters($scope.place_id).then(function(meta) {
+            console.log("Child Meta:");
+            console.log(meta);
+            $scope.childMeta = meta;
+        });
+
         //loginService.isLoggedIn();
         var user_id = loginService.getUser();
         console.log("Currently stored User_ID = " + user_id);
         
-        var isFirstPromotion = $resource("/promotions/isFirstPromotion",{user_id:user_id, store_id:$scope.place_id}).get(function () {
+        var isFirstPromotion = $resource("/promotions/isFirstPromotion",{user_id:user_id, store_id:$scope.childMeta.store_id}).get(function () {
             console.log("isFirstPromotion called and returned: ");
             console.log(isFirstPromotion);
             if (user_id === 0) {
@@ -42,11 +49,7 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
 
         };
 
-    	var childMeta = placeService.setNewStoreParameters($scope.place_id).then(function(meta) {
-    		console.log("Child Meta:");
-    		console.log(meta);
-    		$scope.childMeta = meta;
-    	});
+
 
 
 
