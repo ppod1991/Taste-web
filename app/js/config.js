@@ -23,20 +23,22 @@ app.config(['$routeProvider','$locationProvider',
 .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
 
         $rootScope.$on('$routeChangeStart', function (event) {
-            loginService.isLoggedIn();
-            if (loginService.getUser()===0) {
-                console.log('DENY');
-                //event.preventDefault();
+            var promise = loginService.isLoggedIn();
+            promise.then(function(value) {
+                if (loginService.getUser()===0) {
+                  console.log('DENY');
+                  //event.preventDefault();
 
 
-                // $locationProvider.html5mode(true);
-                //$location.path('/signin');
-                // $locationProvider.html5mode(false);
-            }
-            else {
-                console.log('ALLOW');
-                //$location.path('/feed');
-            }
+                  // $locationProvider.html5mode(true);
+                  //$location.path('/signin');
+                  // $locationProvider.html5mode(false);
+              }
+              else {
+                  console.log('ALLOW');
+                  //$location.path('/feed');
+              }
+          }
         });
 }]);
   

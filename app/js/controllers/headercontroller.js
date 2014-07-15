@@ -16,14 +16,14 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
         }
 
         if(value > 0) {
-          console.log("Connect with value: " + value);
+          //console.log("Connect with value: " + value);
           $scope.auth = value;
         }
 
       }, true);
 
       $scope.logout = function () {
-        $window.location.href = 'desolate-plateau-4658.herokuapp.com/logout';
+        $window.location.href = 'http://desolate-plateau-4658.herokuapp.com/logout';
         $window.location.href = 'http://localhost:5000/logout';
       }
       //  $scope.$on("angularFireAuth:login", function() {

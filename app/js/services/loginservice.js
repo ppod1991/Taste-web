@@ -1,26 +1,33 @@
 'use strict';
  
 angular.module('fantasyApp.services.login', ['ngResource'])
-    .factory('loginService', ['$resource',
-        function($resource) {
+    .factory('loginService', ['$resource','$q',
+        function($resource, $q) {
         	var user_id = 0;
         	return {
         		
         		getUser: function() {
-        			console.log("Get User Called with value: " + user_id );
+        			//console.log("Get User Called with value: " + user_id );
+
+
         			return user_id;
         		},
 
         		isLoggedIn: function() {
 		            //return $resource("http://desolate-plateau-4658.herokuapp.com/users/:user_id",{user_id:'@user_id'});            
-			        var checkLogIn = $resource("/loggedin").get(function () {
+			        var deferred = $q.defer();
+                    console.log("Promise deferred");
+                    var checkLogIn = $resource("/loggedin").get(function () {
 
 						user_id = checkLogIn.user_id;
 					    console.log("isLoggedIn called and user_id set to:  " + user_id);
 						var isLoggedIn = !(checkLogIn.user_id === 0);  
 			        	//console.log((checkLogIn.user_id));
 			        	//console.log('Response is ' + isLoggedIn);
-			        	return isLoggedIn;
+                        console.log("Promise resolved with user_id: " + user_id);
+                        deferred.resolve(user_id);
+
+			        	return deferred.promise;
 			        });
 			        
         		}
