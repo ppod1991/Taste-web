@@ -1,0 +1,74 @@
+doctype html
+html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
+	head
+		meta(charset="utf-8")
+		meta(name="fragment" content="!")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(name="author" content="Piyush Poddar")
+		title Taste - {{placeService.getMeta().title}}
+		meta(property="fb:app_id" content="193198737555570")
+		meta(property="og:type" content="tasteapplication:eatery")
+		meta(property="og:url" content="http://desolate-plateau-4658.herokuapp.com/#!/places/{{placeService.getMeta().snap_id}}")
+		meta(property="og:title" content="{{placeService.getMeta().title}}")
+		meta(property="og:image" content="{{placeService.getMeta().picture_URL}}")
+		link(href="/css/bootstrap.css" rel="stylesheet")
+		link(href="/css/business-casual.css" rel="stylesheet")
+	body(ng-controller="HeaderController")
+		div.background-image(style="background:url({{placeService.getMeta().store_pic_url}})")
+		div.content
+			div.brand {{placeService.getMeta().title}}
+			div.address-bar The Plaza | 5483 Start Bootstrap Ave. | Beverly Hills, California 26892 | 555.519.2013
+			nav.navbar(class="navbar-default" role="navigation")
+				div.container
+					div.navbar-header
+						button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse")
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand(href="/index.html") {{placeService.getMeta().title}}
+				div.collapse(class="navbar-collapse navbar-ex1-collapse")
+					ul.nav(class="navbar-nav")
+						li(data-ng-repeat="entry in navbarEntries" ng-if="auth")
+							a(href="#!{{entry.link}}") {{entry.title.toUpperCase()}}
+						li(ng-if="!!auth" ng-click="login()") LOG IN
+						li(ng-if="!!!auth" ng-click="logout()") LOG OUT
+			div.container
+				div(ng-view)
+
+		script(src="http://static.firebase.com/v0/firebase.js")
+		script(src="https://cdn.firebase.com/v0/firebase-simple-login.js")
+		script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js")
+		script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js")
+		script(src="/js/jquery-1.10.2.js")
+		script(src="/js/bootstrap.js")
+		script(src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js")
+		script(src="lib/angular-route/angular-route.min.js")
+		script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-resource.js")
+		script(src="lib/angular-fire/angularFire.js")
+		script(src="js/app.js")
+		script(src="js/config.js")
+		script(src="js/controllers/headercontroller.js")
+		script(src="js/controllers/signincontroller.js")
+		script(src="js/controllers/feedcontroller.js")
+		script(src="js/controllers/snapcontroller.js")
+		script(src="js/controllers/fancontroller.js")
+		script(src="js/controllers/userTestController.js")
+		script(src="js/controllers/placecontroller.js")
+		script(src="js/controllers/maincontroller.js")
+		script(src="js/controllers/urlcontroller.js")
+		script(src="js/services/loginservice.js")
+		script(src="js/services/firerefservice.js")
+		script(src="js/services/feedservice.js")
+		script(src="js/services/snapservice.js")
+		script(src="js/services/fanservice.js")
+		script(src="js/services/userTestService.js")
+		script(src="js/services/placeservice.js")
+		script $('.carousel').carousel({interval:5000})
+
+
+
+
+
+					
+

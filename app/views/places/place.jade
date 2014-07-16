@@ -1,14 +1,29 @@
-div
-	div.container-fluid
-		div.row
-			div.col-xs-12(class = "text-center")
-				h1(class = "text-center") {{childMeta.title}}
-			div.col-xs-12
-				img(class = "center-block img-responsive img-circle img-thumbnail" style="max-height:200px" ng-src = "{{childMeta.picture_URL}}")
-			div.col-xs-4(class = "col-xs-offset-4")
-				hr.intro-divider
-			div.col-xs-12(class="text-center")
-				button.btn(class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) You've Claimed a Gift from {{childMeta.title}}!
-				a.btn(ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) Claim your Gift Certificates!
-				a.btn(class="btn-primary" type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + snap_id}}") Sign in to Claim your Gift Certificates!
+//- div
+//- 	div.container-fluid
+//- 		div.row
+//- 			div.col-xs-12(class = "text-center")
+//- 				p(class = "text-center") {{childMeta.title.toLowerCase()}}
+//- 		div.row
+//- 			div.col-xs-12
+//- 				img(class = "imageView" class = "center-block img-responsive " style="max-height:650px" ng-src = "{{childMeta.picture_URL}}") 
+//- 		div.row
+//- 			div.col-xs-12(class="text-center")
+//- 				button.btn(class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
+//- 				a.btn(ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim your gift
+//- 				a.btn(class="btn-primary" type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + snap_id}}") sign in to claim your gift!
 				
+div.row
+	div.box
+		div.col-lg-12(class="text-center")
+			div(class="carousel slide" id="carousel-example-generic")
+				div.carousel-inner
+					div(class="item active")
+						img.img-responsive(class="img-full" style="max-height:500px" ng-src="{{childMeta.picture_URL}}" alt="")
+			h2
+				small Welcome to
+			h1
+				span.brand-name {{childMeta.title}}
+			hr.tagline-divider
+			h2
+				small via 
+					strong Taste

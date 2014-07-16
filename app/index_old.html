@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" ng-app="fantasyApp" ng-controller="MainCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="fragment" content="!">
+    <title>Taste</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+<!--<link rel="stylesheet" href="lib/bootstrap/docs/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/bootstrap/docs/assets/css/bootstrap-responsive.css" /> -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/app.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="fb:app_id"                content="193198737555570" /> 
+    <meta property="og:type"                  content="tasteapplication:eatery" /> 
+    <meta property="og:url"                   content="http://desolate-plateau-4658.herokuapp.com/#!/places/{{placeService.getMeta().snap_id}}"> 
+    <meta property="og:title"                 content="{{placeService.getMeta().title}}" /> 
+    <meta property="og:image"                 content="{{placeService.getMeta().picture_URL}}" /> 
+  </head>
+
+  <body ng-controller="HeaderController">
+
+    <header data-ng-include="'views/header.html'"></header>
+
+    <section class="content">
+        <section class="container-fluid">
+            <div ng-view class="fades"></div>
+        </section>
+    </section>
+
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://static.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js"></script>
+   <!--   <script src="//code.jquery.com/jquery-latest.min.js"></script>  -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-resource.js"></script>
+    
+    <script src="lib/angular-fire/angularFire.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/controllers/headercontroller.js"></script>
+    <script src="js/controllers/signincontroller.js"></script>
+    <script src="js/controllers/feedcontroller.js"></script>
+    <script src="js/controllers/snapcontroller.js"></script>
+    <script src="js/controllers/fancontroller.js"></script>
+    <script src="js/controllers/userTestController.js"></script>
+    <script src="js/controllers/placecontroller.js"></script>
+    <script src="js/controllers/maincontroller.js"></script>
+    <script src="js/controllers/urlcontroller.js"></script>
+    <script src="js/services/loginservice.js"></script>
+    <script src="js/services/firerefservice.js"></script>
+    <script src="js/services/feedservice.js"></script>
+    <script src="js/services/snapservice.js"></script>
+    <script src="js/services/fanservice.js"></script>
+    <script src="js/services/userTestService.js"></script>
+    <script src="js/services/placeservice.js"></script>
+
+
+  </body>
+</html>

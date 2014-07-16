@@ -18,7 +18,8 @@ angular.module('fantasyApp.services.place',[])
                                 hashtag_text: snapParams.hashtag_text,
                                 picture_URL: snapParams.snap_URL,
                                 store_id: snapParams.store_id,
-                                snap_id: snapParams.snap_id
+                                snap_id: snapParams.snap_id,
+                                store_pic_url: snapParams.store_picture_url
                             };
                             meta = newMeta;
                             console.log("New Meta:");
