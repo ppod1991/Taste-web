@@ -19,16 +19,12 @@ body {
   height: 100vh;
   width:auto;
 
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: url('/css/blur.svg#blur');
-/*  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
+  filter: blur(5px) grayscale(100%);
+  -webkit-filter: blur(5px) grayscale(100%);
+  -moz-filter: blur(5px) grayscale(100%);
+  -o-filter: blur(5px) grayscale(100%);
+  -ms-filter: blur(5px) grayscale(100%);
+  filter: url('/css/blur.svg#blur'); 
 
 }
 
