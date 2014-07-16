@@ -3,8 +3,8 @@
 // Declare app level module which depends on filters, and services
 angular.module('fantasyApp.config', ['ngRoute'])
 
-app.config(['$routeProvider','$locationProvider', 
-    function($routeProvider,$locationProvider) {
+app.config(['$routeProvider','$locationProvider','$sceDelegateProvider',
+    function($routeProvider,$locationProvider,$sceDelegateProvider) {
 
       $locationProvider.hashPrefix('!');
 
@@ -17,6 +17,12 @@ app.config(['$routeProvider','$locationProvider',
       .when('/places/:snap_id',{ templateUrl: 'views/places/place.html', controller: "PlaceCtrl"})
       .otherwise(       { redirectTo: '/' });
 
+      $sceDelegateProvider.resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from our assets domain.  Notice the difference between * and **.
+        'https://www.google.com/maps/**'
+      ]);
       //$locationProvider.html5Mode(true);
       
     }])

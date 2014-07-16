@@ -19,7 +19,15 @@ angular.module('fantasyApp.services.place',[])
                                 picture_URL: snapParams.snap_URL,
                                 store_id: snapParams.store_id,
                                 snap_id: snapParams.snap_id,
-                                store_pic_url: snapParams.store_picture_url
+                                store_pic_url: snapParams.store_picture_url,
+                                store_street_address: snapParams.street_address,
+                                store_city: snapParams.city,
+                                store_state: snapParams.state,
+                                store_zipcode: snapParams.zipcode,
+                                store_phone_number: snapParams.phone_number,
+                                store_location_url: 'https://www.google.com/maps/embed/v1/search?key=AIzaSyBCQQIP0nd-53kKK8DG56c_seCbwoH2jj0&q=' + encodeURIComponent(snapParams.store_name) + "+" + encodeURIComponent(snapParams.street_address) + "+" + encodeURIComponent(snapParams.city) + "+" + encodeURIComponent(snapParams.state) + "+" + encodeURIComponent(snapParams.zipcode),
+                                store_yelp_url: snapParams.yelp_url,
+                                store_description: snapParams.store_description
                             };
                             meta = newMeta;
                             console.log("New Meta:");

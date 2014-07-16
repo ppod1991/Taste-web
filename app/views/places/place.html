@@ -1,16 +1,50 @@
 
-<div class="row">
-  <div class="box">
-    <div class="col-lg-12 text-center">
-      <div id="carousel-example-generic" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="item active"><img style="max-height:500px" ng-src="{{childMeta.picture_URL}}" alt="" class="img-responsive img-full"/></div>
+<div class="row box">
+  <div class="col-xs-12">
+    <div id="images" class="row">
+      <div class="col-xs-6"><img ng-src="{{childMeta.picture_URL}}" alt="" class="img-responsive img-full"/></div>
+      <div class="col-xs-6">
+        <div class="row">
+          <div class="col-xs-12 dark-box">
+            <table>
+              <tr>
+                <td colspan="2" class="text-center">
+                  <div class="row">
+                    <button style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!(!auth || isFirstPromotion)" class="btn btn-primary">you've claimed a gift from {{childMeta.title.toLowerCase()}}!</button><a>
+                      <button style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button" ng-if="!(!auth || !isFirstPromotion)" class="btn btn-primary">claim your gift <span class="glyphicon glyphicon-gift"></span></button></a><a href="{{'/auth/facebook/places/' + snap_id}}">
+                      <button style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!auth" class="btn btn-primary">sign in to claim your gift! <span class="glyphicon glyphicon-gift"></span></button></a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <hr class="tagline-divider"/>
+                </td>
+              </tr>
+              <tr>
+                <div class="row"></div>
+                <td>
+                  <p><em>"{{childMeta.store_description}}"</em></p>
+                </td>
+                <td><a href="{{childMeta.store_yelp_url}}" class="btn"><img src="/img/yelp-icon.png" height="40" width="40" class="img-circle img-responsive"/></a></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 dark-box">
+            <iframe frameborder="0" height="201" width="201" style="border:0" ng-src="{{childMeta.store_location_url}}" class="img-half"></iframe>
+          </div>
         </div>
       </div>
-      <h2><small>Welcome to</small></h2>
-      <h1><span class="brand-name">{{childMeta.title}}</span></h1>
-      <hr class="tagline-divider"/>
-      <h2><small>via <strong>Taste</strong></small></h2>
+    </div>
+    <div class="row">
+      <div id="storeDescription" class="col-xs-12 text-center">
+        <h2><small>Welcome to</small></h2>
+        <h1><span class="brand-name">{{childMeta.title}}</span></h1>
+        <hr class="tagline-divider"/>
+        <h2><small>via <strong>Taste</strong></small></h2>
+      </div>
     </div>
   </div>
 </div>
