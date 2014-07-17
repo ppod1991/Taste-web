@@ -16,7 +16,7 @@ html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
 		link(href='http://fonts.googleapis.com/css?family=Italianno' rel='stylesheet' type='text/css')
 		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic' rel='stylesheet' type='text/css')
 	body(ng-controller="HeaderController")
-		div.background-image(style="background:url({{placeService.getMeta().store_pic_url}})")
+		div.background-image(ng-style="{ 'background': 'url(' + placeService.getMeta().store_pic_url +')'}")
 		div.content
 			div.brand {{placeService.getMeta().title}}
 			div.address-bar {{placeService.getMeta().store_street_address}} | {{placeService.getMeta().store_city}}, {{placeService.getMeta().store_state}} {{placeService.getMeta().store_zipcode}} | {{placeService.getMeta().store_phone_number.substring(0,3)}}.{{placeService.getMeta().store_phone_number.substring(3,6)}}.{{placeService.getMeta().store_phone_number.substring(6,10)}}

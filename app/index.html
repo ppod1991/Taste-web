@@ -17,7 +17,7 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic" rel="stylesheet" type="text/css">
   </head>
   <body ng-controller="HeaderController">
-    <div style="background:url({{placeService.getMeta().store_pic_url}})" class="background-image"></div>
+    <div ng-style="{ 'background': 'url(' + placeService.getMeta().store_pic_url +')'}" class="background-image"></div>
     <div class="content">
       <div class="brand">{{placeService.getMeta().title}}</div>
       <div class="address-bar">{{placeService.getMeta().store_street_address}} | {{placeService.getMeta().store_city}}, {{placeService.getMeta().store_state}} {{placeService.getMeta().store_zipcode}} | {{placeService.getMeta().store_phone_number.substring(0,3)}}.{{placeService.getMeta().store_phone_number.substring(3,6)}}.{{placeService.getMeta().store_phone_number.substring(6,10)}}</div>

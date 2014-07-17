@@ -11,48 +11,65 @@
 				//- button.btn(class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
 				//- a.btn(ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim your gift
 				//- a.btn(class="btn-primary" type="button" ng-if="!auth" href="{{'/auth/facebook/places/' + snap_id}}") sign in to claim your gift!
-				
-div.row.box
-	div.col-xs-12
-		div#images.row
-			div.col-xs-6
-				img.img-responsive(class="img-full" ng-src="{{childMeta.picture_URL}}" alt="")
-			div.col-xs-6
-				div.row
-					div.col-xs-12.dark-box
-						table
-							tr
-								td(colspan="2").text-center
+div.box
+	div.row
+		div.col-xs-12.col-lg-12
+			div#images.row
+				div.col-lg-6.col-xs-12
+					img.img-responsive(class="img-full" ng-src="{{childMeta.picture_URL}}" alt="")
+					br
+				div.col-lg-6.col-xs-12
+					div.row
+						div.col-xs-12.col-lg-12
+							div.dark-box.img-half
+								table
 									div.row
-										button.btn(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
-										a
-											button.btn(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim your gift <span class="glyphicon glyphicon-gift"></span>
-										a(href="{{'/auth/facebook/places/' + snap_id}}")
-											button.btn(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!auth") sign in to claim your gift! <span class="glyphicon glyphicon-gift"></span>
-							tr
-								td(colspan="2")
-									hr.tagline-divider
-							tr
-								div.row
-								td
-									p
-										em
-											"{{childMeta.store_description}}"
-								td
-									a.btn(href="{{childMeta.store_yelp_url}}")
-										img.img-circle(class="img-responsive" src="/img/yelp-icon.png" height="40" width="40")
-				div.row
-					div.col-xs-12.dark-box
-						iframe(frameborder="0" class="img-half" height="201" width="201" style="border:0" ng-src="{{childMeta.store_location_url}}")
-		div.row
-			div#storeDescription.col-xs-12.text-center
-				h2
-					small Welcome to
-				h1
-					span.brand-name {{childMeta.title}}
-				hr.tagline-divider
-				h2
-					small via 
-						strong Taste
+										div.col-xs-12.col-lg-12
+											tr
+												td(colspan="2").text-center
+													div.row
+														button.btn(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
+														a
+															button.btn(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim your gift <span class="glyphicon glyphicon-gift"></span>
+														a(href="{{'/auth/facebook/places/' + snap_id}}")
+															button.btn(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!auth") sign in to claim your gift! <span class="glyphicon glyphicon-gift"></span>
+									div.row
+										div.col-xs-12.col-lg-12
+											tr
+												td(colspan="2")
+													hr.tagline-divider
+									div.row
+										div.col-xs-12.col-lg-12
+											tr
+												td
+													p.text-center
+														em "{{childMeta.store_description}}"
+									div.row
+										div.col-xs-12.col-lg-12
+											tr
+												td(colspan="2").text-center
+													a.btn(href="{{childMeta.store_yelp_url}}")
+														img.img-circle.yelp(src="/img/yelp-icon.png" height="40" width="40")
+					div.row
+						div.col-xs-12.col-lg-12
+							div.dark-box
+								iframe.sepia(frameborder="0" class="img-half" height="201" width="201" style="border:0" ng-src="{{childMeta.store_location_url}}")
+	div.row
+		div.col-xs-12.col-lg-12
+			hr.tagline-divider
+			h2.text-center
+				small brought to you by 
+					br
+					strong Taste								
+//- div.row.box
+//- 	div#storeDescription.col-xs-12.col-lg-12.text-center
+//- 		h2
+//- 			small Welcome to
+//- 		h1
+//- 			span.brand-name {{childMeta.title}}
+//- 		hr.tagline-divider
+//- 		h2
+//- 			small via 
+//- 				strong Taste
 	
 //- https://www.google.com/maps/embed/v1/place?key=AIzaSyBCQQIP0nd-53kKK8DG56c_seCbwoH2jj0&q={{childMeta.store_street_address + ", " + childMeta.store_city + " " + childMeta.store_state + ", " + childMeta.store_zipcode}}
