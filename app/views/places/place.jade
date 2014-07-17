@@ -21,17 +21,17 @@ div.box
 				div.col-lg-6.col-xs-12
 					div.row
 						div.col-xs-12.col-lg-12
-							div.dark-box.img-half
+							div.dark-box
 								table
 									div.row
 										div.col-xs-12.col-lg-12
 											tr
 												td(colspan="2").text-center
-													button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
+													button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
 													a
-														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span>
-													a(href="{{'/auth/facebook/places/' + snap_id}}")
-														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!auth") sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span>
+														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span>
+													a(href='')
+														button.btn.btn-promotion(ng-click="login()" style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!auth") sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span>
 									div.row
 										div.col-xs-12.col-lg-12
 											tr
@@ -47,12 +47,12 @@ div.box
 										div.col-xs-12.col-lg-12
 											tr
 												td(colspan="2").text-center
-													a.btn(href="{{childMeta.store_yelp_url}}")
+													a(href="{{childMeta.store_yelp_url}}")
 														img.img-circle.yelp(src="/img/yelp-icon.png" height="40" width="40")
 					div.row
 						div.col-xs-12.col-lg-12
 							div.dark-box
-								iframe.sepia(frameborder="0" class="img-half" height="201" width="201" style="border:0" ng-src="{{childMeta.store_location_url}}")
+								iframe.sepia(frameborder="0" height="201" width="201" style="border:0; width:100%" ng-src="{{childMeta.store_location_url}}")
 	div.row
 		div.col-xs-12.col-lg-12
 			hr.tagline-divider

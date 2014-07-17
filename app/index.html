@@ -5,7 +5,7 @@
     <meta name="fragment" content="!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="author" content="Piyush Poddar">
-    <title>Taste - {{placeService.getMeta().title}}</title>
+    <title>taste - {{placeService.getMeta().title}}</title>
     <meta property="fb:app_id" content="193198737555570">
     <meta property="og:type" content="tasteapplication:eatery">
     <meta property="og:url" content="http://desolate-plateau-4658.herokuapp.com/#!/places/{{placeService.getMeta().snap_id}}">
@@ -29,9 +29,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li data-ng-repeat="entry in navbarEntries" ng-if="auth"><a href="#!{{entry.link}}">{{entry.title.toUpperCase()}}</a></li>
-            <li ng-if="!!auth"><a ng-click="login()">LOG IN</a></li>
-            <li ng-if="!!!auth"><a ng-click="logout()">LOG OUT</a></li>
+            <li data-ng-repeat="entry in navbarEntries" ng-if="auth"><a href="#!{{entry.link}}" class="custom-nav">{{entry.title.toUpperCase()}}</a></li>
+            <li ng-if="!!!auth"><a href="" ng-click="login()" class="custom-nav">LOG IN</a></li>
+            <li ng-if="!!auth"><a href="" ng-click="logout()" class="custom-nav">LOG OUT</a></li>
           </ul>
         </div>
       </nav>
@@ -60,6 +60,7 @@
     <script src="js/controllers/placecontroller.js"></script>
     <script src="js/controllers/maincontroller.js"></script>
     <script src="js/controllers/urlcontroller.js"></script>
+    <script src="js/controllers/giftcontroller.js"></script>
     <script src="js/services/loginservice.js"></script>
     <script src="js/services/firerefservice.js"></script>
     <script src="js/services/feedservice.js"></script>
@@ -67,6 +68,6 @@
     <script src="js/services/fanservice.js"></script>
     <script src="js/services/userTestService.js"></script>
     <script src="js/services/placeservice.js"></script>
-    <script>$('.carousel').carousel({interval:5000})</script>
+    <script src="js/services/giftservice.js"></script>
   </body>
 </html>

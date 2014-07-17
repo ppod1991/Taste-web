@@ -33,8 +33,8 @@ exports.findAll = function(req, res) {
 	//model = model.where(PG.knex.raw("start_date < timezone('utc'::text, now())"));
 	//console.log("REACHED");
 	model.then(function(result) {
-	  console.log(result);	     
-	  res.send("{Promotions: " + JSON.stringify(result) + "}");
+	  console.log('{"Promotions": ' + JSON.stringify(result) + '}');	     
+	  res.send('{"Promotions": ' + JSON.stringify(result) + '}');
 	});
 };
 

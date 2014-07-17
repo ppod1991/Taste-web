@@ -32,11 +32,11 @@ html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
 				div.collapse(class="navbar-collapse navbar-ex1-collapse")
 					ul.nav(class="navbar-nav")
 						li(data-ng-repeat="entry in navbarEntries" ng-if="auth")
-							a(href="#!{{entry.link}}") {{entry.title.toUpperCase()}}
-						li(ng-if="!!auth") 
-							a(ng-click="login()") LOG IN
-						li(ng-if="!!!auth")
-							a(ng-click="logout()") LOG OUT
+							a.custom-nav(href="#!{{entry.link}}") {{entry.title.toUpperCase()}}
+						li(ng-if="!!!auth") 
+							a.custom-nav(href='' ng-click="login()") LOG IN
+						li(ng-if="!!auth")
+							a.custom-nav(href='' ng-click="logout()") LOG OUT
 			div.container
 				div(ng-view)
 
@@ -61,6 +61,7 @@ html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
 		script(src="js/controllers/placecontroller.js")
 		script(src="js/controllers/maincontroller.js")
 		script(src="js/controllers/urlcontroller.js")
+		script(src="js/controllers/giftcontroller.js")
 		script(src="js/services/loginservice.js")
 		script(src="js/services/firerefservice.js")
 		script(src="js/services/feedservice.js")
@@ -68,7 +69,7 @@ html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
 		script(src="js/services/fanservice.js")
 		script(src="js/services/userTestService.js")
 		script(src="js/services/placeservice.js")
-		script $('.carousel').carousel({interval:5000})
+		script(src="js/services/giftservice.js")
 
 
 

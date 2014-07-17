@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fantasyApp.services.login','ngResource'])
-  .controller('PlaceCtrl', ['$scope', '$routeParams', 'placeService', 'loginService','$resource','$q',
-    function($scope, $routeParams, placeService,loginService, $resource, $q) {
+  .controller('PlaceCtrl', ['$scope', '$routeParams', 'placeService', 'loginService','$resource','$q','$location','$window',
+    function($scope, $routeParams, placeService,loginService, $resource, $q, $location,$window) {
     	var params = $routeParams;
     	//console.log("Params:" + params);
     	//console.log(params.store_id);
@@ -40,7 +40,10 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
 
 
 
-        
+        $scope.login = function () {
+            $window.location.href = '/auth/facebook/q?location=' + encodeURIComponent($location.url());
+        }
+
         $scope.addPromotion = function() {
             console.log("ADDING PROMOTION! ");
             $resource("/promotions").save([],{user_id:loginService.getUser(), store_id:$scope.childMeta.store_id,first_time:true},function(val, responseHeader) {

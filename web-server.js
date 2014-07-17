@@ -199,6 +199,14 @@ app.get('/auth/facebook/places/:snapID', function(req, res, next){
     // function will not be called.
   });
 
+app.get('/auth/facebook/q', function(req, res, next){
+  console.log("INitial callbackL");
+  console.log('/auth/facebook/callback/q?location='+encodeURIComponent(req.query.location));
+  passport.authenticate('facebook',{callbackURL: '/auth/facebook/callback/q?location='+encodeURIComponent(req.query.location)})(req,res,next);
+    // The request will be redirected to Facebook for authentication, so this
+    // function will not be called.
+  });
+
 // app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
 //     // The request will be redirected to Facebook for authentication, so this
 //     // function will not be called.
@@ -221,11 +229,31 @@ app.get('/auth/facebook/callback/places/:snapID', function(req, res,next) {
       })(req,res,next);
   });
 
+app.get('/auth/facebook/callback/q', function(req, res,next) {
+  console.log("Second callbackL");
+  console.log('/auth/facebook/callback/q?location='+encodeURIComponent(req.query.location));
+    passport.authenticate(
+      'facebook',
+      {
+        callbackURL: '/auth/facebook/callback/q?location='+encodeURIComponent(req.query.location),
+        successRedirect: "/#!" + (req.query.location),
+        failureRedirect: "/"
+      })(req,res,next);
+  });
+
+
 app.get('/logout', function(req,res) {
 	req.logOut();
   res.send(200);
 	res.redirect('/');
 	
+});
+
+app.get('/logout/q', function(req,res) {
+  req.logOut();
+  res.send(200);
+  res.redirect('/#!' + req.query.location);
+  
 });
 
 var port = Number(process.env.PORT || 5000);

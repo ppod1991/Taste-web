@@ -22,9 +22,13 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
 
       }, true);
 
+      $scope.login = function () {
+          $window.location.href = '/auth/facebook/q?location=' + encodeURIComponent($location.url());
+      }
+
+
       $scope.logout = function () {
-        $window.location.href = 'http://desolate-plateau-4658.herokuapp.com/logout';
-        $window.location.href = 'http://localhost:5000/logout';
+        $window.location.href = '/logout/q?location=' + encodeURIComponent($location.url());
       }
       //  $scope.$on("angularFireAuth:login", function() {
       // //   angularFire(new Firebase(FBURL+'/users/'+$scope.auth.id), $scope, 'user');
@@ -47,19 +51,30 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
       //   });
       // };
       
+      // $scope.navbarEntries = [
+      //   {
+      //     "title": "Fan Feed",
+      //     "link": "/feed"
+      //  }
+      //  , {
+      //     "title": "New Snap",
+      //     "link": "/snaps/create"
+      //   }
+      //   , {
+      //      "title": "Find Friends",
+      //      "link": "/fans/find"
+      //    }
+      // ];
+
       $scope.navbarEntries = [
         {
-          "title": "Fan Feed",
-          "link": "/feed"
+          "title": "My Gifts",
+          "link": "/gifts"
        }
        , {
-          "title": "New Snap",
-          "link": "/snaps/create"
+          "title": "Get App",
+          "link": "/app"
         }
-        , {
-           "title": "Find Friends",
-           "link": "/fans/find"
-         }
       ];
 
       $scope.$on('$routeChangeSuccess',function() {

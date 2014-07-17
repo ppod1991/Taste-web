@@ -1,0 +1,16 @@
+
+<div data-ng-controller="GiftController">
+  <div ng-repeat="gift in gifts">
+    <div class="box">
+      <div class="row">
+        <div class="col-xs-12 col-lg-12 text-center">
+          <h2>{{gift.store_name}}</h2>
+          <h1>{{gift.display_text}}</h1>
+          <p>
+            <Valid>from {{gift.start_date}} to {{gift.end_date}}</Valid>
+          </p><a href=""><img ng-click="redeemPromotion($index)" ng-src="./img/redeem_button.png" class="img-responsive"/></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,15 +7,15 @@
         <div class="col-lg-6 col-xs-12">
           <div class="row">
             <div class="col-xs-12 col-lg-12">
-              <div class="dark-box img-half">
+              <div class="dark-box">
                 <table>
                   <div class="row">
                     <div class="col-xs-12 col-lg-12">
                       <tr>
                         <td colspan="2" class="text-center">
-                          <button style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!(!auth || isFirstPromotion)" class="btn btn-promotion btn-primary">you've claimed a gift from {{childMeta.title.toLowerCase()}}!</button><a>
-                            <button style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button" ng-if="!(!auth || !isFirstPromotion)" class="btn btn-promotion btn-primary">claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a href="{{'/auth/facebook/places/' + snap_id}}">
-                            <button style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!auth" class="btn btn-promotion btn-primary">sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span></button></a>
+                          <button style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!(!auth || isFirstPromotion)" class="btn btn-promotion">you've claimed a gift from {{childMeta.title.toLowerCase()}}!</button><a>
+                            <button style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button" ng-if="!(!auth || !isFirstPromotion)" class="btn btn-promotion">claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a href="">
+                            <button ng-click="login()" style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!auth" class="btn btn-promotion">sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span></button></a>
                         </td>
                       </tr>
                     </div>
@@ -41,7 +41,7 @@
                   <div class="row">
                     <div class="col-xs-12 col-lg-12">
                       <tr>
-                        <td colspan="2" class="text-center"><a href="{{childMeta.store_yelp_url}}" class="btn"><img src="/img/yelp-icon.png" height="40" width="40" class="img-circle yelp"/></a></td>
+                        <td colspan="2" class="text-center"><a href="{{childMeta.store_yelp_url}}"><img src="/img/yelp-icon.png" height="40" width="40" class="img-circle yelp"/></a></td>
                       </tr>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
           <div class="row">
             <div class="col-xs-12 col-lg-12">
               <div class="dark-box">
-                <iframe frameborder="0" height="201" width="201" style="border:0" ng-src="{{childMeta.store_location_url}}" class="sepia img-half"></iframe>
+                <iframe frameborder="0" height="201" width="201" style="border:0; width:100%" ng-src="{{childMeta.store_location_url}}" class="sepia"></iframe>
               </div>
             </div>
           </div>
