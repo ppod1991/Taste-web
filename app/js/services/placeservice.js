@@ -27,7 +27,8 @@ angular.module('fantasyApp.services.place',[])
                                 store_phone_number: snapParams.phone_number,
                                 store_location_url: 'https://www.google.com/maps/embed/v1/search?key=AIzaSyBCQQIP0nd-53kKK8DG56c_seCbwoH2jj0&q=' + encodeURIComponent(snapParams.store_name) + "+" + encodeURIComponent(snapParams.street_address) + "+" + encodeURIComponent(snapParams.city) + "+" + encodeURIComponent(snapParams.state) + "+" + encodeURIComponent(snapParams.zipcode),
                                 store_yelp_url: snapParams.yelp_url,
-                                store_description: snapParams.store_description
+                                store_description: snapParams.store_description,
+                                user_first_name: snapParams.first_name
                             };
                             meta = newMeta;
                             console.log("New Meta:");

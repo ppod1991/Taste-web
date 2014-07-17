@@ -58,7 +58,7 @@ exports.addSnap = function (req, res) {
 exports.findById = function(req, res) {
 	var snap_id = req.params.snap_id;
 	console.log('Find Snap By ID Called!');
-	PG.knex('snaps').innerJoin('stores','snaps.store_id', 'stores.store_id').select().where('snap_id',snap_id).then(function(result) {
+	PG.knex('snaps').innerJoin('stores','snaps.store_id', 'stores.store_id').innerJoin('users','snaps.user_id','users.user_id').select().where('snap_id',snap_id).then(function(result) {
 	  //console.log(result[0].first_name);	     
 	  res.send(result[0]);
 	});

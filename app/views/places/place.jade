@@ -27,12 +27,11 @@ div.box
 										div.col-xs-12.col-lg-12
 											tr
 												td(colspan="2").text-center
-													div.row
-														button.btn(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
-														a
-															button.btn(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim your gift <span class="glyphicon glyphicon-gift"></span>
-														a(href="{{'/auth/facebook/places/' + snap_id}}")
-															button.btn(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!auth") sign in to claim your gift! <span class="glyphicon glyphicon-gift"></span>
+													button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!(!auth || isFirstPromotion)" ) you've claimed a gift from {{childMeta.title.toLowerCase()}}!
+													a
+														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" class="btn-primary" type="button" ng-if="!(!auth || !isFirstPromotion)" ) claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span>
+													a(href="{{'/auth/facebook/places/' + snap_id}}")
+														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" class="btn-primary" type="button" ng-if="!auth") sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to you! <br> <span class="glyphicon glyphicon-gift"></span>
 									div.row
 										div.col-xs-12.col-lg-12
 											tr
