@@ -129,14 +129,23 @@ hr {
 }
 
 .gift-box {
-  background: rgba(10, 50, 50, 0.67);
+  background-color: rgba(50, 10, 10, 0.67);
+  color: white;
   margin-bottom: 20px;
   padding: 30px 15px;
+  box-shadow: 5px 5px 3px #888888;
 }
 
 .gift-image {
-  height: 10vh;
+  max-height: 15vh;
   width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gift-text {
+  color: white;
 }
 
 .dark-box {

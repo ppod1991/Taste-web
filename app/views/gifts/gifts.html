@@ -1,14 +1,24 @@
 
 <div data-ng-controller="GiftController">
-  <div ng-repeat="gift in gifts">
-    <div class="gift-box">
-      <div class="row">
-        <div class="col-xs-12 col-lg-12 text-center">
-          <h2>{{gift.store_name}}</h2>
-          <h1>{{gift.display_text}}</h1>
-          <p>
-            <Valid>from {{new Date(gift.start_date).getMonth()}}/{{new Date(gift.start_date).getDate()}}{{new Date(gift.start_date).getYear()}}  to {{new Date(gift.end_date).getMonth()}}/{{new Date(gift.end_date).getDate()}}{{new Date(gift.end_date).getYear()}}</Valid>
-          </p><a href=""><img ng-click="redeemPromotion($index)" ng-src="./img/redeem_button.png" class="img-responsive gift-image"/></a>
+  <div class="box text-center">
+    <h1>My Gifts </h1>
+    <div ng-repeat="gift in gifts">
+      <div class="gift-box">
+        <div class="row">
+          <div class="col-xs-8 col-lg-8 col-xs-offset-2 col-lg-offset-2 text-center">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12 text-center">
+                <h2>{{gift.store_name}}</h2>
+                <h1>{{gift.display_text}}</h1>
+                <p class="gift-text">
+                  <Valid>from {{convertDate(gift.start_date)}} to {{convertDate(gift.end_date)}}</Valid>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-5"><a href=""><img ng-click="redeemPromotion($index)" ng-src="./img/redeem_button.png" class="img-responsive gift-image"/></a></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
