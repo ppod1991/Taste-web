@@ -1,14 +1,14 @@
 
 <div data-ng-controller="GiftController">
   <div ng-repeat="gift in gifts">
-    <div class="box">
+    <div class="gift-box">
       <div class="row">
         <div class="col-xs-12 col-lg-12 text-center">
           <h2>{{gift.store_name}}</h2>
           <h1>{{gift.display_text}}</h1>
           <p>
-            <Valid>from {{gift.start_date}} to {{gift.end_date}}</Valid>
-          </p><a href=""><img ng-click="redeemPromotion($index)" ng-src="./img/redeem_button.png" class="img-responsive"/></a>
+            <Valid>from {{new Date(gift.start_date).getMonth()}}/{{new Date(gift.start_date).getDate()}}{{new Date(gift.start_date).getYear()}}  to {{new Date(gift.end_date).getMonth()}}/{{new Date(gift.end_date).getDate()}}{{new Date(gift.end_date).getYear()}}</Valid>
+          </p><a href=""><img ng-click="redeemPromotion($index)" ng-src="./img/redeem_button.png" class="img-responsive gift-image"/></a>
         </div>
       </div>
     </div>
