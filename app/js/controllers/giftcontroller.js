@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.gift', ['fantasyApp.services.gift','fantasyApp.services.login'])
-    .controller('GiftController', ['$scope', 'giftService','loginService','$window',
-        function ($scope, giftService, loginService, $window) {
-
+angular.module('fantasyApp.controllers.gift', ['fantasyApp.services.gift','fantasyApp.services.login','fantasyApp.services.main'])
+    .controller('GiftController', ['$scope', 'giftService','loginService','$window','mainService',
+        function ($scope, giftService, loginService, $window, mainService) {
+            mainService.setDefaultParameters();
             $scope.gifts = {};
             var user_id;
             var promise = loginService.isLoggedIn();

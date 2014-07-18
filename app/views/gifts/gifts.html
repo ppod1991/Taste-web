@@ -1,8 +1,13 @@
 
 <div data-ng-controller="GiftController">
   <div class="box text-center">
-    <h1>My Gifts </h1>
-    <div ng-repeat="gift in gifts">
+    <h1>My Gifts</h1>
+    <div ng-if="!auth" class="row fades"><a href="">
+        <button ng-click="login()" style="" type="button" class="btn btn-promotion">sign in to view your gifts! <br> <span class="glyphicon glyphicon-gift"></span>						</button></a></div>
+    <div ng-if="gifts.length === 0" class="fades">
+      <button class="btn btn-promotion">sadly, you don't have any gifts right now</button>
+    </div>
+    <div ng-repeat="gift in gifts" class="fades">
       <div class="gift-box">
         <div class="row">
           <div class="col-xs-8 col-lg-8 col-xs-offset-2 col-lg-offset-2 text-center">

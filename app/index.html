@@ -5,22 +5,23 @@
     <meta name="fragment" content="!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="author" content="Piyush Poddar">
-    <title>T A S T E - {{placeService.getMeta().title}}</title>
+    <title>T A S T E - {{main.getMeta().title}}</title>
     <meta property="fb:app_id" content="193198737555570">
     <meta property="og:type" content="tasteapplication:eatery">
-    <meta property="og:url" content="http://desolate-plateau-4658.herokuapp.com/#!/places/{{placeService.getMeta().snap_id}}">
-    <meta property="og:title" content="{{placeService.getMeta().title}}">
-    <meta property="og:image" content="{{placeService.getMeta().picture_URL}}">
+    <meta property="og:url" content="http://desolate-plateau-4658.herokuapp.com/#!/places/{{main.getMeta().snap_id}}">
+    <meta property="og:title" content="{{main.getMeta().title}}">
+    <meta property="og:image" content="{{main.getMeta().picture_URL}}">
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/business-casual.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Italianno" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic" rel="stylesheet" type="text/css">
   </head>
   <body ng-controller="HeaderController">
-    <div ng-style="{ 'background': 'url(' + placeService.getMeta().store_pic_url +')'}" class="background-image"></div>
+    <div ng-class="'background-image-' + main.getMeta().kind" ng-style="{ 'background': 'url(' + main.getMeta().background_url +') no-repeat center center fixed','-webkit-background-size': 'cover',  '-moz-background-size': 'cover',  '-o-background-size': 'cover', 'background-size': 'cover'}" class="my-background"></div>
     <div class="content">
-      <div class="brand">{{placeService.getMeta().title}}</div>
-      <div class="address-bar">{{placeService.getMeta().store_street_address}} | {{placeService.getMeta().store_city}}, {{placeService.getMeta().store_state}} {{placeService.getMeta().store_zipcode}} | {{placeService.getMeta().store_phone_number.substring(0,3)}}.{{placeService.getMeta().store_phone_number.substring(3,6)}}.{{placeService.getMeta().store_phone_number.substring(6,10)}}</div>
+      <div ng-class="'brand-' + main.getMeta().kind" class="brand">{{main.getMeta().title}}</div>
+      <div ng-if="main.getMeta().kind === 'restaurant'" class="address-bar">{{main.getMeta().store_street_address}} | {{main.getMeta().store_city}}, {{main.getMeta().store_state}} {{main.getMeta().store_zipcode}} | {{main.getMeta().store_phone_number.substring(0,3)}}.{{main.getMeta().store_phone_number.substring(3,6)}}.{{main.getMeta().store_phone_number.substring(6,10)}}</div>
+      <div ng-if="main.getMeta().kind === 'default'" class="address-bar">share pics . get gifts . yum</div>
       <nav role="navigation" class="navbar navbar-default">
         <div class="container">
           <div class="navbar-header">
@@ -36,7 +37,7 @@
         </div>
       </nav>
       <div class="container">
-        <div ng-view></div>
+        <div ng-view class="fades"></div>
       </div>
     </div>
     <script src="http://static.firebase.com/v0/firebase.js"></script>
@@ -67,7 +68,7 @@
     <script src="js/services/snapservice.js"></script>
     <script src="js/services/fanservice.js"></script>
     <script src="js/services/userTestService.js"></script>
-    <script src="js/services/placeservice.js"></script>
+    <script src="js/services/mainservice.js"></script>
     <script src="js/services/giftservice.js"></script>
   </body>
 </html>

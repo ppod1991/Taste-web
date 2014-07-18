@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login'])
-  .controller('HeaderController', ['$scope', '$location', 'loginService', '$window','angularFire', 
-    function($scope, $location, loginService, $window,angularFire) {
+angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login','fantasyApp.services.main'])
+  .controller('HeaderController', ['$scope', '$location', 'loginService', '$window','mainService','angularFire', 
+    function($scope, $location, loginService, $window,mainService,angularFire) {
       
+      //mainService.setDefaultParameters();
+
       $scope.auth = 0;
 
       $scope.$watch(loginService.getUser, function (value, oldValue) {

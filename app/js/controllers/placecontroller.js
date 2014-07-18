@@ -1,17 +1,17 @@
 'use strict';
 
-angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fantasyApp.services.login','ngResource'])
-  .controller('PlaceCtrl', ['$scope', '$routeParams', 'placeService', 'loginService','$resource','$q','$location','$window',
-    function($scope, $routeParams, placeService,loginService, $resource, $q, $location,$window) {
+angular.module('fantasyApp.controllers.place', ['fantasyApp.services.main','fantasyApp.services.login','ngResource'])
+  .controller('PlaceCtrl', ['$scope', '$routeParams', 'mainService', 'loginService','$resource','$q','$location','$window',
+    function($scope, $routeParams, mainService,loginService, $resource, $q, $location,$window) {
     	var params = $routeParams;
     	//console.log("Params:" + params);
     	//console.log(params.store_id);
     	$scope.snap_id = params.snap_id;
         //$scope.isFirstPromotion = true;
 
-        $scope.isFirstPromotion = true;
+        $scope.isFirstPromotion = false;
 
-        var childMeta = placeService.setNewStoreParameters($scope.snap_id).then(function(meta) {
+        var childMeta = mainService.setNewStoreParameters($scope.snap_id).then(function(meta) {
             //console.log("Child Meta:");
             //console.log(meta);
             $scope.childMeta = meta;
@@ -40,9 +40,9 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.place','fan
 
 
 
-        $scope.login = function () {
-            $window.location.href = '/auth/facebook/q?location=' + encodeURIComponent($location.url());
-        }
+        // $scope.login = function () {
+        //     $window.location.href = '/auth/facebook/q?location=' + encodeURIComponent($location.url());
+        // }
 
         $scope.addPromotion = function() {
             console.log("ADDING PROMOTION! ");
