@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('fantasyApp.controllers.gift', ['fantasyApp.services.gift','fantasyApp.services.login'])
-    .controller('GiftController', ['$scope', 'giftService','loginService',
-        function ($scope, giftService, loginService) {
+    .controller('GiftController', ['$scope', 'giftService','loginService','$window',
+        function ($scope, giftService, loginService, $window) {
 
             $scope.gifts = {};
             var user_id;
@@ -41,7 +41,9 @@ angular.module('fantasyApp.controllers.gift', ['fantasyApp.services.gift','fanta
                 var toRedeem = $scope.gifts[giftIndex];
                 giftService.redeem.save(toRedeem, function(value, responseHeader) {
                     console.log("Response from trying to redeem promotion");
-                    console.log(value);
+                    console.log(value.response_message);
+                    //$scope.gifts[giftIndex].alertMessage = value.response_message;
+                    $window.alert(value.response_message);
                     refreshGifts(user_id);
                 })
                 // var newUser = new userTest();
