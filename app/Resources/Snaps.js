@@ -24,14 +24,15 @@ exports.addSnap = function (req, res) {
 	  	eatery = '&eatery=' + encodeURIComponent(eatery);
 	  	console.log("Encoded Eatery:" + eatery);
 	  	var picture_url = req.body.picture_url;
-
+	  	var place = '&place=' + 'https://desolate-plateau-4658.herokuapp.com/#!/places/' + snap_id;
 	  	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';
 	  	var method = '&method=POST';
 	  	var pictureURLforFB =  '&image[0][url]=' + encodeURIComponent(picture_url) + '&image[0][user_generated]=true';
 	  	//var pictureURL =  '&image:url=' + encodeURIComponent('https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/10499434_10152165511185233_8074458132375143692_o.jpg') + '&image:user_generated=true';
 	  	var explicitSharing = '&fb:explicitly_shared=true';
+	  	var scrape = '&scrape=false';
 	  	var messageForFB = '&message=' + encodeURIComponent(req.body.snap_message);
-	  	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing + messageForFB;
+	  	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing + scrape + messageForFB;
 	  	console.log("resulting url: " + resultingURL);
 	  	request.post({url: resultingURL},function (error, response,body) {
 	  		console.log("Error: " + error);

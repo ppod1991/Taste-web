@@ -8,7 +8,7 @@ angular.module('fantasyApp.services.main',[])
                        background_url: '',
                        kind:'default'
                         };
-                        
+
        	    return {
                 setDefaultParameters: function() {
                     console.log("Set Default Parameters called");
@@ -38,6 +38,8 @@ angular.module('fantasyApp.services.main',[])
                                 store_location_url: 'https://www.google.com/maps/embed/v1/search?key=AIzaSyBCQQIP0nd-53kKK8DG56c_seCbwoH2jj0&q=' + encodeURIComponent(snapParams.store_name) + "+" + encodeURIComponent(snapParams.street_address) + "+" + encodeURIComponent(snapParams.city) + "+" + encodeURIComponent(snapParams.state) + "+" + encodeURIComponent(snapParams.zipcode),
                                 store_yelp_url: snapParams.yelp_url,
                                 store_description: snapParams.store_description,
+                                store_latitude: snapParams.store_latitude,
+                                store_longitude: snapParams.store_longitude,
                                 user_first_name: snapParams.first_name,
                                 kind: 'restaurant'
                             };
