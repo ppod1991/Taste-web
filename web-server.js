@@ -18,6 +18,7 @@ var request = require('request');
 var PG = require('./app/Resources/knex');
 var facebook = require('./app/Resources/Facebook');
 var url = require('url');
+var jade = require('jade');
 
 passport.serializeUser(function(user, done) {
   //console.log("SERIALIZE USER");
@@ -157,6 +158,32 @@ app.get('/crownOfIndia', function(req, res) {
 app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
+
+app.get('/places/:snapID', function(req,res) {
+  var userAgent = req.headers['user-agent'];
+  var snapID = req.params.snapID;
+
+  //If user-agent is facebookexternalhit, the render page in JADE for Open Graph meta tags
+  if(userAgent.toLowerCase().indexOf('facebookexternalhit') !== -1) {
+
+    console.log("Snap ID " + snapID);
+    snaps.getMetaInfo(snapID, function(locals) {
+      console.log("Locals " + JSON.stringify(locals));
+      var html = jade.renderFile('./app/placeTemplate.jade',{pretty:true,debug:true,locals:locals});
+      res.send(201,html);
+    });
+  }
+  //Else, redirection to '/#!/places/:snapID'
+  else {
+    res.redirect('/#!/places/' + snapID );
+  }
+
+
+
+  
+
+});
+
 
 app.post('/experience',facebook.experienceEatery);
 

@@ -1,0 +1,15 @@
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(name="author" content="Piyush Poddar")
+		title T A S T E - #{locals.locals.store_name}
+		meta(property="fb:app_id" content="193198737555570")
+		meta(property="og:type" content="tasteapplication:eatery")
+		meta(property="og:url" content="http://desolate-plateau-4658.herokuapp.com/places/#{locals.locals.snap_id}")
+		meta(property="og:title" content="#{locals.locals.store_name}")
+		meta(property="og:image" content="#{locals.locals.snap_URL}")
+		meta(property="place:location:latitude" content="#{locals.locals.store_latitude}")
+		meta(property="place:location:longitude" content="#{locals.locals.store_longitude}")
+	body
+		p
+			em "#{locals.locals.store_description}"

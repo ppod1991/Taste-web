@@ -82,6 +82,16 @@ exports.findById = function(req, res) {
 	  res.send(result[0]);
 	});
 };
+
+//Retrieve a Snap by its ID
+exports.getMetaInfo = function(snap_id,cb) {
+	console.log('Find Snap By ID Called!');
+	PG.knex('snaps').innerJoin('stores','snaps.store_id', 'stores.store_id').innerJoin('users','snaps.user_id','users.user_id').select().where('snap_id',snap_id).then(function(result) {
+	  console.log("Result from db call: ");
+	  console.log(result[0]);
+	  cb(result[0]);
+	});
+};
 // exports.addSnap = function (req, res) {
 // 	console.log("Snap trying to be added!");
 // 	//console.log(req);
