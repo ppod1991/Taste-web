@@ -174,6 +174,9 @@ app.get('/places/:snapID', function(req,res) {
       res.send(201,html);
     });
   }
+  else {
+    res.redirect('/#!/places/' + snapID );
+  };
   //Else, redirection to '/#!/places/:snapID'
   // else {
   //   res.redirect('/#!/places/' + snapID );

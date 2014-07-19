@@ -24,7 +24,7 @@ exports.addSnap = function (req, res) {
 	  	eatery = '&eatery=' + encodeURIComponent(eatery);
 	  	console.log("Encoded Eatery:" + eatery);
 	  	var picture_url = req.body.picture_url;
-	  	var place = '&place=' + encodeURIComponent('https://desolate-plateau-4658.herokuapp.com/#!/places/' + snap_id);
+	  	var place = '&place=' + encodeURIComponent('https://desolate-plateau-4658.herokuapp.com/places/' + snap_id);
 	  	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';
 	  	var method = '&method=POST';
 	  	var pictureURLforFB =  '&image[0][url]=' + encodeURIComponent(picture_url) + '&image[0][user_generated]=true';
@@ -35,9 +35,7 @@ exports.addSnap = function (req, res) {
 	  	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + place + pictureURLforFB + explicitSharing + scrape + messageForFB;
 	  	console.log("resulting url: " + resultingURL);
 	  	
-	  	//Call to wake up prerender heroku dyno so that Snap post succeeds
-	  	request.get({url:'http://intense-eyrie-3358.herokuapp.com/hello'},function(error,response,body) {
-	  		request.post({url: resultingURL},function (error, response,body) {
+	  	request.post({url: resultingURL},function (error, response,body) {
 	  			console.log("Error: " + error);
 	  			console.log("Response: " + response);
 	  			console.log("Body: " + body);
@@ -50,7 +48,7 @@ exports.addSnap = function (req, res) {
 	  					res.send(201,null);
 	  				});
 	  		});
-	  	});
+	  	
 
 	  	request.post({url: resultingURL},function (error, response,body) {
 	  		console.log("Error: " + error);
