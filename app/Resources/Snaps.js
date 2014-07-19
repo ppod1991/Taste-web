@@ -50,19 +50,7 @@ exports.addSnap = function (req, res) {
 	  		});
 	  	
 
-	  	request.post({url: resultingURL},function (error, response,body) {
-	  		console.log("Error: " + error);
-	  		console.log("Response: " + response);
-	  		console.log("Body: " + body);
-	  		var facebook_action_post_id = JSON.parse(body).id;
-	  		console.log('Facebook Action Post Id: ' + facebook_action_post_id);
-	  		PG.knex('snaps').where('snap_id',snap_id).update({facebook_action_post_id: facebook_action_post_id, fb_post_request_url:resultingURL})
-	  			.then(function(result) {
-	  				console.log("Result of adding action post ID");
-	  				console.log(result);
-	  				res.send(201,null);
-	  			});
-	  	});
+
 	});
 
 
