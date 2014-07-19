@@ -20,7 +20,7 @@ exports.addSnap = function (req, res) {
 		console.log("Snap ID: " + snap_id);
 
 	  	var access_token = req.body.access_token;
-	  	var eatery = 'https://desolate-plateau-4658.herokuapp.com/#!/places/' + snap_id;
+	  	var eatery = 'https://desolate-plateau-4658.herokuapp.com/places/' + snap_id;
 	  	eatery = '&eatery=' + encodeURIComponent(eatery);
 	  	console.log("Encoded Eatery:" + eatery);
 	  	var picture_url = req.body.picture_url;
