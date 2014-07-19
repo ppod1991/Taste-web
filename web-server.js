@@ -62,7 +62,7 @@ passport.use(new FacebookStrategy({
 var app = express();
 
 
-app.use(require('prerender-node').set('prerenderServiceUrl', 'http://intense-eyrie-3358.herokuapp.com/'));
+//app.use(require('prerender-node').set('prerenderServiceUrl', 'http://intense-eyrie-3358.herokuapp.com/'));
 app.use(logfmt.requestLogger());
 app.use(cookieParser());
 app.use(bodyParser());
@@ -161,6 +161,7 @@ app.get('/', function(req, res) {
 
 app.get('/places/:snapID', function(req,res) {
   var userAgent = req.headers['user-agent'];
+  console.log("User Agent: " + userAgent);
   var snapID = req.params.snapID;
 
   //If user-agent is facebookexternalhit, the render page in JADE for Open Graph meta tags
@@ -174,9 +175,9 @@ app.get('/places/:snapID', function(req,res) {
     });
   }
   //Else, redirection to '/#!/places/:snapID'
-  else {
-    res.redirect('/#!/places/' + snapID );
-  }
+  // else {
+  //   res.redirect('/#!/places/' + snapID );
+  // }
 
 
 
