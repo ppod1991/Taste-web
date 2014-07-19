@@ -24,7 +24,7 @@ exports.addSnap = function (req, res) {
 	  	eatery = '&eatery=' + encodeURIComponent(eatery);
 	  	console.log("Encoded Eatery:" + eatery);
 	  	var picture_url = req.body.picture_url;
-	  	var place = '&place=' + 'https://desolate-plateau-4658.herokuapp.com/#!/places/' + snap_id;
+	  	var place = '&place=' + encodeURIComponent('https://desolate-plateau-4658.herokuapp.com/#!/places/' + snap_id);
 	  	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';
 	  	var method = '&method=POST';
 	  	var pictureURLforFB =  '&image[0][url]=' + encodeURIComponent(picture_url) + '&image[0][user_generated]=true';
