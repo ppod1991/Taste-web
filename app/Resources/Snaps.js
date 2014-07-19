@@ -48,13 +48,7 @@ exports.addSnap = function (req, res) {
 	  					res.send(201,null);
 	  				});
 	  		});
-	  	
-
-
 	});
-
-
-
 
 };
 

@@ -166,18 +166,18 @@ app.get('/places/:snapID', function(req,res) {
 
   //If user-agent is facebookexternalhit, the render page in JADE for Open Graph meta tags
   if(userAgent.toLowerCase().indexOf('facebookexternalhit') !== -1) {
-
+    console.log("FACEBOOK EXTERNAL HIT DETECTED!!");
     console.log("Snap ID " + snapID);
     snaps.getMetaInfo(snapID, function(locals) {
       console.log("Locals " + JSON.stringify(locals));
-      var html = jade.renderFile('./app/placeTemplate.jade',{pretty:true,debug:true,locals:locals});
+      var html = jade.renderFile('./app/placeTemplate.jade',{pretty:true,locals:locals});
       res.send(201,html);
     });
   }
   else {
     console.log("REDIRECT CALLED!!");
     res.redirect('/#!/places/' + snapID );
-  };
+  }
   //Else, redirection to '/#!/places/:snapID'
   // else {
   //   res.redirect('/#!/places/' + snapID );
