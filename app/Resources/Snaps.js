@@ -32,7 +32,7 @@ exports.addSnap = function (req, res) {
 	  	var explicitSharing = '&fb:explicitly_shared=true';
 	  	var scrape = '&scrape=false';
 	  	var messageForFB = '&message=' + encodeURIComponent(req.body.snap_message);
-	  	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + pictureURLforFB + explicitSharing + scrape + messageForFB;
+	  	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + place + pictureURLforFB + explicitSharing + scrape + messageForFB;
 	  	console.log("resulting url: " + resultingURL);
 	  	request.post({url: resultingURL},function (error, response,body) {
 	  		console.log("Error: " + error);
