@@ -18,6 +18,33 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.main','fant
             console.log(meta);
 
             $scope.childMeta = meta;
+            var expiration_date = new Date($scope.childMeta.referral_expiration_date);
+            var now_date = new Date();
+            var differenceMS = expiration_date-now_date;
+            if (differenceMS / (24*60*60*1000) > 1.5){
+                $scope.timeRemaining = differenceMS / (24*60*60*1000);
+                if (Math.floor($scope.timeRemaining)===1)
+                    $scope.timeRemainingText = Math.floor($scope.timeRemaining) + ' day';
+                else
+                    $scope.timeRemainingText = Math.floor($scope.timeRemaining) + ' days';
+
+            }
+            else if (differenceMS / (60*60*1000) > 1) {
+                $scope.timeRemaining = differenceMS / (60*60*1000);
+                if (Math.floor($scope.timeRemaining)===1)
+                    $scope.timeRemainingText = Math.floor($scope.timeRemaining) + ' hour';
+                else
+                    $scope.timeRemainingText = Math.floor($scope.timeRemaining) + ' hours';
+            }
+            else {
+                $scope.timeRemaining = differenceMS / (60*1000);
+                if (Math.floor($scope.timeRemaining)===1)
+                    $scope.timeRemainingText = Math.floor($scope.timeRemaining) + ' minute';
+                else
+                    $scope.timeRemainingText = Math.floor($scope.timeRemaining) + ' minutes';
+            }
+            console.log("$scope.timeRemaining: " + $scope.timeRemaining);
+            console.log("$scope.childMeta.referring_user_id",$scope.childMeta.referring_user_id);
             //return meta;
 
         },function(err) {
@@ -81,7 +108,6 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.main','fant
             });  
 
         };
-
 
 
 

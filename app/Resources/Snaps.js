@@ -4,7 +4,8 @@ var request = require('request');
 exports.addSnap = function (req, res) {
 	console.log("Snap trying to be added!");
 	//console.log(req);
-	
+	var referral_expiration_date = new Date();
+	referral_expiration_date.setDate(referral_expiration_date.getDate()+3);
 
 	//Insert snap, then post OG story to FB, then take action ID and insert back into snap_id
 	PG.knex('snaps').insert(
@@ -13,7 +14,8 @@ exports.addSnap = function (req, res) {
 		 received_promotion_id: req.body.promotion.promotion_id,
 		 snap_message: req.body.snap_message,
 		 snap_URL: req.body.picture_url,
-		 facebook_image_post_id: req.body.facebook_post_id
+		 facebook_image_post_id: req.body.facebook_post_id,
+		 referral_expiration_date: referral_expiration_date.toISOString()
 		 }).returning('snap_id')
 	.then(function(result) {
 		var snap_id = result[0];

@@ -12,10 +12,11 @@
                   <div class="row">
                     <div class="col-xs-12 col-lg-12">
                       <tr>
-                        <td colspan="2" class="text-center"><a class="fades">
-                            <button style="margin-bottom:4px;white-space: normal;" type="button" ng-if="auth===childMeta.referring_user_id" class="btn btn-promotion">share this page to give your gift! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a class="fades">
-                            <button style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button" ng-if="!(!auth || auth===childMeta.referring_user_id)" class="btn btn-promotion">claim {{childMeta.user_first_name.toLowerCase()}}'s gift to {{childMeta.title}}! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a href="" class="fades">
-                            <button ng-click="login()" style="margin-bottom:4px;white-space: normal;" type="button" ng-if="!auth" class="btn btn-promotion">sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to {{childMeta.title}}! <br> <span class="glyphicon glyphicon-gift"></span></button></a></td>
+                        <td colspan="2" class="text-center"><a ng-if="auth===childMeta.referring_user_id" class="fades">
+                            <button style="margin-bottom:4px;white-space: normal;" type="button" class="btn btn-promotion">Share this page to share your gifts! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a ng-if="!(!auth || auth===childMeta.referring_user_id || timeRemaining &lt; 0)" class="fades">
+                            <button style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button" class="btn btn-promotion">claim {{childMeta.user_first_name.toLowerCase()}}'s gift to {{childMeta.title}} within the next {{timeRemainingText}}! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a href="" ng-if="!(auth || timeRemaining &lt; 0)" class="fades">
+                            <button ng-click="login()" style="margin-bottom:4px;white-space: normal;" type="button" class="btn btn-promotion">sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to {{childMeta.title}} within the next {{timeRemainingText}}! <br> <span class="glyphicon glyphicon-gift"></span></button></a><a href="" ng-if="!(timeRemaining &gt; 0 || auth===childMeta.referring_user_id)" class="fades">
+                            <button style="margin-bottom:4px;white-space: normal;" type="button" class="btn btn-promotion">{{childMeta.user_first_name.toLowerCase()}} ran out of gifts!</button></a></td>
                       </tr>
                     </div>
                   </div>

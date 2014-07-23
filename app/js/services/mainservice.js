@@ -48,7 +48,8 @@ angular.module('fantasyApp.services.main',[])
                                 store_longitude: snapParams.store_longitude,
                                 user_first_name: snapParams.first_name,
                                 referring_user_id:snapParams.user_id,
-                                kind: 'restaurant'
+                                kind: 'restaurant',
+                                referral_expiration_date: snapParams.referral_expiration_date
                             };
                             meta = newMeta;
                             console.log("New Meta:");
