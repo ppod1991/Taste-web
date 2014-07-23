@@ -65,6 +65,10 @@ exports.redeemPromotion = function(req,res) {
 	var end_date = new Date(req.body.end_date);
 	var cur_date = new Date();
 
+	console.log("Start Date: " + start_date.toUTCString());
+	console.log("End Date: " + end_date.toUTCString());
+	console.log("Cur Date: " + cur_date.toUTCString());
+
 	if (cur_date > end_date) {
 		//Promotion Expired 
 		console.log("Trying to Redeem Expired Coupon");
