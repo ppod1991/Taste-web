@@ -166,6 +166,13 @@ exports.addPromotion = function(req,res) {
 	// }
 
 	if (referring_user_id > 0) {
+		var start_date = new Date();
+		//start_date.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
+		start_date = start_date.toISOString();
+		var end_date = new Date(+ new Date() + 12096e5); //Two weeks from now
+		end_date.setHours(0,0,1,0);
+		end_date = end_date.toISOString();
+
 		console.log("Referring User ID > 0");
 		PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).where(PG.knex.raw("end_date > timezone('utc'::text, now())")).where('use_status','not used').count('promotion_id').then(function(result) {
 			console.log(result);
@@ -176,7 +183,9 @@ exports.addPromotion = function(req,res) {
 					{user_id: user_id,
 					 store_id: store_id,
 					 display_text: display_text,
-					 referring_user_id: referring_user_id})
+					 referring_user_id: referring_user_id,
+					 start_date: start_date,
+					 end_date: end_date})
 				.returning('promotion_id')
 				.then(function(result) {
 					  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
@@ -191,6 +200,13 @@ exports.addPromotion = function(req,res) {
 		});
 	}
 	else {
+		var start_date = new Date();
+		start_date.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
+		start_date = start_date.toISOString();
+		var end_date = new Date(+ new Date() + 4*12096e5); //Two weeks from now
+		end_date.setHours(0,0,1,0);
+		end_date = end_date.toISOString();
+
 		PG.knex('promotions').insert(
 			{user_id: user_id,
 			 store_id: store_id,
