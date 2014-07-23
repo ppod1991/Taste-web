@@ -191,11 +191,11 @@ exports.addPromotion = function(req,res) {
 					  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 				      //res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 					  console.log("Successfully added the user-referred promotion");
-					  res.send(201,{promotion_added:true,reason:null});
+					  res.send(201,{promotion_added:true,reason:null,user_id:user_id,store_id:store_id,display_text:display_text,promotion_id:result[0]});
 				});
 			}
 			else {
-				res.send(201,{promotion_added:false,reason:"You already have too many gifts from here. Sharing is caring."});
+				res.send(201,{promotion_added:false,reason:"You already have too many gifts from here. Sharing is caring.",user_id:user_id,store_id:store_id,display_text:display_text,promotion_id:result[0]});
 			}
 		});
 	}
@@ -203,14 +203,16 @@ exports.addPromotion = function(req,res) {
 		var start_date_2 = new Date();
 
 		start_date_2.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
-		start_date_2 = start_date_2.toISOString();
 		console.log("Start Date:");
 		console.log(start_date_2.toUTCString());
+		start_date_2 = start_date_2.toISOString();
+		
 		var end_date_2 = new Date(+ new Date() + 3*12096e5); //3xTwo weeks from now
 		end_date_2.setHours(0,0,1,0);
-		end_date_2 = end_date_2.toISOString();
 		console.log("End Date: ");
 		console.log(end_date_2.toUTCString());
+		end_date_2 = end_date_2.toISOString();
+
 		PG.knex('promotions').insert(
 			{user_id: user_id,
 			 store_id: store_id,
@@ -223,7 +225,7 @@ exports.addPromotion = function(req,res) {
 
 			  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 		      //res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-			  res.send(201,{promotion_added:true,reason:null});
+			  res.send(201,{promotion_added:true,reason:null,user_id:user_id,store_id:store_id,display_text:display_text,promotion_id:result[0]});
 		});
 	}
 
