@@ -170,7 +170,7 @@ exports.addPromotion = function(req,res) {
 		//start_date.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
 		start_date = start_date.toISOString();
 		var end_date = new Date(+ new Date() + 12096e5); //Two weeks from now
-		end_date.setHours(0,0,1,0);
+		end_date.setHours(11,59,59,0);
 		end_date = end_date.toISOString();
 
 		console.log("Referring User ID > 0");
@@ -201,14 +201,14 @@ exports.addPromotion = function(req,res) {
 	}
 	else {
 		var start_date_2 = new Date();
-
-		start_date_2.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
+		start_date_2.setDate(start_date_2.getDate()+1);
+		start_date_2.setHours(0,0,1,0);  //Set to 11:59:59pm  tonight
 		console.log("Start Date:");
 		console.log(start_date_2.toUTCString());
 		start_date_2 = start_date_2.toISOString();
 		
 		var end_date_2 = new Date(+ new Date() + 3*12096e5); //3xTwo weeks from now
-		end_date_2.setHours(0,0,1,0);
+		end_date_2.setHours(11,59,59,0);
 		console.log("End Date: ");
 		console.log(end_date_2.toUTCString());
 		end_date_2 = end_date_2.toISOString();
