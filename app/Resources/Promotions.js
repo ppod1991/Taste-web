@@ -215,7 +215,8 @@ exports.addPromotion = function(req,res) {
 			 end_date: end_date})
 		.returning('promotion_id')
 		.then(function(result) {
-			  console.log("Successfully added the store-referred promotion");
+			  console.log("Successfully added the store-referred promotion with start_date" + start_date.toUTCString() + " and end date: " + end_date.toUTCString());
+
 			  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 		      //res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 			  res.send(201,{promotion_added:true,reason:null});
