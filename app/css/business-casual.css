@@ -118,14 +118,9 @@ hr {
 
 .brand-restaurant {
   font-family: 'Italianno', cursive;
-  display: inherit;
   font-weight: 500;
   font-size: 7em;
-  line-height: normal;
-  text-align: center;
   margin: 0;
-  padding: 30px 0 10px;
-  color: #fff;
   text-shadow: 4px 1px 1px rgba(0, 0, 0, 0.6);
 }
 
@@ -133,14 +128,7 @@ hr {
   font-family: 'Josefin Sans', sans-serif;
   text-transform: lowercase;
   font-weight: 300;
-  display: inherit;
   font-size: 10em;
-  line-height: normal;
-  text-align: center;
-  margin: 0;
-  padding: 30px 0 10px;
-  color: #fff;
-  /*text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.2);*/
 }
 
 .navbar-brand {
@@ -295,7 +283,12 @@ footer p {
 }
 
 .brand {
-
+  display: inherit;
+  line-height: normal;
+  text-align: center;
+  margin: 0;
+  padding: 30px 0 10px;
+  color: #fff;
 }
 
 .top-divider {
