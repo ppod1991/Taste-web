@@ -10,7 +10,7 @@ exports.findAll = function(req, res) {
 	var store_id = req.query.store_id;
 	var user_id = req.query.user_id;
 	var use_status = req.query.use_status;
-	var model = PG.knex('promotions').innerJoin('stores','promotions.store_id', 'stores.store_id')
+	var model = PG.knex('promotions').orderBy('end_date','asc').innerJoin('stores','promotions.store_id', 'stores.store_id')
 				.select('display_text','store_name','start_date','end_date','promotion_id');
 	//console.log(knex('promotions').join('stores'));
 	//var model = PG.knex('promotions').innerJoin('stores');
@@ -56,75 +56,7 @@ exports.isFirstPromotion = function (req,res) {
 	
 };
 
-exports.addPromotion = function(req,res) {
-	console.log("Promotion trying to be added!");
-	var user_id = req.body.user_id;
-	var store_id = req.body.store_id;
-	var display_text;
-	var first_time = req.body.first_time;
-	var count = -1;
 
-	if ("first_time" in req.body && first_time) {
-		console.log("First Time Found!");
-		PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
-			console.log(result);
-			count = parseInt(result[0].count);
-			console.log("Count: " + count);
-			if (count === 0) {
-				console.log("Count is === 0");
-
-				if("display_text" in req.body) {
-					display_text = req.body.display_text;
-				}
-				else {
-					display_text = "$2 Gift!";
-				}
-				
-
-
-				PG.knex('promotions').insert(
-					{user_id: user_id,
-					 store_id: store_id,
-					 display_text: display_text})
-				.returning('promotion_id')
-				.then(function(result) {
-					  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-				      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-				});
-
-
-			 }
-			else {
-				console.log("Sorry, you have already claimed a promotion from here " + count + " times!");
-				res.send("Sorry, you have already claimed a promotion from here " + count + " times!");
-			}	
-
-		});
-			
-	}
-	else {
-
-
-		if("display_text" in req.body) {
-			display_text = req.body.display_text;
-		}
-		else {
-			display_text = "$2 Gift Certificate!";
-		}
-		
-
-
-		PG.knex('promotions').insert(
-			{user_id: user_id,
-			 store_id: store_id,
-			 display_text: display_text})
-		.returning('promotion_id')
-		.then(function(result) {
-			  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-		      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
-		});
-	}
-};
 
 exports.redeemPromotion = function(req,res) {
 	console.log("Promotion trying to be redeemed!");
@@ -171,3 +103,108 @@ exports.findById = function(req, res) {
 // var connection = process.env.DATABASE_URL 
 // 	|| 'postgres://khctwifcwaratd:D4-FK0pynGsG7S_wuOn4m1Cyrw@ec2-54-243-48-227.compute-1.amazonaws.com:5432/d81o6v1corf28q?ssl=true';
 
+exports.addPromotion = function(req,res) {
+	console.log("Promotion trying to be added!");
+	var user_id = req.body.user_id;
+	var store_id = req.body.store_id;
+	var display_text;
+	var referring_user_id = -1;
+	if("display_text" in req.body) {
+		display_text = req.body.display_text;
+	}
+	else {
+		display_text = "$2 Gift for each person in your party!";
+	}
+	
+	if("referring_user_id" in req.body) {
+		referring_user_id = req.body.referring_user_id;
+	}
+	else {
+		referring_user_id = -1;
+	}
+
+	// var first_time = req.body.first_time;
+	// var count = -1;
+
+	// if ("first_time" in req.body && first_time) {
+	// 	console.log("First Time Found!");
+		// PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).count('promotion_id').then(function(result) {
+		// 	console.log(result);
+		// 	count = parseInt(result[0].count);
+	// 		console.log("Count: " + count);
+	// 		if (count === 0) {
+	// 			console.log("Count is === 0");
+
+	// 			if("display_text" in req.body) {
+	// 				display_text = req.body.display_text;
+	// 			}
+	// 			else {
+	// 				display_text = "$2 Gift!";
+	// 			}
+				
+
+
+	// 			PG.knex('promotions').insert(
+	// 				{user_id: user_id,
+	// 				 store_id: store_id,
+	// 				 display_text: display_text})
+	// 			.returning('promotion_id')
+	// 			.then(function(result) {
+	// 				  console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+	// 			      res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+	// 			});
+
+
+	// 		 }
+	// 		else {
+	// 			console.log("Sorry, you have already claimed a promotion from here " + count + " times!");
+	// 			res.send("Sorry, you have already claimed a promotion from here " + count + " times!");
+	// 		}	
+
+	// 	});
+			
+	// }
+
+	if (referring_user_id > 0) {
+		console.log("Referring User ID > 0");
+		PG.knex('promotions').where('user_id',user_id).where('store_id',store_id).where(PG.knex.raw("end_date > timezone('utc'::text, now())")).where('use_status','not used').count('promotion_id').then(function(result) {
+			console.log(result);
+			var count = parseInt(result[0].count);
+			console.log("This user has " + count + " valid promotions!");
+			if (count < 2) {
+				PG.knex('promotions').insert(
+					{user_id: user_id,
+					 store_id: store_id,
+					 display_text: display_text,
+					 referring_user_id: referring_user_id})
+				.returning('promotion_id')
+				.then(function(result) {
+					  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+				      //res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+					  console.log("Successfully added the user-referred promotion");
+					  res.send(201,{promotion_added:true,reason:null});
+				});
+			}
+			else {
+				res.send(201,{promotion_added:false,reason:"You already have too many gifts from here. Sharing is caring."});
+			}
+		});
+	}
+	else {
+		PG.knex('promotions').insert(
+			{user_id: user_id,
+			 store_id: store_id,
+			 display_text: display_text,
+			 referring_user_id: referring_user_id})
+		.returning('promotion_id')
+		.then(function(result) {
+			  console.log("Successfully added the store-referred promotion");
+			  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+		      //res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
+			  res.send(201,{promotion_added:true,reason:null});
+		});
+	}
+
+	
+	
+};

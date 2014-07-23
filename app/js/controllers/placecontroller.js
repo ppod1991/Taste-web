@@ -10,16 +10,31 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.main','fant
         //$scope.isFirstPromotion = true;
 
         $scope.isFirstPromotion = false;
-
         var childMeta = mainService.setNewStoreParameters($scope.snap_id).then(function(meta) {
-            //console.log("Child Meta:");
-            //console.log(meta);
+            console.log("Child Meta:");
+            if (meta.data === '') {
+                $location.path('/');
+            }
+            console.log(meta);
+
             $scope.childMeta = meta;
+            //return meta;
+
+        },function(err) {
+            console.log("ERROR IN SET STORE PARAMETERS PROMISE");
+            $location.path('/');
+            // $scope.$apply();
+            console.log("path SHOULD change");
+            //return $q.reject(err);
+            
+            
         });
+
+
 
         var promise = loginService.isLoggedIn();
         promise.then(function(value) {
-            console.log("Promise being completed");
+            //console.log("Promise being completed");
             var user_id = value;
             var isFirstPromotion = $resource("/promotions/isFirstPromotion",{user_id:user_id, snap_id:$scope.snap_id}).get(function () {
                 console.log("isFirstPromotion called and returned: ");
@@ -45,13 +60,24 @@ angular.module('fantasyApp.controllers.place', ['fantasyApp.services.main','fant
         // }
 
         $scope.addPromotion = function() {
+            var promotion_display_text;
+            if ($scope.isFirstPromotion) {
+                promotion_display_text = "$2 Gift for each person in your party!";
+            }
+            else {
+                promotion_display_text = "$1 Gift for each person in your party!";
+            }
+
             console.log("ADDING PROMOTION! ");
-            $resource("/promotions").save([],{user_id:loginService.getUser(), store_id:$scope.childMeta.store_id,first_time:true},function(val, responseHeader) {
-                console.log("New Promotion Added!");
-                console.log(val);
-                console.log("Response Header");
-                console.log(responseHeader);
+            $resource("/promotions").save([],{user_id:loginService.getUser(), store_id:$scope.childMeta.store_id,first_time:true,display_text:promotion_display_text,referring_user_id:$scope.childMeta.referring_user_id},function(val, responseHeader) {
+                if (val.promotion_added) {
+                    console.log("New Promotion Successfully Added!");
+                }
+                else {
+                    console.log("New Promotion Not Added");
+                }
                 $scope.isFirstPromotion = false;
+                $location.path('/gifts')
             });  
 
         };

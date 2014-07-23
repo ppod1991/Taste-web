@@ -1,8 +1,8 @@
 'use strict';
  
 angular.module('fantasyApp.services.main',[])
-    .factory('mainService', ['$http',
-        function($http) {
+    .factory('mainService', ['$http','$location','$q',
+        function($http,$location,$q) {
          
            var meta = {title: '',
                        background_url: '',
@@ -14,12 +14,18 @@ angular.module('fantasyApp.services.main',[])
                     console.log("Set Default Parameters called");
                     meta = {title: 'TASTE',
                     background_url: './img/main_background_image.jpg',
-                    kind: 'default' }
+                    kind: 'default' };
                 },
         		setNewStoreParameters: function(snap_id) {
                     var promise = $http.get("/snaps/" + snap_id)
                         .then(function(response) {
                             var snapParams = response.data;
+                            console.log("RESPONSE TO RETRIEVING SNAP:");
+                            console.log(response);
+                            if (response.data==="") {
+                                console.log("No Snap at this Path");
+                                $location.path('/');
+                            }
                             console.log("Set New Store Parameters called with place_id: " + snap_id);
                             //console.log("Store Params:");
                             //console.log(storeParams);
@@ -41,13 +47,20 @@ angular.module('fantasyApp.services.main',[])
                                 store_latitude: snapParams.store_latitude,
                                 store_longitude: snapParams.store_longitude,
                                 user_first_name: snapParams.first_name,
+                                referring_user_id:snapParams.user_id,
                                 kind: 'restaurant'
                             };
                             meta = newMeta;
                             console.log("New Meta:");
                             console.log(meta);
-                            return meta;   
-            		      });
+                            
+                            return meta;  
+            		      }, function(err) {
+                                console.log("Error retrieving snap!");
+                                //$location.path('/gifts');
+                                console.log(err);                             
+                                return $q.reject(err);                     
+                          });
                         return promise;
                     },
                 getMeta: function() { 
@@ -55,5 +68,5 @@ angular.module('fantasyApp.services.main',[])
                     // console.log(meta);
                     return meta; 
                 }
-        	}
+        	};
         }]);

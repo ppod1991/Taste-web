@@ -178,7 +178,7 @@ app.get('/places/:snapID', function(req,res) {
     console.log("REDIRECT CALLED!!");
     res.redirect('/#!/places/' + snapID );
   }
-  //Else, redirection to '/#!/places/:snapID'
+  //Else, redirection '/#!/places/:snapID'
   // else {
   //   res.redirect('/#!/places/' + snapID );
   // }

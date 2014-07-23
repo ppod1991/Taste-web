@@ -16,15 +16,15 @@ angular.module('fantasyApp.services.login', ['ngResource'])
         		isLoggedIn: function() {
 		            //return $resource("http://desolate-plateau-4658.herokuapp.com/users/:user_id",{user_id:'@user_id'});            
 			        var deferred = $q.defer();
-                    console.log("Promise deferred");
+                    //console.log("Promise deferred");
                     var checkLogIn = $resource("/loggedin").get(function () {
 
 						user_id = checkLogIn.user_id;
-					    console.log("isLoggedIn called and user_id set to:  " + user_id);
+					    //console.log("isLoggedIn called and user_id set to:  " + user_id);
 						var isLoggedIn = !(checkLogIn.user_id === 0);  
 			        	//console.log((checkLogIn.user_id));
 			        	//console.log('Response is ' + isLoggedIn);
-                        console.log("Promise resolved with user_id: " + user_id);
+                        //console.log("Promise resolved with user_id: " + user_id);
                         deferred.resolve(user_id);
 
 			        	

@@ -16,9 +16,14 @@ angular.module('fantasyApp.controllers.url', [])
 	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
 	    var results = regex.exec(absUrl);
 	    results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        
-	    var newPath = decodeURIComponent(results[1]);
-	    console.log("REGEX FOUND FRAGMENT VAL:" + newPath);
+        var newPath = '/';
+
+        if (results) {
+            newPath = decodeURIComponent(results[1]);
+            console.log("REGEX FOUND FRAGMENT VAL:" + newPath);
+        }
+	    
+	    
 	    if (!(results === ""))
 	    {
 	    	$location.path(newPath);

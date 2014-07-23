@@ -9,7 +9,7 @@ app.config(['$routeProvider','$locationProvider','$sceDelegateProvider',
       $locationProvider.hashPrefix('!');
 
       $routeProvider
-      .when('/',{templateUrl:'views/default.html',controller:"urlCtrl"})
+      .when('/',{redirectTo:'/gifts'})
       .when('/signin',  { templateUrl: 'views/users/signin.html' })
       .when('/snaps/create', { templateUrl: 'views/snaps/create.html'})
       .when('/feed', { templateUrl: 'views/feed/feed.html'})
