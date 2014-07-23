@@ -200,22 +200,26 @@ exports.addPromotion = function(req,res) {
 		});
 	}
 	else {
-		var start_date = new Date();
-		start_date.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
-		start_date = start_date.toISOString();
-		var end_date = new Date(+ new Date() + 3*12096e5); //3xTwo weeks from now
-		end_date.setHours(0,0,1,0);
-		end_date = end_date.toISOString();
+		var start_date_2 = new Date();
 
+		start_date_2.setHours(23,59,59,0);  //Set to 11:59:59pm  tonight
+		start_date_2 = start_date_2.toISOString();
+		console.log("Start Date:");
+		console.log(start_date_2.toUTCString());
+		var end_date_2 = new Date(+ new Date() + 3*12096e5); //3xTwo weeks from now
+		end_date_2.setHours(0,0,1,0);
+		end_date_2 = end_date_2.toISOString();
+		console.log("End Date: ");
+		console.log(end_date_2.toUTCString());
 		PG.knex('promotions').insert(
 			{user_id: user_id,
 			 store_id: store_id,
 			 display_text: display_text,
-			 start_date: start_date,
-			 end_date: end_date})
+			 start_date: start_date_2,
+			 end_date: end_date_2})
 		.returning('promotion_id')
 		.then(function(result) {
-			  console.log("Successfully added the store-referred promotion with start_date" + start_date + " and end date: " + end_date);
+			  console.log("Successfully added the store-referred promotion with start_date " + start_date_2 + " and end date: " + end_date_2);
 
 			  //console.log('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
 		      //res.send('{"user_id":"' + user_id + '","store_id":"' + store_id + '","display_text":"' + display_text + '","promotion_id":"' + result[0] + '"}');
