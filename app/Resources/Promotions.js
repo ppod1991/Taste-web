@@ -210,7 +210,9 @@ exports.addPromotion = function(req,res) {
 		PG.knex('promotions').insert(
 			{user_id: user_id,
 			 store_id: store_id,
-			 display_text: display_text})
+			 display_text: display_text,
+			 start_date: start_date,
+			 end_date: end_date})
 		.returning('promotion_id')
 		.then(function(result) {
 			  console.log("Successfully added the store-referred promotion");
