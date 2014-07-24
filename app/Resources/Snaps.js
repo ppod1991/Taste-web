@@ -22,11 +22,11 @@ exports.addSnap = function (req, res) {
 		console.log("Snap ID: " + snap_id);
 
 	  	var access_token = req.body.access_token;
-	  	var eatery = 'https://desolate-plateau-4658.herokuapp.com/places/' + snap_id;
+	  	var eatery = 'http://www.getTaste.co/places/' + snap_id;
 	  	eatery = '&eatery=' + encodeURIComponent(eatery);
 	  	console.log("Encoded Eatery:" + eatery);
 	  	var picture_url = req.body.picture_url;
-	  	var place = '&place=' + encodeURIComponent('https://desolate-plateau-4658.herokuapp.com/places/' + snap_id);
+	  	var place = '&place=' + encodeURIComponent('http://www.getTaste.co/places/' + snap_id);
 	  	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';
 	  	var method = '&method=POST';
 	  	var pictureURLforFB =  '&image[0][url]=' + encodeURIComponent(picture_url) + '&image[0][user_generated]=true';
@@ -82,7 +82,7 @@ exports.getMetaInfo = function(snap_id,cb) {
 // 	console.log(JSON.stringify(req.body.store));
 // 	//res.send(201,null);
 // 	var access_token = req.body.access_token;
-// 	var eatery = 'https://desolate-plateau-4658.herokuapp.com/#!/places/' + req.body.store.store_id;
+// 	var eatery = 'http://www.getTaste.co/#!/places/' + req.body.store.store_id;
 // 	eatery = '&eatery=' + encodeURIComponent(eatery);
 // 	console.log("Encoded Eatery:" + eatery);
 // 	var picture_url = req.body.picture_url;
@@ -100,7 +100,7 @@ exports.getMetaInfo = function(snap_id,cb) {
 	
 
 // 	//var access_token = '?access_token=' + 'CAACvtpYfgHIBAPVwWbFFjcE3Gwj2GJR7VuylzZBDpWmXMwZB93ewr5o4aJbEyZCj6vI2ENa14hOKjZAprOUy4Osg7aGbWZBXCu5zn5WVrBooFWgDuZB0JTy7s5TpiUsOiQeDOo8SI604yt6dWbX7bOzaM60P2s9nbCfDWppFDtcW9PocmiGym49PW2Rw9YTfCnVEPF0ZCaKTZC7MSx9ZAAYfqEIVWXjBAAIGVTZAZB3CZCZCKfQZDZD';
-// 	//var eatery = 'https://desolate-plateau-4658.herokuapp.com/moltobene';
+// 	//var eatery = 'http://www.getTaste.co/moltobene';
 
 // 	//console.log("Uncoded Eatery:" + eatery);
 // 	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';

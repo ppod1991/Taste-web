@@ -14,7 +14,7 @@ angular.module('fantasyApp.services.login', ['ngResource'])
         		},
 
         		isLoggedIn: function() {
-		            //return $resource("http://desolate-plateau-4658.herokuapp.com/users/:user_id",{user_id:'@user_id'});            
+		            //return $resource("http://www.getTaste.co/users/:user_id",{user_id:'@user_id'});            
 			        var deferred = $q.defer();
                     //console.log("Promise deferred");
                     var checkLogIn = $resource("/loggedin").get(function () {

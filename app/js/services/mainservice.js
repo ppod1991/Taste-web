@@ -12,7 +12,7 @@ angular.module('fantasyApp.services.main',[])
        	    return {
                 setDefaultParameters: function() {
                     console.log("Set Default Parameters called");
-                    meta = {title: 'TASTE',
+                    meta = {title: 'taste',
                     background_url: './img/main_background_image.jpg',
                     kind: 'default' };
                 },

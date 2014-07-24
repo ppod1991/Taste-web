@@ -39,7 +39,7 @@ var callbackURL;
 
 
 if (!!process.env.PORT) {
-	callbackURL = "http://desolate-plateau-4658.herokuapp.com/auth/facebook/callback";
+	callbackURL = "http://www.getTaste.co/auth/facebook/callback";
 }
 else {
 	callbackURL = "http://localhost:5000/auth/facebook/callback";
