@@ -141,7 +141,9 @@ var auth = function(req, res, next) {
 
 
 // app.use(checkUserAgent);
-
+app.get('/get',function(req,res){
+  res.redirect(301,'https://play.google.com/store/apps/details?id=com.pod.taste&ah=3m5KCLR5t3wwfmz7Iye4wPgKuIg');
+});
 
 app.get('/moltoBene', function(req, res) {
   res.sendfile('./app/views/places/moltoBene.html');

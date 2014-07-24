@@ -16,6 +16,7 @@ app.config(['$routeProvider','$locationProvider','$sceDelegateProvider',
       .when('/fans/find', { templateUrl: 'views/fans/fanSearch.html'})
       .when('/places/:snap_id',{ templateUrl: 'views/places/place.html', controller: "PlaceCtrl"})
       .when('/gifts',{templateUrl: 'views/gifts/gifts.html'})
+      .when('/get',{templateUrl:'views/get/get.html'})
       .otherwise(       { redirectTo: '/' });
 
       $sceDelegateProvider.resourceUrlWhitelist([
