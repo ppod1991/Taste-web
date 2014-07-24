@@ -75,7 +75,7 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login','fa
        }
        , {
           "title": "Get App",
-          "link": "/app"
+          "link": "/get"
         }
       ];
 
