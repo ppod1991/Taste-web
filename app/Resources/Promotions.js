@@ -83,7 +83,7 @@ exports.redeemPromotion = function(req,res) {
 		return;
 
 	}
-	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used'}).then(function(result) {
+	PG.knex('promotions').where('promotion_id',promotion_id).update({use_status:'used',redeemed_date:cur_date.toISOString()}).then(function(result) {
 		console.log("Promotion with Promotion_id: " + promotion_id + " redeemed!");
 		res.send(201, {success: true, response_message:'You just redeemed your gift! I am jealous...'});
 		return;

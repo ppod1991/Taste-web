@@ -8,6 +8,16 @@ body {
   font-weight: 300;
 }
 
+.table {
+  text-align: center;
+  font-size: 16px;
+}
+
+th {
+  text-align: center;
+  font-size: 16px;
+}
+
 .fades.ng-enter {
   -webkit-transition: all 0.6s ease;
   -moz-transition: all 0.6s ease;

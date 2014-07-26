@@ -8,6 +8,7 @@ var users = require('./app/Resources/Users');
 var stores = require('./app/Resources/Stores');
 var promotions = require('./app/Resources/Promotions');
 var snaps = require('./app/Resources/Snaps');
+var stats = require('./app/Resources/Stats');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -161,6 +162,7 @@ app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
 
+
 app.get('/places/:snapID', function(req,res) {
   var userAgent = req.headers['user-agent'];
   console.log("User Agent: " + userAgent);
@@ -191,6 +193,8 @@ app.get('/places/:snapID', function(req,res) {
 
 });
 
+
+app.get('/stats/:store_id', stats.getStoreStats);
 
 app.post('/experience',facebook.experienceEatery);
 

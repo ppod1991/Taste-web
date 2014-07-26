@@ -15,6 +15,7 @@ app.config(['$routeProvider','$locationProvider','$sceDelegateProvider',
       .when('/feed', { templateUrl: 'views/feed/feed.html'})
       .when('/fans/find', { templateUrl: 'views/fans/fanSearch.html'})
       .when('/places/:snap_id',{ templateUrl: 'views/places/place.html', controller: "PlaceCtrl"})
+      .when('/stats/:store_id',{templateUrl: 'views/stats/stats.html'})
       .when('/gifts',{templateUrl: 'views/gifts/gifts.html'})
       .when('/get',{templateUrl:'views/get/get.html'})
       .otherwise(       { redirectTo: '/' });

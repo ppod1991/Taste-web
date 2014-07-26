@@ -1,0 +1,25 @@
+
+<div data-ng-controller="StatsController">
+  <div class="box text-center">
+    <h1>Your Recent Taste Stats
+      <p>
+        <table align="center" class="table table-striped text-center">
+          <tr>
+            <th>Feature</th>
+            <th>Last 24 hrs</th>
+            <th>Last Week</th>
+            <th>Last Month</th>
+            <th>Since signup</th>
+          </tr>
+          <tr ng-repeat="stat in stats">
+            <td>{{stat[0].name}}</td>
+            <td>{{stat[0].result}}</td>
+            <td>{{stat[1].result}}</td>
+            <td>{{stat[2].result}}</td>
+            <td>{{stat[3].result}}</td>
+          </tr>
+        </table>
+      </p>
+    </h1>
+  </div>
+</div>

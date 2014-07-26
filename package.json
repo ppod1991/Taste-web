@@ -40,6 +40,8 @@
     "request": "~2.36.0",
     "prerender-node": "~1.0.4",
     "url": "~0.10.1",
-    "jade": "~1.4.2"
+    "jade": "~1.4.2",
+    "underscore": "~1.6.0",
+    "async": "~0.9.0"
   }
 }

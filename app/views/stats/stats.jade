@@ -1,0 +1,34 @@
+div(data-ng-controller="StatsController")
+	div.box.text-center
+		h1 Your Recent Taste Stats
+			p
+				table.table.table-striped.text-center(align="center")
+					tr 
+						th Feature
+						th Last 24 hrs
+						th Last Week
+						th Last Month
+						th Since signup
+					tr(ng-repeat="stat in stats")
+						td {{stat[0].name}}
+						td {{stat[0].result}}
+						td {{stat[1].result}}
+						td {{stat[2].result}}
+						td {{stat[3].result}}
+			//- div.gift-box
+			//- 	div.row
+			//- 		div.col-xs-8.col-lg-8.col-xs-offset-2.col-lg-offset-2.text-center
+			//- 			div.row
+			//- 				div.col-xs-12.col-lg-12.text-center
+			//- 					h2.text-center {{gift.store_name}}
+			//- 					h1.text-center(style="white-space: normal") {{gift.display_text}}
+			//- 					p.gift-text
+			//- 						Valid from {{convertDate(gift.start_date)}} to {{convertDate(gift.end_date)}}
+
+			//- 						//- /{{(new Date(gift.start_date)).getDate()}}/{{(new Date(gift.start_date)).getYear()}}  to {{(new Date(gift.end_date)).getMonth()}}/{{(new Date(gift.end_date)).getDate()}}/{{(new Date(gift.end_date)).getYear()}}
+			//- 			div.row
+			//- 				div.col-xs-6.col-xs-offset-3
+			//- 					a(href="")
+			//- 						img.img-responsive.gift-image(ng-click="redeemPromotion($index)" ng-src="./img/redeem_button.png")
+
+
