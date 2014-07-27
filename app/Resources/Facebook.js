@@ -30,11 +30,11 @@ exports.newVisitPOST = function(req,res) {
 };
 
 exports.experienceEatery = function(req, res) {
-	// var access_token = '?access_token=' + req.body.accessToken;
+	var access_token = '?access_token=' + req.body.accessToken;
 	var eatery = req.body.eatery;
 	var pictureURL = encodeURIComponent(req.body.picture_url);
 	console.log("Experience Eatery Reached!");
-	var access_token = '?access_token=' + 'CAACvtpYfgHIBAPVwWbFFjcE3Gwj2GJR7VuylzZBDpWmXMwZB93ewr5o4aJbEyZCj6vI2ENa14hOKjZAprOUy4Osg7aGbWZBXCu5zn5WVrBooFWgDuZB0JTy7s5TpiUsOiQeDOo8SI604yt6dWbX7bOzaM60P2s9nbCfDWppFDtcW9PocmiGym49PW2Rw9YTfCnVEPF0ZCaKTZC7MSx9ZAAYfqEIVWXjBAAIGVTZAZB3CZCZCKfQZDZD';
+	//var access_token = '?access_token=' + 'CAACvtpYfgHIBAPVwWbFFjcE3Gwj2GJR7VuylzZBDpWmXMwZB93ewr5o4aJbEyZCj6vI2ENa14hOKjZAprOUy4Osg7aGbWZBXCu5zn5WVrBooFWgDuZB0JTy7s5TpiUsOiQeDOo8SI604yt6dWbX7bOzaM60P2s9nbCfDWppFDtcW9PocmiGym49PW2Rw9YTfCnVEPF0ZCaKTZC7MSx9ZAAYfqEIVWXjBAAIGVTZAZB3CZCZCKfQZDZD';
 	//var eatery = 'http://www.getTaste.co/moltobene';
 
 	console.log("Uncoded Eatery:" + eatery);

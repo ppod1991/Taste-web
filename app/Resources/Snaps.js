@@ -19,12 +19,12 @@ exports.addSnap = function (req, res) {
 		 }).returning('snap_id')
 	.then(function(result) {
 		var snap_id = result[0];
-		console.log("Snap ID: " + snap_id);
+		// console.log("Snap ID: " + snap_id);
 
 	  	var access_token = req.body.access_token;
 	  	var eatery = 'http://www.getTaste.co/places/' + snap_id;
 	  	eatery = '&eatery=' + encodeURIComponent(eatery);
-	  	console.log("Encoded Eatery:" + eatery);
+	  	// console.log("Encoded Eatery:" + eatery);
 	  	var picture_url = req.body.picture_url;
 	  	var place = '&place=' + encodeURIComponent('http://www.getTaste.co/places/' + snap_id);
 	  	var baseURL = 'https://graph.facebook.com/me/tasteapplication:experience';
@@ -35,20 +35,29 @@ exports.addSnap = function (req, res) {
 	  	var scrape = '&scrape=false';
 	  	var messageForFB = '&message=' + encodeURIComponent(req.body.snap_message);
 	  	var resultingURL = baseURL + '?access_token=' + access_token + method + eatery + place + pictureURLforFB + explicitSharing + scrape + messageForFB;
-	  	console.log("resulting url: " + resultingURL);
+	  	// console.log("resulting url: " + resultingURL);
 	  	
 	  	request.post({url: resultingURL},function (error, response,body) {
-	  			console.log("Error: " + error);
-	  			console.log("Response: " + response);
-	  			console.log("Body: " + body);
+	  			// console.log("Error: " + error);
+	  			// console.log("Response: " + response);
+	  			// console.log("Body: " + body);
 	  			var facebook_action_post_id = JSON.parse(body).id;
-	  			console.log('Facebook Action Post Id: ' + facebook_action_post_id);
-	  			PG.knex('snaps').where('snap_id',snap_id).update({facebook_action_post_id: facebook_action_post_id, fb_post_request_url:resultingURL})
-	  				.then(function(result) {
-	  					console.log("Result of adding action post ID");
-	  					console.log(result);
-	  					res.send(201,null);
-	  				});
+	  			var facebook_image_id = JSON.parse(body).photos;
+	  			facebook_image_id = facebook_image_id[0];
+	  			request.get({url: 'https://graph.facebook.com/v2.0/' + facebook_image_id}, function(error, response, body) {
+	  				// console.log('Facebook Action Post Id: ' + facebook_action_post_id);
+	  				console.log("Get image post data body:", body);
+	  				console.log("Get image post data response:", response);
+	  				console.log("Get image post data error:", error);
+	  				var snap_URL = JSON.parse(body).images[0].source;
+	  				PG.knex('snaps').where('snap_id',snap_id).update({facebook_action_post_id: facebook_action_post_id, fb_post_request_url:resultingURL, snap_URL: snap_URL})
+	  					.then(function(result) {
+	  						console.log("Result of adding action post ID");
+	  						console.log(result);
+	  						res.send(201,null);
+	  					});
+	  			});
+
 	  		});
 	});
 
