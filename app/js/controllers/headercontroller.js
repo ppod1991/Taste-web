@@ -11,6 +11,8 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login','fa
       $scope.$watch(loginService.getUser, function (value, oldValue) {
         //console.log("$scope.$watch called with val: " + value + " and old Value of: " + oldValue);
         //console.log($scope);
+
+
         if(!value && oldValue) {
           console.log("Disconnect");
           $scope.auth = 0;
@@ -20,6 +22,13 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login','fa
         if(value > 0) {
           //console.log("Connect with value: " + value);
           $scope.auth = value;
+
+          $scope.userName = loginService.getName();
+          console.log("WATCH NAME CALLED" + $scope.userName);
+          $scope.navbarEntries[0].title = $scope.userName + " Gifts"; 
+
+          // $scope.$apply();
+
         }
 
       }, true);
@@ -67,10 +76,10 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login','fa
       //      "link": "/fans/find"
       //    }
       // ];
-
+      $scope.userName = loginService.getName();
       $scope.navbarEntries = [
         {
-          "title": "My Gifts",
+          "title": $scope.userName + " Gifts",
           "link": "/gifts"
        }
        , {
@@ -79,10 +88,10 @@ angular.module('fantasyApp.controllers.header', ['fantasyApp.services.login','fa
         }
       ];
 
-      $scope.$on('$routeChangeSuccess',function() {
-        $scope.navbarEntries.forEach(
-          function(data) {
-            data.isActive = ($location.path().indexOf(data.link) == 0);
-          })
-      })
+      // $scope.$on('$routeChangeSuccess',function() {
+      //   $scope.navbarEntries.forEach(
+      //     function(data) {
+      //       data.isActive = ($location.path().indexOf(data.link) == 0);
+      //     })
+      // })
     }])

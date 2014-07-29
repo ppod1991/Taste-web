@@ -32,8 +32,16 @@ div.box
 													a.fades(ng-if="!(!auth || auth===childMeta.referring_user_id || timeRemaining < 0)")
 														//- p {{!(!auth || auth===childMeta.referring_user_id || timeRemaining < 0}} auth {{auth}} time {{timeRemaining}}
 														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" ng-click="addPromotion()" type="button") claim {{childMeta.user_first_name.toLowerCase()}}'s gift to {{childMeta.title}} within the next {{timeRemainingText}}! <br> <span class="glyphicon glyphicon-gift"></span>
-													a.fades(href='' ng-if="!(auth || timeRemaining < 0)")
-														button.btn.btn-promotion(ng-click="login()" style="margin-bottom:4px;white-space: normal;" type="button") sign in to claim {{childMeta.user_first_name.toLowerCase()}}'s gift to {{childMeta.title}} within the next {{timeRemainingText}}! <br> <span class="glyphicon glyphicon-gift"></span>
+													div(ng-if="!(auth || timeRemaining < 0)")
+														a.fades(href='')
+															button.btn.btn-promotion(ng-click="login()" style="margin-bottom:4px;white-space: normal;" type="button") 
+																|Claim {{childMeta.user_first_name.toLowerCase()}}'s <span class="glyphicon glyphicon-gift"></span> to {{childMeta.title}} within the next {{timeRemainingText}}!
+																br
+																img(src="/img/facebook_login_button.png" style="height:5vh;width:auth;margin-top:10px")
+														p.fb-warning
+															| Taste will 
+															b NEVER 
+															| post anything without your explicit permission			
 													a.fades(href='' ng-if="!(timeRemaining > 0 || auth===childMeta.referring_user_id)") 
 														button.btn.btn-promotion(style="margin-bottom:4px;white-space: normal;" type="button") {{childMeta.user_first_name.toLowerCase()}} ran out of gifts!
 									div.row

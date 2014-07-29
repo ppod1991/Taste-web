@@ -18,6 +18,8 @@ app.config(['$routeProvider','$locationProvider','$sceDelegateProvider',
       .when('/stats/:store_id',{templateUrl: 'views/stats/stats.html'})
       .when('/gifts',{templateUrl: 'views/gifts/gifts.html'})
       .when('/get',{templateUrl:'views/get/get.html'})
+      .when('/privacy',{templateUrl:'views/base/privacy.html'})
+      .when('/contact',{templateUrl:'views/base/contact.html'})
       .otherwise(       { redirectTo: '/' });
 
       $sceDelegateProvider.resourceUrlWhitelist([

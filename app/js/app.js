@@ -12,6 +12,7 @@ var app = angular.module('fantasyApp',
   , 'fantasyApp.controllers.place'
   , 'fantasyApp.controllers.main'
   , 'fantasyApp.controllers.url'
+  , 'fantasyApp.controllers.default'  
   , 'fantasyApp.controllers.gift'
   , 'fantasyApp.controllers.stats'
   , 'firebase', 'ui.bootstrap', 'ngRoute','ngAnimate']

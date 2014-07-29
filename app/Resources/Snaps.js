@@ -44,8 +44,8 @@ exports.addSnap = function (req, res) {
 	  			var facebook_action_post_id = JSON.parse(body).id;
 	  			var facebook_image_id = JSON.parse(body).photos;
 	  			facebook_image_id = facebook_image_id[0];
-	  			console.log("FB Image ID:" + facebook_image_id);
-	  			console.log("Post URL: " + 'https://graph.facebook.com/v2.0/' + facebook_image_id + '?access_token=' + access_token);
+	  			// console.log("FB Image ID:" + facebook_image_id);
+	  			// console.log("Post URL: " + 'https://graph.facebook.com/v2.0/' + facebook_image_id + '?access_token=' + access_token);
 	  			request.get({url: 'https://graph.facebook.com/v2.0/' + facebook_image_id + '?access_token=' + access_token}, function(error, response, body) {
 	  				// console.log('Facebook Action Post Id: ' + facebook_action_post_id);
 	  				console.log("Get image post data body:", body);

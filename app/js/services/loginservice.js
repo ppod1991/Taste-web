@@ -4,12 +4,16 @@ angular.module('fantasyApp.services.login', ['ngResource'])
     .factory('loginService', ['$resource','$q',
         function($resource, $q) {
         	var user_id = 0;
+            var user_name = 'My';
         	return {
-        		
+
+        		getName: function () {
+                    console.log("Returning name of " + user_name);
+                    return user_name;
+                },
+
         		getUser: function() {
         			//console.log("Get User Called with value: " + user_id );
-
-
         			return user_id;
         		},
 
@@ -18,8 +22,10 @@ angular.module('fantasyApp.services.login', ['ngResource'])
 			        var deferred = $q.defer();
                     //console.log("Promise deferred");
                     var checkLogIn = $resource("/loggedin").get(function () {
-
+                        console.log("Check Log IN Returned User:");
+                        console.log(checkLogIn);
 						user_id = checkLogIn.user_id;
+                        user_name = checkLogIn.first_name + "'s";
 					    //console.log("isLoggedIn called and user_id set to:  " + user_id);
 						var isLoggedIn = !(checkLogIn.user_id === 0);  
 			        	//console.log((checkLogIn.user_id));

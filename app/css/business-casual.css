@@ -47,6 +47,14 @@ th {
   text-align:"center";
 }
 
+.footer {
+  color: rgba(255, 255, 255, 1);
+}
+
+.footer:hover,.footer:focus {
+  color: rgba(50, 50, 50, 1);
+}
+
 .background-image-default {
 
   filter: blur(5px) grayscale(100%);
@@ -172,6 +180,9 @@ hr {
   width: 100%;
 }*/
 
+.fb-warning {
+  font-size:0.9em;
+}
 
 .brand-name {
   font-weight: 700;

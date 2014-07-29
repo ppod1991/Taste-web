@@ -3,6 +3,7 @@
 angular.module('fantasyApp.controllers.url', [])
   .controller('urlCtrl', ['$scope','$location',
     function($scope, $location) {
+        //mainService.setDefaultParameters();
     	// var escapedFragment = $routeParams._escaped_fragment_;
     	// console.log("escapedFragment: " + escapedFragment);
     	// if (escapedFragment)

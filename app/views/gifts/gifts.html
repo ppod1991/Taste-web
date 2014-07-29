@@ -3,7 +3,9 @@
   <div class="box text-center">
     <h1>My Gifts</h1>
     <div ng-if="!auth" class="row fades"><a href="">
-        <button ng-click="login()" style="" type="button" class="btn btn-promotion">sign in to view your gifts! <br> <span class="glyphicon glyphicon-gift"></span>						</button></a></div>
+        <button ng-click="login()" style="" type="button" class="btn btn-promotion">Log in to view your gifts<br/><img src="/img/facebook_login_button.png" style="height:5vh;width:auth;margin-top:10px"/></button></a>
+      <p class="fb-warning">Taste will <b>NEVER </b>post anything without your explicit permission				</p>
+    </div>
     <div ng-if="gifts.length === 0" class="fades">
       <button class="btn btn-promotion">sadly, you don't have any gifts right now</button>
     </div>

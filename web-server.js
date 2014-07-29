@@ -17,7 +17,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var request = require('request');
 var PG = require('./app/Resources/knex');
-var facebook = require('./app/Resources/Facebook');
+//var facebook = require('./app/Resources/Facebook');
 var url = require('url');
 var jade = require('jade');
 
@@ -196,7 +196,7 @@ app.get('/places/:snapID', function(req,res) {
 
 app.get('/stats/:store_id', stats.getStoreStats);
 
-app.post('/experience',facebook.experienceEatery);
+//app.post('/experience',facebook.experienceEatery);
 
 app.get('/android/users', androidAuth, users.findAll);
 
@@ -214,8 +214,8 @@ app.get('/promotions/isFirstPromotion',promotions.isFirstPromotion);
 app.post('/promotions',promotions.addPromotion);
 app.post('/promotions/redeem',promotions.redeemPromotion);
 
-app.get('/facebookVisit',facebook.newVisitGET);
-app.post('/facebookVisit',facebook.newVisitPOST);
+// app.get('/facebookVisit',facebook.newVisitGET);
+// app.post('/facebookVisit',facebook.newVisitPOST);
 
 app.get('/loggedin',function (req,res) {
   // console.log("Going to /loggedin");

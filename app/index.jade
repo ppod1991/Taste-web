@@ -48,10 +48,19 @@ html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
 							a.custom-nav(href='' ng-click="logout()") LOG OUT
 			div.container
 				div.fades(ng-view)
+				.row
+					.col-lg-12.text-center
+						ul.list-inline
+							li
+								a.footer(href='/#!/privacy') Privacy Policy
+							li
+								a.footer(href='/#!/contact') Contact Us
+						p.copyright.text-muted.small Copyright © Taste 2014. All Rights Reserved
 
 		script(src="http://static.firebase.com/v0/firebase.js")
 		script(src="https://cdn.firebase.com/v0/firebase-simple-login.js")
 		script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js")
+		//- script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js")
 		script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js")
 		script(src="/js/jquery-1.10.2.js")
 		script(src="/js/bootstrap.js")
@@ -71,6 +80,7 @@ html(lang="en" ng-app="fantasyApp" ng-controller="MainCtrl")
 		script(src="js/controllers/maincontroller.js")
 		script(src="js/controllers/urlcontroller.js")
 		script(src="js/controllers/giftcontroller.js")
+		script(src="js/controllers/defaultcontroller.js")
 		script(src="js/controllers/statscontroller.js")
 		script(src="js/services/loginservice.js")
 		script(src="js/services/firerefservice.js")
